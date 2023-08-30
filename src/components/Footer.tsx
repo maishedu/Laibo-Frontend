@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
     <>
       <FooterNav />
 
-      <div className="nc-Footer bg-black relative py-12 lg:py-12 border-t border-neutral-200 dark:border-neutral-700">
+      <div className="nc-Footer bg-black relative py-12 lg:py-12">
         <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
           <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
             

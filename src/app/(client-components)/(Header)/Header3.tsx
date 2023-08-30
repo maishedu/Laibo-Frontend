@@ -4,13 +4,13 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import Logo from "@/shared/Logo";
 import useOutsideAlerter from "@/hooks/useOutsideAlerter";
 import NotifyDropdown from "./NotifyDropdown";
-import AvatarDropdown from "./AvatarDropdown";
+// import AvatarDropdown from "./AvatarDropdown";
 import MenuBar from "@/shared/MenuBar";
-import { SearchTab } from "../(HeroSearchForm)/HeroSearchForm";
-import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
+// import { SearchTab } from "../(HeroSearchForm)/HeroSearchForm";
+// import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import HeroSearchFormSmall from "../(HeroSearchFormSmall)/HeroSearchFormSmall";
+// import HeroSearchFormSmall from "../(HeroSearchFormSmall)/HeroSearchFormSmall";
 import { StaySearchFormFields } from "../type";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
@@ -29,12 +29,12 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
   const [showHeroSearch, setShowHeroSearch] =
     useState<StaySearchFormFields | null>();
   //
-  const [currentTab, setCurrentTab] = useState<SearchTab>("Stays");
+  // const [currentTab, setCurrentTab] = useState<SearchTab>("Stays");
 
   //
   useOutsideAlerter(headerInnerRef, () => {
     setShowHeroSearch(null);
-    setCurrentTab("Stays");
+    // setCurrentTab("Stays");
   });
 
   let pathname = usePathname();
@@ -84,13 +84,13 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
             : "-translate-x-0 -translate-y-[90px] scale-x-[0.395] scale-y-[0.6] opacity-0 invisible pointer-events-none"
         }`}
       >
-        <div className={`w-full max-w-4xl mx-auto pb-6`}>
+        {/* <div className={`w-full max-w-4xl mx-auto pb-6`}>
           <HeroSearchFormSmall
             defaultFieldFocus={showHeroSearch || undefined}
             onTabChange={setCurrentTab}
             defaultTab={currentTab}
           />
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -150,7 +150,7 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
       ></div>
       {showHeroSearch && <div id="nc-Header-3-anchor"></div>}
       <header ref={headerInnerRef} className={`sticky top-0 z-40 ${className}`}>
-        <div
+        {/* <div
           className={`bg-white dark:bg-neutral-900 absolute h-full inset-x-0 top-0 transition-transform will-change-[transform,opacity]
           ${showHeroSearch ? "duration-75" : ""} 
           ${
@@ -160,7 +160,7 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
                 : "scale-y-[3.4]"
               : ""
           }`}
-        ></div>
+        ></div> */}
         <div className="relative px-4 lg:container h-[88px] flex">
           <div className="flex-1 flex justify-between">
             {/* Logo (lg+) */}
@@ -172,9 +172,9 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
               <div className="flex-1 hidden lg:flex self-center">
                 {renderButtonOpenHeroSearch()}
               </div>
-              <div className="self-center flex-1 lg:hidden w-full max-w-lg mx-auto">
+              {/* <div className="self-center flex-1 lg:hidden w-full max-w-lg mx-auto">
                 <HeroSearchForm2MobileFactory />
-              </div>
+              </div> */}
               {renderHeroSearch()}
             </div>
 
@@ -189,7 +189,7 @@ const Header3: FC<Header3Props> = ({ className = "" }) => {
                 </Link>
 
                 <NotifyDropdown />
-                <AvatarDropdown />
+                {/* <AvatarDropdown /> */}
                 <MenuBar />
               </div>
             </div>
