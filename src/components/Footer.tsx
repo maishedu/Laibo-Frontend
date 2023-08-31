@@ -49,7 +49,7 @@ const widgetMenus: WidgetFooterMenu[] = [
 const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
     return (
-      <div key={index} className="text-sm">
+      <div key={index} className="text-sm p-4">
         <h2 className="font-semibold text-neutral-200 dark:text-neutral-200">
           {menu.title}
         </h2>

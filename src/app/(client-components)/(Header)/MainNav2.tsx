@@ -2,8 +2,8 @@ import React, { FC } from "react";
 import Logo from "@/shared/Logo";
 import MenuBar from "@/shared/MenuBar";
 import NotifyDropdown from "./NotifyDropdown";
-import AvatarDropdown from "./AvatarDropdown";
-import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
+// import AvatarDropdown from "./AvatarDropdown";
+// import HeroSearchForm2MobileFactory from "../(HeroSearchForm2Mobile)/HeroSearchForm2MobileFactory";
 import Link from "next/link";
 import { Route } from "@/routers/types";
 
@@ -14,29 +14,29 @@ export interface MainNav2Props {
 const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
   return (
     <div className={`MainNav2 relative z-10 ${className}`}>
-      <div className="px-4 h-20 lg:container flex justify-between">
-        <div className="flex md:flex flex-1 justify-center  space-x-3 sm:space-x-8 lg:space-x-10">
+      <div className="px-8 h-20 lg:container flex justify-between">
+        <div className="flex md:flex flex-1 justify-center ">
             <div className="self-center">
-              <h2 className="text-yellow-300 font-bold text-3xl uppercase ">Laibo</h2>
+              <Link href={"/"} className="text-amber-300 font-semibold text-3xl uppercase ">Laibo</Link>
             </div>
           
         </div>
-        <div className="hidden md:flex flex-1 justify-center space-x-3">
+        <div className="hidden md:flex flex-1 space-x-3">
             <p className="text-white text-sm self-center" >How it works</p>
             <p className="text-white text-sm self-center" >Authors</p>
             <p className="text-white text-sm self-center" >Press</p>
-            <p className="text-white text-sm self-center" >Contact</p>
+            <Link href={"/contact" as Route<string> } className="text-white text-sm self-center" >Contact</Link>
         </div>
 
-        <div className="hidden md:flex flex-1 justify-center lg:flex-none text-neutral-700 dark:text-neutral-100">
-            <div className="hidden lg:flex space-x-3">
+        <div className="hidden md:flex flex-1  lg:flex-none text-neutral-700 dark:text-neutral-100">
+            <div className="hidden lg:flex space-x-4">
             <div className="self-center ">
-              <button className="p-2 w-32 font-semibold text-sm rounded-md bg-yellow-400 hover:bg-sky-900 hover:text-white text-gray-700">
+              <button className="p-2.5 w-36 font-medium text-sm rounded-md bg-yellow-400 hover:bg-sky-900 hover:text-white text-gray-900">
                 LOG IN
               </button>
             </div>
             <div className="self-center ">
-              <button className="p-2 w-32 font-semibold text-sm rounded-md bg-lime-600 hover:bg-sky-900 text-white">
+              <button className="p-2.5 w-36 font-medium  text-sm rounded-md bg-green-500 hover:bg-sky-900 text-white">
                 SIGN UP
               </button>
             </div>

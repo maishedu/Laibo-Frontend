@@ -3,8 +3,8 @@ import HomeImage from '@/images/main page desktop_edited.jpg'
 
 export default function Home() {
   return (
-    <main className=" min-h-screen  items-center ">
-     <Image src={HomeImage} alt="home-image" />
+    <main className="lg:min-h-screen  items-center ">
+     <Image src={HomeImage}className='object-fit'  alt="home-image" />
     </main>
   )
 }
