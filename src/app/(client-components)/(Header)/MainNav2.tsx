@@ -24,7 +24,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
         <div className="hidden md:flex flex-1 space-x-3">
             <Link href={"/how-it-works" as Route<string> } className="text-white text-sm self-center" >How it works</Link>
             <Link href={"/authors" as Route<string> } className="text-white text-sm self-center" >Authors</Link>
-            <p className="text-white text-sm self-center" >Press</p>
+            <Link href={"/press" as Route<string> } className="text-white text-sm self-center" >Press</Link>
             <Link href={"/contact" as Route<string> } className="text-white text-sm self-center" >Contact</Link>
         </div>
 

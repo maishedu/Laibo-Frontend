@@ -19,7 +19,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     id: "5",
     title: "About us",
     menus: [
-      { href: "#", label: "Our story" },
+      { href: "/press", label: "Our story" },
       
     ],
   },
