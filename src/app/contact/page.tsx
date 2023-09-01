@@ -18,10 +18,10 @@ const PageContact: FC<PageContactProps> = ({}) => {
     <div className={`nc-PageContact overflow-hidden min-h-screen relative`}>
       
          <Image src={BgImage} className="absolute inset-0 object-cover w-full min-h-screen"  alt="bg-image" />
-            <h2 className="relative my-8 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-yellow-400 justify-center">
+            <h2 className="relative my-8 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-cyellow justify-center">
               Contact Us
             </h2>
-            <div className="relative mb-32 flex self-center bg-yellow-400  container max-w-5xl mx-auto ">
+            <div className="relative mb-32 flex self-center bg-cyellow  container max-w-5xl mx-auto ">
             <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-12">
           
               <div className="grid gap-20 row-gap-8 lg:grid-cols-3">
