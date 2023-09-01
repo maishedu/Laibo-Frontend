@@ -29,7 +29,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     menus: [
       
       { href: "#", label: "support@laibo.co.ke" },
-      { href: "#", label: "Contact us" },
+      { href: "/contact", label: "Contact us" },
       
     ],
   },
@@ -38,7 +38,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     title: "Resources",
     menus: [
       { href: "#", label: "Terms & conditions" },
-      { href: "#", label: "Privacy policy" },
+      { href: "/privacypolicy", label: "Privacy policy" },
       { href: "#", label: "Billing policy" },
       
     ],
