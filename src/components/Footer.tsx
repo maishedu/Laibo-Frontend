@@ -29,7 +29,7 @@ const widgetMenus: WidgetFooterMenu[] = [
     menus: [
       
       { href: "#", label: "support@laibo.co.ke" },
-      { href: "#", label: "Contact us" },
+      { href: "/contact", label: "Contact us" },
       
     ],
   },
@@ -37,9 +37,9 @@ const widgetMenus: WidgetFooterMenu[] = [
     id: "2",
     title: "Resources",
     menus: [
-      { href: "#", label: "Terms & conditions" },
-      { href: "#", label: "Privacy policy" },
-      { href: "#", label: "Billing policy" },
+      { href: "/terms-conditions", label: "Terms & conditions" },
+      { href: "/privacypolicy", label: "Privacy policy" },
+      // { href: "#", label: "Billing policy" },
       
     ],
   },
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <FooterNav />
+      {/* <FooterNav /> */}
 
       <div className="nc-Footer bg-black relative py-12 lg:py-12">
         <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
