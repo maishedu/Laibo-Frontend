@@ -37,9 +37,9 @@ const widgetMenus: WidgetFooterMenu[] = [
     id: "2",
     title: "Resources",
     menus: [
-      { href: "#", label: "Terms & conditions" },
+      { href: "/terms-conditions", label: "Terms & conditions" },
       { href: "/privacypolicy", label: "Privacy policy" },
-      { href: "#", label: "Billing policy" },
+      // { href: "#", label: "Billing policy" },
       
     ],
   },
