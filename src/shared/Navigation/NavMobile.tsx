@@ -107,6 +107,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
     <div className="overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800">
       <div className="py-6 px-5">
         {/* <Logo /> */}
+        <h2>Laibo</h2>
         {/* <div className="flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm">
           <span>
             Discover the most outstanding articles on all topics of life. Write
@@ -127,21 +128,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
       <ul className="flex flex-col py-6 px-2 space-y-1">
         {data.map(_renderItem)}
       </ul>
-      <div className="flex items-center justify-between py-6 px-5">
-        <a
-          className="inline-block"
-          href="https://themeforest.net/item/chisfis-online-booking-nextjs-template/43399526"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <ButtonPrimary>Get Template</ButtonPrimary>
-        </a>
-
-        {/* <LangDropdown
-          className="flex"
-          panelClassName="z-10 w-screen max-w-[280px] px-4 mb-3 right-3 bottom-full sm:px-0"
-        /> */}
-      </div>
+     
     </div>
   );
 };
