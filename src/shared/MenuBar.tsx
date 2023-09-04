@@ -20,7 +20,11 @@ const MenuBar: React.FC<MenuBarProps> = ({
     setIsVisable(false);
   }, [pathname]);
 
-  const handleOpenMenu = () => setIsVisable(true);
+  const handleOpenMenu = () => {
+    setIsVisable(true);
+    console.log('clicked')
+  }
+  //  setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);
 
   const renderContent = () => {
@@ -67,6 +71,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
   return (
     <>
       <button
+      // onClick={() => console.log('BUTTON CLICKED!')}
         onClick={handleOpenMenu}
         className={`focus:outline-none flex items-center justify-center ${className}`}
       >
