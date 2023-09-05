@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Logo from "@/shared/Logo";
 import SocialsList1 from "@/shared/SocialsList1";
 import { CustomLink } from "@/data/types";
@@ -7,11 +8,13 @@ import React from "react";
 import FooterNav from "./FooterNav";
 import { BsInstagram, BsTwitter  } from 'react-icons/bs'
 import {BiLogoFacebook, BiLogoLinkedin } from 'react-icons/bi'
+import  googleLogo from '@/images/google-play.png'
 
 export interface WidgetFooterMenu {
   id: string;
   title: string;
   menus: CustomLink[];
+  // galleryImgs: StaticImageData;
 }
 
 const widgetMenus: WidgetFooterMenu[] = [
@@ -39,12 +42,14 @@ const widgetMenus: WidgetFooterMenu[] = [
     menus: [
       { href: "/terms-conditions", label: "Terms & conditions" },
       { href: "/privacypolicy", label: "Privacy policy" },
-      // { href: "#", label: "Billing policy" },
       
     ],
   },
+
+
  
 ];
+// galleryImgs: (StaticImageData
 
 const Footer: React.FC = () => {
   const renderWidgetMenuItem = (menu: WidgetFooterMenu, index: number) => {
@@ -75,13 +80,14 @@ const Footer: React.FC = () => {
       {/* <FooterNav /> */}
 
       <div className="nc-Footer bg-black relative py-12 lg:py-12">
-        <div className="container grid grid-cols-2 gap-y-10 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-5 lg:gap-x-10 ">
-          <div className="grid grid-cols-4 gap-5 col-span-2 md:col-span-4 lg:md:col-span-1 lg:flex lg:flex-col">
-            
+        <div className="container grid self-center text-center  gap-y-5 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-5 ">
+          <div className="flex flex-col items-center">sss
+          <p className="text-purple-600 font-bold ">Download now</p>
+          <div className=" flex justify-center  items-center  w-40 h-40 inset-0">
+            <Image src={googleLogo} className="" alt="google play logo" />
+          </div>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}
-         
-          
         </div>
           
 
