@@ -15,10 +15,10 @@ export interface PageContactProps {}
 
 const PageContact: FC<PageContactProps> = ({}) => {
   return (
-    <div className={`nc-PageContact overflow-hidden min-h-screen relative`}>
+    <div className={`nc-PageContact overflow-hidden relative h-4/5`}>
       
          <Image src={BgImage} className="absolute inset-0 object-cover w-full min-h-screen"  alt="bg-image" />
-            <h2 className="relative my-8 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-cyellow justify-center">
+            <h2 className="relative my-8 sm:my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-cyellow justify-center pt-16">
               Contact Us
             </h2>
             <div className="relative mb-32 flex self-center bg-cyellow  container max-w-5xl mx-auto ">

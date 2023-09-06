@@ -28,7 +28,7 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
                 <input type="checkbox" name="toggle_nav" id="toggle_nav" className="peer hidden"/>
                 <div className="w-full px-6 flex justify-between lg:w-max md:px-0 z-30">
                     <Link href={'/'} aria-label="logo" className="flex space-x-2 items-center">
-                        <span className="text-2xl font-bold text-yellow ">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
+                        <span className="secondary-font default-yellow">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
                     </Link>
 
                     <div className="flex items-center lg:hidden max-h-10">
@@ -72,12 +72,12 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
 
                     <div className="hidden lg:flex w-full space-x-3 min-w-max space-y-2 
                        border-yellow-200 lg:space-y-0 sm:w-max ">
-                        <button type="button" className="w-36 p-2.5 text-center rounded-md bg-yellow hover:bg-sky-900  transition hover:text-white text-gray-900  ">
+                        <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
                             <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                                 LOG IN
                             </span>
                         </button>
-                        <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition bg-green hover:bg-sky-900 ">
+                        <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
                             <span className="block text-yellow-900 font-semibold text-sm">
                                 SIGN UP
                             </span>
@@ -87,39 +87,6 @@ const MainNav2: FC<MainNav2Props> = ({ className = "" }) => {
             </div>
         </div>
     </nav>
-      {/* <div className="px-8 h-20 lg:container flex justify-between">
-        <div className="flex md:flex flex-1 justify-center ">
-            <div className="self-center">
-              <Link href={"/"} className="text-cyellow font-semibold text-3xl uppercase ">Laibo</Link>
-            </div>
-          
-        </div>
-        <div className="hidden md:flex flex-1 space-x-3">
-            <Link href={"/how-it-works" as Route<string> } className="text-white text-sm self-center" >How it works</Link>
-            <Link href={"/authors" as Route<string> } className="text-white text-sm self-center" >Authors</Link>
-            <Link href={"/press" as Route<string> } className="text-white text-sm self-center" >Press</Link>
-            <Link href={"/contact" as Route<string> } className="text-white text-sm self-center" >Contact</Link>
-        </div>
-
-        <div className="hidden md:flex flex-1  lg:flex-none text-neutral-700 dark:text-neutral-100">
-            <div className="hidden lg:flex space-x-4">
-            <div className="self-center ">
-              <button className="p-2.5 w-36 font-medium text-sm rounded-md bg-yellow hover:bg-sky-900 hover:text-white text-gray-900">
-                LOG IN
-              </button>
-            </div>
-            <div className="self-center ">
-              <button className="p-2.5 w-36 font-medium  text-sm rounded-md bg-green hover:bg-sky-900 text-white">
-                SIGN UP
-              </button>
-            </div>
-            
-          </div>  
-        </div>
-        <div className="flex space-x-2 lg:hidden">
-            <MenuBar />
-        </div>
-      </div> */}
     </div>
   );
 };

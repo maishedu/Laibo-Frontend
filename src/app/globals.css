@@ -1,27 +1,42 @@
+@import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+:root {
+    font-family: 'Helvetica Neue', sans-serif;
+    --default-yellow:#E1E138;
+    --default-green:#2EA625 ;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-} */
-
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+.default-yellow{
+    color: var(--default-yellow);
+}
+.default-yellow-bg{
+    background-color: var(--default-yellow);
+}
+.default-green{
+    color: var(--default-green);
+}
+.default-green-bg{
+    background-color: var(--default-green);
+}
+.secondary-font{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 27px;
+}
+.header-btn {
+    transition: inherit;
+    color: #000000;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    font-family: avenir-lt-w01_85-heavy1475544,sans-serif;
+}

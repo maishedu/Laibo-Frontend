@@ -1,11 +1,7 @@
 "use client";
-
 import Image from "next/image";
-import Logo from "@/shared/Logo";
-import SocialsList1 from "@/shared/SocialsList1";
 import { CustomLink } from "@/data/types";
 import React from "react";
-import FooterNav from "./FooterNav";
 import { BsInstagram, BsTwitter  } from 'react-icons/bs'
 import {BiLogoFacebook, BiLogoLinkedin } from 'react-icons/bi'
 import  googleLogo from '@/images/google-play.png'
@@ -81,11 +77,10 @@ const Footer: React.FC = () => {
 
       <div className="nc-Footer bg-black relative py-12 lg:py-12">
         <div className="container grid self-center text-center  gap-y-5 gap-x-5 sm:gap-x-8 md:grid-cols-4 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-5 ">
-          <div className="flex flex-col items-center">sss
-          <p className="text-purple-600 font-bold ">Download now</p>
-          <div className=" flex justify-center  items-center  w-40 h-40 inset-0">
-            <Image src={googleLogo} className="" alt="google play logo" />
-          </div>
+          <div className="flex flex-col items-center p-5">
+            <a href="https://play.google.com/store/apps/details?id=ke.co.laibo.mobile&hl=en&gl=US" className="text-neutral-200 ">
+              <Image src={googleLogo} className="" alt="google play logo" width={200} />
+            </a>
           </div>
           {widgetMenus.map(renderWidgetMenuItem)}
         </div>
@@ -111,8 +106,9 @@ const Footer: React.FC = () => {
       </div>
 
         <div className="mt-4 text-center">
-            <span className="text-sm text-yellow-400 tracking-wide"
-              >© 2023 by Laibo <span id="year"></span> | All rights reserved</span>
+            <h2 className="text-sm default-yellow tracking-wide">
+              {`© ${new Date().getFullYear()} by Laibo | All rights reserved`}
+            </h2>
           </div>
          
 

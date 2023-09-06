@@ -9,7 +9,7 @@ import { Route } from "@/routers/types";
 
 const PagePress = () => {
   return (
-    <div className={` overflow-hidden bg-black min-h-screen relative`}>
+    <div className="overflow-hidden bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="grid max-w-screen-lg gap-8 row-gap-5 md:row-gap-8 sm:mx-auto lg:grid-cols-2">
           <div className="transition duration-300 transform  rounded  hover:-translate-y-1  md:text-center">
