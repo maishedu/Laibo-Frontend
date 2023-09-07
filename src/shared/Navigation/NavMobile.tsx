@@ -2,16 +2,12 @@
 
 import React from "react";
 import ButtonClose from "@/shared/ButtonClose";
-import Logo from "@/shared/Logo";
 import { Disclosure } from "@headlessui/react";
 import { NavItemType } from "./NavigationItem";
 import { NAVIGATION_DEMO } from "@/data/navigation";
-import ButtonPrimary from "@/shared/ButtonPrimary";
-import SocialsList from "@/shared/SocialsList";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import SwitchDarkMode from "@/shared/SwitchDarkMode";
+
 import Link from "next/link";
-// import LangDropdown from "@/app/(client-components)/(Header)/LangDropdown";
 
 export interface NavMobileProps {
   data?: NavItemType[];
@@ -106,21 +102,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
   return (
     <div className="overflow-y-auto w-full h-screen py-2 transition transform shadow-lg ring-1 dark:ring-neutral-700 bg-white dark:bg-neutral-900 divide-y-2 divide-neutral-100 dark:divide-neutral-800">
       <div className="py-6 px-5">
-        {/* <Logo /> */}
         <h2>Laibo</h2>
-        {/* <div className="flex flex-col mt-5 text-neutral-700 dark:text-neutral-300 text-sm">
-          <span>
-            Discover the most outstanding articles on all topics of life. Write
-            your stories and share them
-          </span>
-
-          <div className="flex justify-between items-center mt-4">
-            <SocialsList itemClass="w-9 h-9 flex items-center justify-center rounded-full bg-neutral-100 text-xl dark:bg-neutral-800 dark:text-neutral-300" />
-            <span className="block">
-              <SwitchDarkMode className="bg-neutral-100 dark:bg-neutral-800" />
-            </span>
-          </div>
-        </div> */}
         <span className="absolute right-2 top-2 p-1">
           <ButtonClose onClick={onClickClose} />
         </span>
