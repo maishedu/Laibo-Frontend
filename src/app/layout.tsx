@@ -1,9 +1,7 @@
 import './globals.css'
-import type { Metadata } from 'next'
-import { Poppins } from "next/font/google";
-import SiteHeader from './(client-components)/(Header)/SiteHeader'
-import Footer from '@/components/Footer'
-import FooterNav from '@/components/FooterNav'
+import SiteHeader from '../components/navigation/SiteHeader'
+import Footer from '@/components/navigation/Footer'
+
 
 export default function RootLayout({
   children,
@@ -15,7 +13,6 @@ export default function RootLayout({
       <body >
         <SiteHeader />
          {children}
-         {/* <FooterNav /> */}
          <Footer />
           </body>
     </html>
