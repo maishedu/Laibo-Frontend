@@ -8,14 +8,15 @@ export interface MainNav2Props {
   className?: string;
 }
 
-
-
 const SiteHeader: FC<MainNav2Props> = ({ className = "" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
 
   return (
       <div className={`MainNav2 relative z-10 ${className}`}>
@@ -39,34 +40,36 @@ const SiteHeader: FC<MainNav2Props> = ({ className = "" }) => {
                   </label>
                 </div>
               </div>
-
+              
+              
               <label role="button" htmlFor="toggle_nav" className="hidden peer-checked:block justify-center fixed w-full h-full left-0 top-0 z-10 bg-neutral-600 divide-y-2  backdrop-filter"></label>
               <div className="hidden peer-checked:flex w-full flex-col  lg:flex lg:flex-row justify-end z-30 items-center gap-y-6  p-6 rounded-xl bg-neutral-600  lg:gap-y-0 lg:p-0 md:flex-nowrap lg:bg-transparent lg:w-7/12">
-                <div className="text-white text-center lg:pr-4 w-full  sm:divide-y divide-slate-200">
-                  <ul className="tracking-wide justify-center font-medium  text-sm
-                           flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
-                    <li>
-                      <Link href={"/how-it-works" as Route<string> } className="block md:px-4 transition  hover:text-yellow-700">
-                        <span>How it works</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={"/authors" as Route<string> } className="block md:px-4 transition  hover:text-yellow-700">
-                        <span>Authors</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={"/press" as Route<string> } className="block md:px-4 transition  hover:text-yellow-700">
-                        <span>Press</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href={"/contact" as Route<string> } className="block md:px-4 transition  hover:text-yellow-700">
-                        <span>Contact</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+                
+                   <div className="text-white text-center lg:pr-4 w-full  sm:divide-y divide-slate-200">
+                   <ul className="tracking-wide justify-center font-medium  text-sm
+                            flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
+                     <li>
+                       <Link href={"/how-it-works" as Route<string> } onClick={closeMenu} className="block md:px-4 transition  hover:text-yellow-700">
+                         <span>How it works</span>
+                       </Link>
+                     </li>
+                     <li>
+                       <Link href={"/authors" as Route<string> } onClick={closeMenu} className="block md:px-4 transition  hover:text-yellow-700">
+                         <span>Authors</span>
+                       </Link>
+                     </li>
+                     <li>
+                       <Link href={"/press" as Route<string> } onClick={closeMenu} className="block md:px-4 transition  hover:text-yellow-700">
+                         <span>Press</span>
+                       </Link>
+                     </li>
+                     <li>
+                       <Link href={"/contact" as Route<string> } onClick={closeMenu} className="block md:px-4 transition  hover:text-yellow-700">
+                         <span>Contact</span>
+                       </Link>
+                     </li>
+                   </ul>
+                 </div>
 
                 <div className="hidden lg:flex w-full space-x-3 min-w-max space-y-2
                        border-yellow-200 lg:space-y-0 sm:w-max ">
