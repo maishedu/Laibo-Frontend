@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import BgImg from "@/images/bg1.jpg";
 import Img1 from "@/images/Publisher screen phone.png";
 import Img2 from "@/images/ebook screenshot.png";
 
