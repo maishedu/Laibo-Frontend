@@ -71,7 +71,7 @@ const SiteHeader = () => {
                   </Link>
                 </li>
                 <li>
-                <Link href={'/login'}>
+                <Link href={'/login'} onClick={toggleMenu}>
                   <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
                       <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                           LOG IN
@@ -81,7 +81,7 @@ const SiteHeader = () => {
 
                 </li>
                 <li>
-                <Link href={'/signup'}>
+                <Link href={'/signup'} onClick={toggleMenu}>
                 <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
                     <span className="block text-yellow-900 font-semibold text-sm">
                         SIGN UP
