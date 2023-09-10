@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import HomeImage from '@/images/main page desktop_edited.jpg'
 import Img from '@/images/logo4 copy.png'
+import Link from 'next/link';
 
 function Homepage(props) {
     return (
@@ -10,7 +11,10 @@ function Homepage(props) {
                 <Image src={Img} className='w-64 h-64'   alt="home-image" />
             </div>
             <div className='absolute inset-10 flex justify-center items-center lg:hidden ' >
+                <Link href={'/login'}>
                 <button className='p-2.5 w-36 font-medium text-sm rounded-md bg-green hover:bg-sky-900 hover:text-white text-white'>LOG IN</button>
+                </Link>
+               
             </div>
         </main>
     );

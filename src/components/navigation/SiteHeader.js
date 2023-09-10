@@ -70,6 +70,25 @@ const SiteHeader = () => {
                     <span>Contact</span>
                   </Link>
                 </li>
+                <li>
+                <Link href={'/login'}>
+                  <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
+                      <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
+                          LOG IN
+                      </span>
+                    </button>
+                  </Link>
+
+                </li>
+                <li>
+                <Link href={'/signup'}>
+                <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
+                    <span className="block text-yellow-900 font-semibold text-sm">
+                        SIGN UP
+                    </span>
+                </button>
+              </Link>
+                </li>
               </ul>
              </div>
             </div>
@@ -105,7 +124,7 @@ const SiteHeader = () => {
               </div>
                
 
-             <div className="hidden lg:flex w-full space-x-3 min-w-max space-y-2
+             <div className=" lg:flex w-full space-x-3 min-w-max space-y-2
                     border-yellow-200 lg:space-y-0 sm:w-max ">
                       <Link href={'/login'}>
                       <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
