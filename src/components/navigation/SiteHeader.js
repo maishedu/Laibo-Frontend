@@ -107,16 +107,21 @@ const SiteHeader = () => {
 
              <div className="hidden lg:flex w-full space-x-3 min-w-max space-y-2
                     border-yellow-200 lg:space-y-0 sm:w-max ">
-               <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
+                      <Link href={'/login'}>
+                      <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
                          <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                              LOG IN
                          </span>
+                       </button>
+                      </Link>
+              <Link href={'/signup'}>
+              <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
+                  <span className="block text-yellow-900 font-semibold text-sm">
+                      SIGN UP
+                  </span>
                </button>
-               <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
-                         <span className="block text-yellow-900 font-semibold text-sm">
-                             SIGN UP
-                         </span>
-               </button>
+              </Link>
+               
              </div>
 
            </div>
