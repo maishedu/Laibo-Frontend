@@ -1,4 +1,5 @@
 import React from "react";
+import './authors.css'
 import Image from "next/image";
 import Img1 from "@/images/Publisher screen phone.png";
 import Img2 from "@/images/ebook screenshot.png";

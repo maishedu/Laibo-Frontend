@@ -6,7 +6,7 @@ import Link from 'next/link';
 function Homepage(props) {
     return (
         <main className="nc-PageContact overflow-hidden min-h-screen relative h-3/5">
-            <Image src={HomeImage} className="relative  object-cover w-full h-screen"  alt="home-image" />
+            <Image src={HomeImage} className="relative  object-fill w-full h-screen"  alt="home-image" />
             <div className='hidden absolute inset-0 shadow-lg shadow-yellow lg:flex items-center justify-center '>
                 <Image src={Img} className='w-64 h-64'   alt="home-image" />
             </div>

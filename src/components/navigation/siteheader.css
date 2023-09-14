@@ -1,0 +1,11 @@
+.show-mobile-logo{
+    display: none;
+}
+@media screen and (max-width: 800px) {
+    .hide-desktop-logo{
+        display: none;
+    }
+    .show-mobile-logo{
+        display: inline-block;
+    }
+}

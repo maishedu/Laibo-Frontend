@@ -1,0 +1,9 @@
+@import url(https://db.onlinewebfonts.com/c/69dbc1186412d7831b88d8a78a360360?family=DIN+Condensed+Web);
+
+h1,h2,h3,h4,h5,h6{
+    font-family: "DIN Condensed Web",sans-serif;
+    font-weight: bold;
+}
+p{
+    font-family: "DIN Condensed Web",sans-serif;
+}

@@ -1,8 +1,12 @@
 "use client"
 import React, { FC, useState } from "react";
+import Image from 'next/image';
 import Link from "next/link";
 import { Route } from "@/routers/types";
-import {AiOutlineMenu ,AiOutlineClose} from 'react-icons/ai'
+import './siteheader.css';
+import {AiOutlineMenu ,AiOutlineClose} from 'react-icons/ai';
+import mobileLogo from '../../images/logo4 copy.png';
+import Img from "@/images/logo4 copy.png";
 
 
 
@@ -25,12 +29,14 @@ const SiteHeader = () => {
               <div className="w-full px-6 flex justify-between lg:w-max md:px-0 z-30">
                 {isMenuOpen && (
                   <Link href={'/'} aria-label="logo" onClick={toggleMenu} className=" hidden lg:flex space-x-2 items-center">
-                  <span className="secondary-font default-yellow">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
+                  <span className="secondary-font default-yellow hide-desktop-logo">LAIBO<span className="text-yellow-700 dark:text-yellow-300"></span></span>
+                      <Image src={mobileLogo} width={80} className='show-mobile-logo'   alt="mobile logo" />
                 </Link>
 
                 )}
                 <Link href={'/'} aria-label="logo" className="flex space-x-2 items-center">
-                  <span className="secondary-font default-yellow">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
+                  <span className="secondary-font default-yellow hide-desktop-logo">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
+                    <Image src={mobileLogo} width={80} className='show-mobile-logo'   alt="home-image" />
                 </Link>
 
                 <div className="flex items-center lg:hidden max-h-10">

@@ -1,4 +1,5 @@
 import React from 'react'
+import './how-it-works.css'
 import Image from 'next/image'
 import Img1 from '@/images/bid phone.png'
 import Img2 from '@/images/The market phone .png'
