@@ -40,7 +40,7 @@ const SiteHeader = () => {
                 </Link>
 
                 <div className="flex items-center lg:hidden max-h-10">
-                  <label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2" onClick={toggleMenu}>
+                  <label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2 hamburger" onClick={toggleMenu}>
                     {isMenuOpen ? (
                         <AiOutlineClose className="w-5 h-5 text-yellow" />
                     ) : (
