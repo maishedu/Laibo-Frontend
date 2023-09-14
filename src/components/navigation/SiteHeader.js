@@ -34,7 +34,7 @@ const SiteHeader = () => {
                 </Link>
 
                 )}
-                <Link href={'/'} aria-label="logo" className="flex space-x-2 items-center">
+                <Link href={'/'} onClick={toggleMenu} aria-label="logo" className="flex space-x-2 items-center">
                   <span className="secondary-font default-yellow hide-desktop-logo">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
                     <Image src={mobileLogo} width={80} className='show-mobile-logo'   alt="home-image" />
                 </Link>
@@ -42,9 +42,9 @@ const SiteHeader = () => {
                 <div className="flex items-center lg:hidden max-h-10">
                   <label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2 hamburger" onClick={toggleMenu}>
                     {isMenuOpen ? (
-                        <AiOutlineClose className="w-5 h-5 text-yellow" />
+                        <AiOutlineClose className="w-5 h-5 default-yellow" />
                     ) : (
-                        <AiOutlineMenu className="w-5 h-5 text-yellow" />
+                        <AiOutlineMenu className="w-5 h-5 default-yellow" />
                     )}
                   </label>
                 </div>
@@ -55,7 +55,7 @@ const SiteHeader = () => {
             
             <div className="menu fixed text-white text-center  bg-neutral-600 w-full h-full left-0 top-0 z-10 backdrop-filter">
              <div className="py-16  flex items-center">
-             <ul className="tracking-wide justify-center font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
+             <ul className="tracking-wide justify-center mt-5 font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
                 <li>
                   <Link href="/how-it-works" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                     <span>How it works</span>
