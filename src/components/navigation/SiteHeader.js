@@ -76,30 +76,13 @@ const SiteHeader = () => {
                     <span>Contact</span>
                   </Link>
                 </li>
-                <li>
-                <Link href={'/login'} onClick={toggleMenu}>
-                  <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
-                      <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
-                          LOG IN
-                      </span>
-                    </button>
-                  </Link>
-
-                </li>
-                <li>
-                <Link href={'/signup'} onClick={toggleMenu}>
-                <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
-                    <span className="block text-yellow-900 font-semibold text-sm">
-                        SIGN UP
-                    </span>
-                </button>
-              </Link>
-                </li>
+             
+              
               </ul>
              </div>
              <div className=" absolute w-full px-6 inset-x-0 mb-4  bottom-0 flex  justify-between  lg:w-max md:px-0 ">
                
-                 <Link href={'/login'}>
+                 <Link href={'/login'} onClick={toggleMenu}>
                       <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
                          <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                              LOG IN
@@ -107,7 +90,7 @@ const SiteHeader = () => {
                        </button>
                   </Link>
 
-              <Link href={'/signup'}>
+              <Link href={'/signup'} onClick={toggleMenu}>
               <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
                   <span className="block text-yellow-900 font-semibold text-sm">
                       SIGN UP
