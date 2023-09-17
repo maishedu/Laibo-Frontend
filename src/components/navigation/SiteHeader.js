@@ -53,7 +53,7 @@ const SiteHeader = () => {
               {isMenuOpen && (
             <>
             
-            <div className="menu fixed text-white text-center h-screen flex-col justify-between gap-y-6 bg-neutral-600 w-full  left-0 top-0 z-10 backdrop-filter">
+            <div className="menu fixed text-white text-center h-full flex-col justify-between gap-y-6 bg-neutral-600 w-full  left-0 top-0 z-10 backdrop-filter">
              <div className="py-16  flex items-center">
              <ul className="tracking-wide justify-center mt-5 font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
                 <li>
