@@ -53,7 +53,7 @@ const SiteHeader = () => {
               {isMenuOpen && (
             <>
             
-            <div className="menu fixed text-white text-center  bg-neutral-600 w-full h-full left-0 top-0 z-10 backdrop-filter">
+            <div className="menu fixed text-white text-center h-screen flex-col justify-between gap-y-6 bg-neutral-600 w-full  left-0 top-0 z-10 backdrop-filter">
              <div className="py-16  flex items-center">
              <ul className="tracking-wide justify-center mt-5 font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
                 <li>
@@ -97,6 +97,25 @@ const SiteHeader = () => {
                 </li>
               </ul>
              </div>
+             <div className=" absolute w-full px-6 inset-x-0 mb-4  bottom-0 flex  justify-between  lg:w-max md:px-0 ">
+               
+                 <Link href={'/login'}>
+                      <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
+                         <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
+                             LOG IN
+                         </span>
+                       </button>
+                  </Link>
+
+              <Link href={'/signup'}>
+              <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
+                  <span className="block text-yellow-900 font-semibold text-sm">
+                      SIGN UP
+                  </span>
+               </button>
+              </Link>
+                </div>
+
             </div>
             </>
           )}

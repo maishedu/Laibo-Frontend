@@ -4,6 +4,8 @@ import Img1 from "@/images/newpress2.png";
 import Img2 from "@/images/newpress4.png";
 import Img3 from "@/images/newpress3.png";
 import Img4 from "@/images/newpress1.jpg";
+import Nationimg from "@/images/nation-removebg-preview.png";
+import Kenyanslogo from "@/images/kenyans.png"
 
 function Press() {
   return (
@@ -59,6 +61,11 @@ function Press() {
           </div>
 
           <div className="transition self-center duration-300 transform  rounded  hover:-translate-y-1  md:text-center">
+          <div className='mb-2 flex text-white justify-center'>
+            <p className='text-xl font-semibold font-serif'>Nation</p>
+              {/* <Image src={Nationimg}
+              className='h-7 w-20 self-center  inset-0' alt='nation logo'/> */}
+            </div>
             <div className="relative px-5 lg:px-20 ">
               <Image
                 src={Img3}
@@ -83,6 +90,10 @@ function Press() {
           </div>
 
           <div className="transition self-center duration-300 transform  rounded hover:-translate-y-1  md:text-center">
+            <div className='relative mb-2 flex justify-center'>
+              <Image src={Kenyanslogo}
+              className='h-7 w-20 self-center inset-0' alt='kenyans.co.ke logo'/>
+            </div>
             <div className="relative lg:px-10 ">
               <Image
                 src={Img4}
