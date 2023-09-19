@@ -1,11 +1,39 @@
-import React from 'react'
+"use client"
+import React,{useState,useRef,useEffect} from 'react'
+import { signIn } from "next-auth/react";
 import Image from 'next/image'
 import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
 import {FaFacebookF} from 'react-icons/fa'
 import Link from 'next/link'
 
+
 function Login() {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  useEffect(() => {
+    if (errorMessage) {
+      // Display the error message on the login page
+    }
+  }, [errorMessage]);
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect:false
+      });
+    }catch (error){
+      setErrorMessage(error.message);
+    }
+  }
   return (
   <div className="relative min-h-screen">
     <Image src={BgImg} className='absolute inset-0 object-cover w-full min-h-screen' alt='background image'/>
@@ -15,31 +43,34 @@ function Login() {
           <div className="w-full max-w-xl mt-8 xl:px-8 xl:w-5/12">
             <div className="bg-black w-80 lg:w-96 rounded-3xl mt-4 shadow-2xl p-10 sm:p-10">
               <h3 className="mb-4 text-xl default-yellow font-semibold sm:text-center sm:mb-6 sm:text-2xl">
-                Sign in 
+                Sign in
               </h3>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="mb-1 sm:mb-2">
-                  
+
                   <input
                     placeholder="Username, email or phone"
                     required
+                    ref={emailRef}
                     type="text"
                     className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
-                    id="username"
-                    name="username"
+                    id="email"
+                    name="email"
                   />
                 </div>
                 <div className="mb-1 sm:mb-2">
-                  
+
                   <input
                     placeholder="Password"
                     required
+                    ref={passwordRef}
                     type="password"
                     className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
                     id="password"
                     name="password"
                   />
                 </div>
+                  {errorMessage && <div>{errorMessage}</div>}
 
                 <p className="text-xs text-center text-white sm:text-sm">
                   Sign in with one of the following options
