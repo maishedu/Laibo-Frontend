@@ -8,7 +8,7 @@ import { useSwipeable } from "react-swipeable";
 import { variants } from "@/utils/animationVariants";
 import Link from "next/link";
 import { Route } from "@/routers/types";
-import mobileLogo from '../images/logo4 copy.png';
+import imageLoad from '../images/imageload.gif';
 
 export interface GallerySliderProps {
   className?: string;
@@ -85,7 +85,7 @@ export default function GallerySlider({
                 className="absolute inset-0"
               >
                 <Image
-                    src={currentImage || mobileLogo} // provide a default image path or keep it empty as before
+                    src={currentImage || imageLoad} // provide a default image path or keep it empty as before
                     layout="fill"
                     alt="post card gallery"
                     className={`object-cover ${imageClass}`}
