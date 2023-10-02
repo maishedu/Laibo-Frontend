@@ -7,14 +7,7 @@ const nextConfig = {
     // typedRoutes: true,
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "173.214.165.67",
-        port: "",
-        pathname: "/**"
-      }
-    ]
+    domains: ['173.214.165.67'],
   }
 }
 

@@ -8,10 +8,11 @@ import { useSwipeable } from "react-swipeable";
 import { variants } from "@/utils/animationVariants";
 import Link from "next/link";
 import { Route } from "@/routers/types";
+import mobileLogo from '../images/logo4 copy.png';
 
 export interface GallerySliderProps {
   className?: string;
-  galleryImgs: (StaticImageData | string)[];
+  galleryImgs: string[]; // Change this to an array of strings
   ratioClass?: string;
   uniqueID: string;
   href?: Route<string>;
@@ -21,14 +22,14 @@ export interface GallerySliderProps {
 }
 
 export default function GallerySlider({
-  className = "h-full",
-  galleryImgs,
-  ratioClass = "aspect-w-4 aspect-h-3",
-  imageClass = "",
-  uniqueID = "uniqueID",
-  galleryClass = "rounded-xl",
-  navigation = true,
-}: GallerySliderProps) {
+                                        className = "h-full",
+                                        galleryImgs = [], // add default value here
+                                        ratioClass = "aspect-w-4 aspect-h-3",
+                                        imageClass = "",
+                                        uniqueID = "uniqueID",
+                                        galleryClass = "rounded-xl",
+                                        navigation = true,
+                                      }: GallerySliderProps) {
   const [loaded, setLoaded] = useState(false);
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -84,12 +85,12 @@ export default function GallerySlider({
                 className="absolute inset-0"
               >
                 <Image
-                  src={currentImage || ""}
-                  fill
-                  alt="post card gallery"
-                  className={`object-cover ${imageClass}`}
-                  onLoadingComplete={() => setLoaded(true)}
-                  sizes="(max-width: 1025px) 100vw, (max-width: 768px) 50vw , 300px"
+                    src={currentImage || mobileLogo} // provide a default image path or keep it empty as before
+                    layout="fill"
+                    alt="post card gallery"
+                    className={`object-cover ${imageClass}`}
+                    onLoadingComplete={() => setLoaded(true)}
+                    sizes="(max-width: 1025px) 100vw, (max-width: 768px) 50vw , 300px"
                 />
               </motion.div>
             </AnimatePresence>

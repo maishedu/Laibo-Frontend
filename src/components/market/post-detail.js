@@ -5,6 +5,7 @@ import __postdetail from "@/data/jsons/__postdetail.json"
 import {BiSolidUpArrow} from 'react-icons/bi'
 import { useParams } from 'next/navigation'
 
+
 const Post = () => {
   const params = useParams()
   const postId = params.postId
