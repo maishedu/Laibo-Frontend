@@ -29,7 +29,6 @@ export default function  Search() {
     
         const data = await response.json();
         setPosts(data)
-        console.log(data)
         return data;
       
       } catch (error) {
@@ -68,9 +67,8 @@ export default function  Search() {
                       />
                     </div>
                     </Link>
-                  
-
-                   <div className="flex flex-col sm:text-center">
+                
+                   <div className="flex flex-col ">
                    <p className="text-sm text-white font-bold">{post.title}</p>
                      <p className="mb-2 text-xs text-gray-200">
                        {post.location}

@@ -1,12 +1,10 @@
 "use client"
-import React, { FC, useState } from "react";
+import React, {  useState } from "react";
 import Image from 'next/image';
 import Link from "next/link";
-import { Route } from "@/routers/types";
 import './siteheader.css';
 import {AiOutlineMenu ,AiOutlineClose} from 'react-icons/ai';
 import mobileLogo from '../../images/logo4 copy.png';
-import Img from "@/images/logo4 copy.png";
 
 
 
@@ -62,6 +60,11 @@ const SiteHeader = () => {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/market" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+                    <span>Market</span>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/authors" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                     <span>Authors</span>
                   </Link>
@@ -104,13 +107,18 @@ const SiteHeader = () => {
           )}
 
            {/* Desktop Menu */}
-           <div className="hidden  w-full flex-col  lg:flex lg:flex-row justify-end z-30 items-center gap-y-6  p-6 rounded-xl bg-neutral-600  lg:gap-y-0 lg:p-0 md:flex-nowrap lg:bg-transparent lg:w-7/12">
+           <div className="hidden  w-full flex-col  lg:flex lg:flex-row justify-end z-30 items-center gap-y-6  p-6 rounded-xl bg-neutral-600  lg:gap-y-0 lg:p-0 md:flex-nowrap lg:bg-transparent lg:w-8/12">
                 <div className="text-white text-center lg:pr-4 w-full ">
                 <ul className="tracking-wide justify-center font-medium  text-sm
                          flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
                   <li>
                     <Link href={"/how-it-works" }  className="block md:px-4 transition  hover:text-yellow-700">
                       <span>How it works</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/market" }  className="block md:px-4 transition  hover:text-yellow-700">
+                      <span>Market</span>
                     </Link>
                   </li>
                   <li>
