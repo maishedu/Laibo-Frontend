@@ -1,4 +1,5 @@
 "use client"
+
 import React, {useEffect, useState} from 'react'
 import GallerySlider from '@/components/GallerySlider';
 import __postdetail from "@/data/jsons/__postdetail.json"
@@ -21,7 +22,6 @@ const Post = () => {
   
       const data = await response.json();
       setDetails(data?.data)
-      console.log(data.data)
       return data;
     
     } catch (error) {
@@ -29,9 +29,6 @@ const Post = () => {
       throw new Error('Failed to fetch posts');
     }
   }
-
-
-  const galleryImgs = details?.photos;
 
   useEffect(() => {
     fetchData()
@@ -57,7 +54,7 @@ const Post = () => {
               <div>
                 <a
                   aria-label="Author"
-                  className="font-semibold text-gray-800 transition-colors duration-200 hover:text-gray-400"
+                  className="font-semibold default-yellow "
                 >
                   {details.seller_first_name}
                 </a>
@@ -118,5 +115,7 @@ const Post = () => {
   )
 }
 
-
 export default Post
+
+
+
