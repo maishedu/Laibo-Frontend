@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Filter = ({searchDetails, handleValueChange}) => {
   return (
-    <div className=" px-5 pt-6 pb-5 rounded sticky ">
+    <div className="hidden lg:block px-5 pt-6 pb-5 rounded sticky ">
     <Label>Book Type</Label>
      <div className="mb-3 rounded-xl bg-neutral-800 ">
      <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>

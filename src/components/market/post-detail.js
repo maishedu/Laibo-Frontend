@@ -8,6 +8,7 @@ import { useParams } from 'next/navigation'
 
 
 const Post = () => {
+  // const details = __postdetail.data;
   const params = useParams()
   const postId = params.postId
   const [details, setDetails] = useState([])
@@ -40,26 +41,26 @@ const Post = () => {
     <div className='overflow-hidden py-16 bg-black min-h-screen relative h-2/4'>
     <div className="px-4 py-16  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
     
-    <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2 ">
-
-      <div className=" h-96 lg:h-full relative " >
-      <div className="flex items-center mb-2">
-              <a aria-label="Author"  className="mr-3">
-                <img
-                  src={details.seller_image_url}
-                  alt="avatar"
-                  className="object-cover w-10 h-10 rounded-2xl shadow-sm"
-                />
+    {details.type === "Hardcover" ? (
+      <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2">
+      <div className=" h-96 lg:h-full relative ">
+       <div className="flex items-center mb-2">
+            <a aria-label="Author"  className="mr-3">
+              <img
+                src={details.seller_image_url}
+                alt="avatar"
+                className="object-cover w-10 h-10 rounded-2xl shadow-sm"
+              />
+            </a>
+            <div>
+              <a
+                aria-label="Author"
+                className="font-semibold default-yellow "
+              >
+                {details.seller_first_name}
               </a>
-              <div>
-                <a
-                  aria-label="Author"
-                  className="font-semibold default-yellow "
-                >
-                  {details.seller_first_name}
-                </a>
-              </div>
             </div>
+          </div>
 
           <GallerySlider
             
@@ -108,6 +109,63 @@ const Post = () => {
           </div>
       </div>
     </div>
+
+    ): 
+    <div>
+      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="relative">
+      <div className="flex items-center mb-2">
+            <a aria-label="Author"  className="ml-3 lg:ml-16 ">
+              <img
+                src={details?.seller_image_url}
+                alt="avatar"
+                className="object-cover w-10 h-10 rounded-2xl shadow-sm"
+              />
+            </a>
+            <div>
+              <a
+                aria-label="Author"
+                className="font-semibold default-yellow ml-3"
+              >
+                {details?.seller_first_name}
+              </a>
+            </div>
+          </div>
+
+      </div>
+      
+      <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2 sm:mx-auto">
+      
+        <div className="grid grid-cols-2 gap-5">
+        
+          <img
+            className="object-cover w-full h-96 rounded shadow-lg"
+            src={details?.photos?.[0]}
+            alt="post image"
+          />
+          <img
+            className="object-cover w-full h-96 rounded shadow-lg"
+            src={details?.photos?.[0]}
+            alt="post image"
+          />
+        </div>
+        <div className="flex flex-col justify-center">
+          <div className="pb-4 mb-4 ">
+            <h6 className="mb-2 text-center font-semibold  text-white leading-5">
+              {details?.market_price}
+            </h6>
+            <div className='mb-2 flex justify-center'>
+            <button className='default-green-bg text-gray-200 p-2 w-32 rounded-lg'>Buy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    }
+    
    
   </div>
   </div>
