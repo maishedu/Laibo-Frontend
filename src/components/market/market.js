@@ -5,11 +5,14 @@ import {BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import Select from "@/shared/Select";
 import Label from "../Label";
-import {BsFilter} from 'react-icons/bs'
+import {BsFilter} from 'react-icons/bs';
+import Filter from '../Filter';
 
-export default function  Market() {
+const  Market = () => {
+ 
   const [posts, setPosts] = useState([])
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [page, setPage] = useState(0);
 
   const handleFilterButtonClick = () => {
     setIsFilterVisible(!isFilterVisible);
@@ -28,18 +31,27 @@ export default function  Market() {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
   }
 
+  const handleLoadMore = async () => {
+    try{
+      const nextPage = page + 1;
+      const newData = await fetchPosts(nextPage);
+      setPage(nextPage);
+    } catch (error) {
+      console.error('Error loading more posts:', error);
+    }
+  };
+
   
-  async function fetchPosts() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=0`);
+  async function fetchPosts(page) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=${page}`);
     try {
-      
-      
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
   
-      const data = await response.json();
-      setPosts(data)
+      const responseData = await response.json();
+      const data = responseData.data;
+      setPosts(prevPosts => [...prevPosts, ...data]);
       return data;
     
     } catch (error) {
@@ -47,11 +59,11 @@ export default function  Market() {
       throw new Error('Failed to fetch posts');
     }
   }
+
  
-
-
+ 
   useEffect(() => {
-    fetchPosts();
+    fetchPosts(page);
     
   }, []);
 
@@ -62,7 +74,6 @@ export default function  Market() {
         <div className="flex flex-col justify-between lg:flex-row">
 
           <div
-          
            className="mb-12 lg:mb-0 w-full  ">
             <div className=" mb-6">
               <div className="mx-auto mb-10 flex justify-center w-96 sm:text-center">
@@ -130,7 +141,7 @@ export default function  Market() {
 
               <div
                className="grid gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
-                {posts.data?.map((post,index) =>(
+                {posts?.map((post,index) =>(
                    <div key={index} >
                     <Link href={`/market/${post.post_id}`}>
                       <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
@@ -141,8 +152,6 @@ export default function  Market() {
                       />
                     </div>
                     </Link>
-                  
-
                    <div className="flex flex-col ">
                    <p className="text-sm text-white font-bold">{post.title}</p>
                      <p className="mb-2 text-xs text-gray-200">
@@ -162,59 +171,26 @@ export default function  Market() {
 
               </div>
 
-
+              <div className="mt-4 flex justify-center">
+                <button onClick={handleLoadMore} className="text-gray-900 font-semibold p-2 default-yellow-bg rounded-lg w-36">Load more</button>
+              </div>
             </div>
           </div>
 
-      
-
-            <div className="hidden lg:block px-5 pt-6 pb-5 rounded sticky ">
-             <Label>Book Type</Label>
-              <div className="mb-3 rounded-xl bg-neutral-800 ">
-              <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>
-                <option value="E-book">E-book</option>
-                <option value="Hardcover">Hardcover</option>
-              </Select>
-              </div>
-  
-              <Label>Condition</Label>
-                <div className="mb-3 rounded-xl bg-neutral-800 ">
-                <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" value={searchDetails.condition} onChange={handleValueChange}>
-                  <option value="Brand new"  >Brand new</option>
-                  <option value="New">New</option>
-                  <option value="Good">Good</option>
-                  <option value="Ok">Ok</option>
-                  <option value="Bad">Bad</option>
-                  <option value="Used">Used</option>
-                  <option value="very-bad">Very bad</option>
-                </Select>
-              </div>
-  
-              <Label>Location</Label>
-                <div className="mb-3 rounded-lg bg-neutral-800 ">
-                  <input placeholder="Location" name="location" value={searchDetails.location} onChange={handleValueChange} className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
-               
-              </div>
-                 <Label>Price</Label>
-                 <div className="flex justify-center mb-3 space-x-3">
-                  <input placeholder="Min price" name="minPrice" value={searchDetails.minPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>
-                  <input placeholder="Max price" name="maxPrice" value={searchDetails.maxPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>
-                 </div>
-                
-              <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
-                <Link  href={`/market/search/?bookType=${searchDetails.bookType}&condition=${searchDetails.condition}&location=${searchDetails.location}&maxPrice=${searchDetails.maxPrice}&minPrice=${searchDetails.minPrice}`} >
-                 <button type="submit" className="rounded-lg text-center">Show results </button>
-                </Link>
-              
-              </div>
-            
-            </div>
+          <Filter searchDetails={searchDetails} handleValueChange={handleValueChange} />
 
         </div>
       </div>
     </div>
   );
 }
+
+
+
+export default Market
+
+
+
 
 
 
