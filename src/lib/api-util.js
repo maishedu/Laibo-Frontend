@@ -1,5 +1,5 @@
 export async function fetchPosts(page) {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=${page}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/laibo/api/posts/fetch?limit=20&page=${page}`);
         
         try {
         
@@ -38,6 +38,7 @@ export async function fetchPost(postId) {
 }
 
 export async function login(email,password){
+    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/login`);
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/login`, {
         method: "POST",
         headers: {

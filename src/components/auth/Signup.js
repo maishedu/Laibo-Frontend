@@ -13,7 +13,7 @@ function Signup() {
       <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl  md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col items-center justify-between xl:flex-row">
           <div className="w-full max-w-xl mt-8 lg:mt-1 xl:px-8 xl:w-5/12">
-            <div className="bg-black mt-20 h-full w-full lg:w-full rounded-3xl mt-4 shadow-2xl p-5 sm:p-10">
+            <div className="bg-black mt-20 h-full w-full lg:w-full rounded-3xl shadow-2xl p-5 sm:p-10">
               <h3 className="mb-2 text-xl default-yellow font-semibold sm:text-center sm:mb-6 sm:text-2xl">
                 Sign up 
               </h3>
