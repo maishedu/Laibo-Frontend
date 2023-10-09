@@ -38,7 +38,6 @@ export async function fetchPost(postId) {
 }
 
 export async function login(email,password){
-    console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/login`);
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/login`, {
         method: "POST",
         headers: {
