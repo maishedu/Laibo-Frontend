@@ -5,11 +5,13 @@ import Link from "next/link";
 import './siteheader.css';
 import {AiOutlineMenu ,AiOutlineClose} from 'react-icons/ai';
 import mobileLogo from '../../images/logo4 copy.png';
+import { useSession,signOut } from "next-auth/react";
 
 
 
 const SiteHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { data: session, status } = useSession();
 
   const toggleMenu = () => {
    
@@ -26,13 +28,13 @@ const SiteHeader = () => {
               <input type="checkbox" name="toggle_nav" id="toggle_nav" className="peer hidden"/>
               <div className="w-full px-6 flex justify-between lg:w-max md:px-0 z-30">
                 {isMenuOpen && (
-                  <Link href={'/'} aria-label="logo" onClick={toggleMenu} className=" hidden lg:flex space-x-2 items-center">
+                  <Link href={'/'} aria-label="logo" onClick={()=>setIsMenuOpen(false)} className=" hidden lg:flex space-x-2 items-center">
                   <span className="secondary-font default-yellow hide-desktop-logo">LAIBO<span className="text-yellow-700 dark:text-yellow-300"></span></span>
                       <Image src={mobileLogo} width={80} className='show-mobile-logo'   alt="mobile logo" />
                 </Link>
 
                 )}
-                <Link href={'/'} onClick={toggleMenu} aria-label="logo" className="flex space-x-2 items-center">
+                <Link href={'/'} onClick={()=>setIsMenuOpen(false)} aria-label="logo" className="flex space-x-2 items-center">
                   <span className="secondary-font default-yellow hide-desktop-logo">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
                     <Image src={mobileLogo} width={80} className='show-mobile-logo'   alt="home-image" />
                 </Link>
@@ -140,23 +142,29 @@ const SiteHeader = () => {
               </div>
                
 
-             <div className=" lg:flex w-full space-x-3 min-w-max space-y-2
-                    border-yellow-200 lg:space-y-0 sm:w-max ">
-                      <Link href={'/login'}>
-                      <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
+             <div className=" lg:flex w-full space-x-3 min-w-max space-y-2 border-yellow-200 lg:space-y-0 sm:w-max ">
+
+                 {status === "authenticated" ? <button type="button" onClick={() => signOut({ callbackUrl: '/login' })}
+                                                       className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
+                  <span className="block text-yellow-900 font-semibold text-sm">
+                      Logout
+                  </span>
+                 </button>:<>
+                     <Link href={'/login'}>
+                         <button type="button" className="w-36 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900  ">
                          <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                              LOG IN
                          </span>
-                       </button>
-                      </Link>
-              <Link href={'/signup'}>
-              <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
-                  <span className="block text-yellow-900 font-semibold text-sm">
-                      SIGN UP
-                  </span>
-               </button>
-              </Link>
-               
+                         </button>
+                     </Link>
+                     <Link href={'/signup'}>
+                         <button type="button"  className="w-36 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 ">
+                          <span className="block text-yellow-900 font-semibold text-sm">
+                              SIGN UP
+                          </span>
+                         </button>
+                     </Link>
+                 </>}
              </div>
 
            </div>

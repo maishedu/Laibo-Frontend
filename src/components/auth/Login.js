@@ -6,6 +6,9 @@ import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
 import {FaFacebookF} from 'react-icons/fa'
 import Link from 'next/link'
+import {login} from "@/lib/api-util";
+import Swal from 'sweetalert2'
+
 
 
 function Login() {
@@ -21,15 +24,27 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
 
+    const user = await login(enteredEmail,enteredPassword);
+    if (user.status === 0){
+      setErrorMessage(user.message);
+      return;
+    }
     try {
-      await signIn("credentials", {
-        email,
-        password,
+      const result = await signIn("credentials", {
+       email:user.data.email,
+        id:user.data.id,
+        token:user.token,
         redirect:false
       });
+      Swal.fire(
+          'Login Successful',
+          `You are now logged in as ${user.data.email}`,
+          'success'
+      )
+
     }catch (error){
       setErrorMessage(error.message);
     }
@@ -41,7 +56,7 @@ function Login() {
       <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl  md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col items-center justify-between xl:flex-row">
           <div className="w-full max-w-xl mt-8 xl:px-8 xl:w-5/12">
-            <div className="bg-black w-80 lg:w-96 rounded-3xl mt-4 shadow-2xl p-10 sm:p-10">
+            <div className="bg-black mt-20 w-full lg:w-96 rounded-3xl mt-4 shadow-2xl p-10 sm:p-10">
               <h3 className="mb-4 text-xl default-yellow font-semibold sm:text-center sm:mb-6 sm:text-2xl">
                 Sign in
               </h3>
@@ -70,8 +85,14 @@ function Login() {
                     name="password"
                   />
                 </div>
-                  {errorMessage && <div>{errorMessage}</div>}
-
+                  {errorMessage &&
+                      <div className="default-yellow-bg border border-red-400 text-black px-4 py-3 rounded relative" role="alert">
+                        <strong className="font-bold">Error</strong>
+                        <span className="block sm:inline">{errorMessage}</span>
+                        <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+    <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+  </span>
+                      </div>}
                 <p className="text-xs text-center text-white sm:text-sm">
                   Sign in with one of the following options
                 </p>

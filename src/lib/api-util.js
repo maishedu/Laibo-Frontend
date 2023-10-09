@@ -20,7 +20,7 @@ export async function fetchPosts(page) {
 }
 
 export async function fetchPost(postId) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/postdetails/${postId}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/posts/postdetails/${postId}`);
  
   try {
     if (!response.ok) {
@@ -35,4 +35,20 @@ export async function fetchPost(postId) {
     console.error('Error fetching posts:', error);
     throw new Error('Failed to fetch posts');
   }
+}
+
+export async function login(email,password){
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "msisdn":email, //Pass email, phone number or username
+            "password":password
+
+        }),
+    });
+    const user = await response.json();
+    return user;
 }

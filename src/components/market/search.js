@@ -162,7 +162,7 @@ export default function  Search() {
 
               )}
               {posts?.length > 0 ? (
-              <div className="grid gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
+              <div className="grid grid-cols-2 gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
                
                 <>
                  {posts?.map((post,index) =>(

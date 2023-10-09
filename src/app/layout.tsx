@@ -1,6 +1,7 @@
 import './globals.css'
 import SiteHeader from '../components/navigation/SiteHeader'
 import Footer from '@/components/navigation/Footer'
+import Provider from "@/components/providers/Provider";
 
 
 export default function RootLayout({
@@ -11,9 +12,11 @@ export default function RootLayout({
   return (
     <html lang="en" >
     <body suppressHydrationWarning={true}>
+    <Provider>
         <SiteHeader />
          {children}
          <Footer />
+    </Provider>
           </body>
     </html>
   )
