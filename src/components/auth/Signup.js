@@ -8,7 +8,7 @@ import Link from 'next/link'
 import * as sweetalert2 from "sweetalert2";
 import {signUp,sendOTP} from "@/lib/api-util";
 import RegisterModal from "@/components/modal/RegisterModal";
-import Otp from "@/components/auth/otp";
+import Otp from "@/components/auth/Otp";
 import React from "react";
 import Swal from "sweetalert2";
 
