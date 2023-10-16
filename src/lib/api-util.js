@@ -52,3 +52,42 @@ export async function login(email,password){
     const user = await response.json();
     return user;
 }
+export async function signUp(details){
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/registration`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: details
+    });
+    const user = await response.json();
+    return user;
+}
+export async function sendOTP(phone){
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/otp/send`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "msisdn":phone, //Pass phone
+
+        }),
+    });
+    const data = await response.json();
+    return data;
+}
+export async function verifyOTP(phone,code){
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/otp/verify`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "msisdn":phone, //Pass phone
+            "otp":code
+        }),
+    });
+    const data = await response.json();
+    return data;
+}

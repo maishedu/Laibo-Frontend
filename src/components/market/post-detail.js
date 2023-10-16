@@ -5,6 +5,7 @@ import GallerySlider from '@/components/GallerySlider';
 import __postdetail from "@/data/jsons/__postdetail.json"
 import {BiSolidUpArrow} from 'react-icons/bi'
 import { useParams } from 'next/navigation'
+import nullUser from '../../images/user.png';
 
 
 const Post = () => {
@@ -34,6 +35,10 @@ const Post = () => {
   useEffect(() => {
     fetchData()
   }, []);
+  const handleImageError = (e) => {
+    e.target.onerror = null; // To prevent infinite loop in case the default image also fails
+    e.target.src = nullUser.src; // Replace with your default image path
+  };
    
 
   
@@ -48,6 +53,7 @@ const Post = () => {
             <a aria-label="Author"  className="mr-3">
               <img
                 src={details.seller_image_url}
+                onError={handleImageError}
                 alt="avatar"
                 className="object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
@@ -118,6 +124,7 @@ const Post = () => {
             <a aria-label="Author"  className="ml-3 lg:ml-16 ">
               <img
                 src={details?.seller_image_url}
+                onError={handleImageError}
                 alt="avatar"
                 className="object-cover w-10 h-10 rounded-2xl shadow-sm"
               />

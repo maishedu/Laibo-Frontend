@@ -12,7 +12,7 @@ import piggyBank from '@/images/money-pig.png'
 
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
 
-const AunthenticatedHeader = () => {
+const AuthenticatedHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { data: session, status } = useSession();
     const userId = session?.user.id;
@@ -39,8 +39,7 @@ const AunthenticatedHeader = () => {
     
         const data = await response.json();
         setUserDetails(data.data)
-        console.log(data)
-        return data;
+          return data;
       } catch (error) {
         console.error('Error fetching user data:', error);
         throw new Error('Failed to fetch user data');
@@ -49,28 +48,28 @@ const AunthenticatedHeader = () => {
     
 
   const toggleMenu = () => {
-   
+
     setIsMenuOpen(!isMenuOpen);
   };
 
  
 
   useEffect(() => {
-    fetchUserData(userId,bearerToken)
+      fetchUserData(userId,bearerToken)
   }, []);
 
 
   return (
     <div className={`bg-neutral-700 fixed w-full z-40  `}>
-    
+
     <nav className="fixed z-10 w-full bg-neutral-700 ">
       <div className="container m-auto px-2 md:px-12 lg:px-7">
         <div className="flex flex-wrap items-center justify-center py-3 gap-6 md:py-4 md:gap-0">
           <input type="checkbox" name="toggle_nav" id="toggle_nav" className="peer hidden"/>
           <div className="w-full px-6 flex justify-between lg:w-max md:px-0 z-30">
-           
+
            <div className="flex space-x-3">
-           <Image src={piggyBank} alt="money bag image" height={30} width={40} /> 
+           <Image src={piggyBank} alt="money bag image" height={30} width={40} />
            <div className="">
               <p className="text-gray-400 text-sm font-semibold">My account</p>
               <span className="text-white "> {userDetails?.walletBalance?.toFixed(2)} <span className="default-yellow">KES</span> </span>
@@ -80,7 +79,7 @@ const AunthenticatedHeader = () => {
             </div>
 
            </div>
-           
+
 
             <div className="flex items-center lg:hidden max-h-10">
               <label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2 hamburger" onClick={toggleMenu}>
@@ -92,10 +91,7 @@ const AunthenticatedHeader = () => {
               </label>
             </div>
           </div>
-
-          
-
-          {isMenuOpen && (
+            {isMenuOpen && (
         <>
         
         <div className="menu fixed text-white text-center h-full flex-col justify-between gap-y-6 bg-neutral-600 w-full  left-0 top-0 z-10 backdrop-filter">
@@ -136,10 +132,10 @@ const AunthenticatedHeader = () => {
                 <span>Reports an issue</span>
               </Link>
             </li>
-            <li>
-              <Link href="/contact" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+            <li className="flex justify-center text-center">
+              <button onClick={() => signOut({ callbackUrl: '/login' })} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Logout</span>
-              </Link>
+              </button>
             </li>
 
           </ul>
@@ -157,8 +153,7 @@ const AunthenticatedHeader = () => {
               <div className="flex space-x-2 justify-center ">
               <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
                 <p className="text-lg text-center text-gray-200 font-semibold">
-                  
-                  <span className="default-green">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span> 
+                    <span className="default-green">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span>
                 </p>
              </div>
 
@@ -191,4 +186,4 @@ const AunthenticatedHeader = () => {
   )
 }
 
-export default AunthenticatedHeader
+export default AuthenticatedHeader

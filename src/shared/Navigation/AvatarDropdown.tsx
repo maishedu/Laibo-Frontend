@@ -1,7 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import Link from "next/link";
-import {RxAvatar} from 'react-icons/rx'
+import {RxAvatar} from 'react-icons/rx';
+import { useSession,signOut } from "next-auth/react";
 interface Props {
   className?: string;
 }
@@ -15,7 +16,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
             <Popover.Button
               className={`self-center w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center`}
             >
-              <RxAvatar sizeClass="w-8  h-8 sm:w-9 sm:h-9" className="text-white h-8 w-8" />
+              <RxAvatar className="text-white w-8  h-8 sm:w-9 sm:h-9" />
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -100,15 +101,14 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                     <hr/>
 
-                    <Link
-                      href={"/#"}
-                      className="flex items-center mb-2  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
+                    <button
+                        className="flex items-center mb-2  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        onClick={() => signOut({ callbackUrl: '/login' })}
                     >
-                      <div className="ml-4">
+                        <div className="ml-4">
                         <p className="text-sm font-medium ">{"Log out"}</p>
                       </div>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </Popover.Panel>
