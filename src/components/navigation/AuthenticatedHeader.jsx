@@ -9,6 +9,7 @@ import mobileLogo from '../../images/logo4 copy.png';
 import { useSession,signOut } from "next-auth/react";
 import moneyImg from '@/images/money-bag-@2x.png'
 import piggyBank from '@/images/money-pig.png'
+import {  fetchUserData} from "@/lib/api-util";
 
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
 
@@ -19,34 +20,7 @@ const AuthenticatedHeader = () => {
     const bearerToken = session?.accessToken;
 
     const [userDetails, setUserDetails] = useState([])
-
-    async function fetchUserData(userId, bearerToken) {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/info/${userId}`;
-      const headers = {
-        'Authorization': `Bearer ${bearerToken}`,
-        'Content-Type': 'application/json' 
-      };
     
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: headers
-      });
-    
-      try {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-    
-        const data = await response.json();
-        setUserDetails(data.data)
-          return data;
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        throw new Error('Failed to fetch user data');
-      }
-    }
-    
-
   const toggleMenu = () => {
 
     setIsMenuOpen(!isMenuOpen);
@@ -55,7 +29,15 @@ const AuthenticatedHeader = () => {
  
 
   useEffect(() => {
-      fetchUserData(userId,bearerToken)
+    fetchUserData(userId, bearerToken)
+      .then((data)=> {
+        setUserDetails(data)
+      })
+      .catch((error) =>{
+        console.error('Error:', error);
+      })
+
+     
   }, []);
 
 
@@ -108,6 +90,11 @@ const AuthenticatedHeader = () => {
               </Link>
             </li>
             <li>
+            <li>
+              <Link href="/rich-list" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+                <span>The rich list</span>
+              </Link>
+            </li>
               <Link href="/authors" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Publisher</span>
               </Link>
@@ -175,7 +162,10 @@ const AuthenticatedHeader = () => {
               </p>
              </div>
              <div className="border-r"/>
-            <AvatarDropdown/>
+             <div className=" px-3">
+             <AvatarDropdown/>
+             </div>
+            
          </div>
 
        </div>
