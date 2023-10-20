@@ -7,10 +7,10 @@ export async function fetchPosts(page) {
             throw new Error('Network response was not ok');
           }
          const responseData = await response.json();
-        //  const data = responseData.data;
+         const data = responseData.data;
          
           // setPosts(prevPosts => [...prevPosts, ...data]);
-          return responseData.data; 
+          return data; 
       
         } catch (error) {
           console.error('Error fetching posts:', error);
@@ -90,4 +90,67 @@ export async function verifyOTP(phone,code){
     });
     const data = await response.json();
     return data;
+}
+
+
+export async function fetchUserPosts(page, userId) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/user/${userId}?limit=10&page=${page}`);
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+    return data;
+  
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw new Error('Failed to fetch posts');
+  }
+}
+
+
+export async function fetchUserData(userId, bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/info/${userId}`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: headers
+  });
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+      return data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+}
+
+export  async function fetchRichList(page) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/richlist?limit=10&page=${page}`);
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+    // setPosts(prevPosts => [...prevPosts, ...data]);
+    return data;
+  
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw new Error('Failed to fetch posts');
+  }
 }

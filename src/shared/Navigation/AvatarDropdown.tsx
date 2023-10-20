@@ -54,6 +54,17 @@ export default function AvatarDropdown({ className = "" }: Props) {
                     </Link>
 
                     <Link
+                      href={"/rich-list"}
+                      className="flex items-center mt-2  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      onClick={() => close()}
+                    >
+                      
+                      <div className="ml-4">
+                        <p className="text-sm font-medium ">{"The rich list"}</p>
+                      </div>
+                    </Link>
+
+                    <Link
                       href={"/account-savelists"}
                       className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
@@ -80,7 +91,11 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       className="flex items-center transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
-                        <p className="text-sm font-medium ">{"Offer"}</p>
+                      <div className="ml-4">
+                      <p className="text-sm font-medium ">{"Offer"}</p>
+
+                      </div>
+                       
                     </Link>
 
                     <Link
@@ -88,7 +103,10 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       className="flex items-center   transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
-                        <p className="text-sm font-medium ">{"Settings"}</p>
+                      <div className="ml-4">
+                      <p className="text-sm font-medium ">{"Settings"}</p>
+
+                      </div>
                       
                     </Link>
                     <Link
@@ -96,7 +114,9 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
+                        <div className="ml-2">
                         <p className="text-sm font-medium ">{"Report an issue"}</p>
+                        </div>
                     </Link>
 
                     <hr/>

@@ -1,15 +1,17 @@
 "use client"
 
 import React, {useEffect, useState} from 'react'
+import Link from 'next/link';
 import GallerySlider from '@/components/GallerySlider';
-import __postdetail from "@/data/jsons/__postdetail.json"
 import {BiSolidUpArrow} from 'react-icons/bi'
 import { useParams } from 'next/navigation'
 import nullUser from '../../images/user.png';
+import { fetchPost } from '@/lib/api-util';
 
 
-const Post = () => {
-  // const details = __postdetail.data;
+export default async function Post ()  {
+
+  
   const params = useParams()
   const postId = params.postId
   const [details, setDetails] = useState([])
@@ -35,9 +37,11 @@ const Post = () => {
   useEffect(() => {
     fetchData()
   }, []);
+
+
   const handleImageError = (e) => {
-    e.target.onerror = null; // To prevent infinite loop in case the default image also fails
-    e.target.src = nullUser.src; // Replace with your default image path
+    e.target.onerror = null; 
+    e.target.src = nullUser.src; 
   };
    
 
@@ -50,22 +54,25 @@ const Post = () => {
       <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2">
       <div className=" h-96 lg:h-full relative ">
        <div className="flex items-center mb-2">
-            <a aria-label="Author"  className="mr-3">
+       <Link href={`/user-profile/?id=${details?.customer_id}`}>
+            <p   className="mr-3">
               <img
                 src={details.seller_image_url}
                 onError={handleImageError}
                 alt="avatar"
                 className="object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
-            </a>
+            </p>
+            </Link>
             <div>
-              <a
+              <p
                 aria-label="Author"
                 className="font-semibold default-yellow "
               >
                 {details.seller_first_name}
-              </a>
+              </p>
             </div>
+            
           </div>
 
           <GallerySlider
@@ -120,24 +127,30 @@ const Post = () => {
     <div>
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="relative">
-      <div className="flex items-center mb-2">
-            <a aria-label="Author"  className="ml-3 lg:ml-16 ">
+
+      
+       <div className="flex items-center mb-2">
+       <Link href={`/user-profile/?id=${details?.customer_id}`}>
+            <p    className="ml-3 lg:ml-16 ">
               <img
                 src={details?.seller_image_url}
                 onError={handleImageError}
                 alt="avatar"
                 className="object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
-            </a>
+            </p>
             <div>
-              <a
+              <p
                 aria-label="Author"
                 className="font-semibold default-yellow ml-3"
               >
                 {details?.seller_first_name}
-              </a>
+              </p>
             </div>
+            </Link>
           </div>
+     
+     
 
       </div>
       
@@ -180,7 +193,7 @@ const Post = () => {
   )
 }
 
-export default Post
+
 
 
 
