@@ -89,7 +89,7 @@ const AuthenticatedHeader = () => {
                 <span>My stock</span>
               </Link>
             </li>
-            <li>
+           
             <li>
               <Link href="/rich-list" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>The rich list</span>
@@ -98,7 +98,7 @@ const AuthenticatedHeader = () => {
               <Link href="/authors" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Publisher</span>
               </Link>
-            </li>
+          
             <li>
               <Link href="/press" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Deals</span>

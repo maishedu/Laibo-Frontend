@@ -9,7 +9,7 @@ import nullUser from '../../images/user.png';
 import { fetchPost } from '@/lib/api-util';
 
 
-export default async function Post ()  {
+const  Post =  () =>  {
 
   
   const params = useParams()
@@ -192,6 +192,8 @@ export default async function Post ()  {
   
   )
 }
+
+export default Post;
 
 
 
