@@ -1,6 +1,3 @@
-"use client"
-
-import React, {useEffect, useState} from 'react'
 import Link from 'next/link';
 import GallerySlider from '@/components/GallerySlider';
 import {BiSolidUpArrow} from 'react-icons/bi'
@@ -8,37 +5,24 @@ import { useParams } from 'next/navigation'
 import nullUser from '../../images/user.png';
 import { fetchPost } from '@/lib/api-util';
 
+async function getData() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/posts/postdetails/259`,
+      { cache: 'force-cache' },
 
-const  Post =  () =>  {
+      );
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
-  
-  const params = useParams()
-  const postId = params.postId
-  const [details, setDetails] = useState([])
- 
-
-  async function fetchData() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/postdetails/${postId}`);
-    try {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-  
-      const data = await response.json();
-      setDetails(data?.data)
-      return data;
-    
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      throw new Error('Failed to fetch posts');
-    }
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
   }
+console.log(res)
+  return res.json()
+}
 
-  useEffect(() => {
-    fetchData()
-  }, []);
-
-
+async function Post() {
+const details = await getData();
   const handleImageError = (e) => {
     e.target.onerror = null; 
     e.target.src = nullUser.src; 
