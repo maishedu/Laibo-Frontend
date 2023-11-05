@@ -32,8 +32,19 @@ export default function AvatarDropdown({ className = "" }: Props) {
                   <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-10 w-40 px-6">
 
                     <Link
-                      href={"/market"}
+                      href={"/account"}
                       className="flex items-center mt-2  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      onClick={() => close()}
+                    >
+                      
+                      <div className="ml-4">
+                        <p className="text-sm font-medium ">{"Account"}</p>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href={"/market"}
+                      className="flex items-center mt-1  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                       
@@ -55,7 +66,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
 
                     <Link
                       href={"/rich-list"}
-                      className="flex items-center mt-2  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      className="flex items-center mt-1  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                       
@@ -76,7 +87,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                     </Link>
 
                     <Link
-                      href={"/account-savelists"}
+                      href={"/deals"}
                       className="flex items-center transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
@@ -87,12 +98,12 @@ export default function AvatarDropdown({ className = "" }: Props) {
                     </Link>
 
                     <Link
-                      href={"/#"}
+                      href={"/offers"}
                       className="flex items-center transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                       <div className="ml-4">
-                      <p className="text-sm font-medium ">{"Offer"}</p>
+                      <p className="text-sm font-medium ">{"Offers"}</p>
 
                       </div>
                        

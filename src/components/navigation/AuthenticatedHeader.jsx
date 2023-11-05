@@ -56,8 +56,11 @@ const AuthenticatedHeader = () => {
               <p className="text-gray-400 text-sm font-semibold">My account</p>
               <span className="text-white "> {userDetails?.walletBalance?.toFixed(2)} <span className="default-yellow">KES</span> </span>
             </div>
-            <div className="hidden lg:flex default-yellow-bg h-10  rounded-xl">
-                <button className="font-semibold w-32 text-sm ">DEPOSIT</button>
+            <div className="hidden lg:flex default-yellow-bg h-10 items-center text-center  rounded-xl">
+              <Link href={`/deposit`}>
+               <button className="font-semibold text-center w-32 text-sm ">DEPOSIT</button>
+              </Link>
+               
             </div>
 
            </div>
@@ -80,6 +83,11 @@ const AuthenticatedHeader = () => {
          <div className="py-16  flex items-center">
          <ul className="tracking-wide justify-center mt-5 font-medium text-sm flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row w-full">
             <li>
+              <Link href="/account" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+                <span>Account</span>
+              </Link>
+            </li>
+            <li>
               <Link href="/market" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>The market</span>
               </Link>
@@ -100,12 +108,12 @@ const AuthenticatedHeader = () => {
               </Link>
           
             <li>
-              <Link href="/press" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/deals" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Deals</span>
               </Link>
             </li>
             <li>
-              <Link href="/contact" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/offers" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Offers</span>
               </Link>
             </li>
