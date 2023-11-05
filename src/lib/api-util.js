@@ -77,6 +77,7 @@ export async function sendOTP(phone){
     const data = await response.json();
     return data;
 }
+
 export async function verifyOTP(phone,code){
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/otp/verify`, {
         method: "POST",
@@ -146,7 +147,6 @@ export  async function fetchRichList(page) {
 
     const responseData = await response.json();
     const data = responseData.data;
-    // setPosts(prevPosts => [...prevPosts, ...data]);
     return data;
   
   } catch (error) {
@@ -154,3 +154,166 @@ export  async function fetchRichList(page) {
     throw new Error('Failed to fetch posts');
   }
 }
+
+
+
+export async function sendSTK(phone,amount,fcm, bearerToken) {
+  const newAmount = parseFloat(amount)
+  var params = JSON.stringify({
+    msisdn: phone,
+    amount: newAmount,
+    fcm_token: fcm,
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/mpesa/stk_push`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+export async function fetchCustomerTransactions(bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/transactions/customer`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: headers
+  });
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+      return data;
+  } catch (error) {
+    console.error('Error fetching transactions:', error);
+    throw new Error('Failed to fetch transactions');
+  }
+}
+
+
+export async function fetchCustomerTransactionsSummary(bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/transactions/customersummary`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: headers
+  });
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+      return data;
+  } catch (error) {
+    console.error('Error fetching transactions:', error);
+    throw new Error('Failed to fetch transactions');
+  }
+}
+
+export async function acceptOrDenyDeal(deal_id,deal_status ,bearerToken) {
+ 
+  var params = JSON.stringify({
+    id: deal_id,
+    deal_accepted: deal_status,
+   
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/accept`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+export async function fetchOffers(bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/offers/customer`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: headers
+  });
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+      return data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+}
+
+
+
+export async function fetchDeals(page,userId, bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/customer?page=${page}&limit=10&user_id=${userId}`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: headers
+  });
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const responseData = await response.json();
+    const data = responseData.data;
+      return data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+}
+
+
+
+
