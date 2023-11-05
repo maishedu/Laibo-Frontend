@@ -2,17 +2,18 @@
 import React, {useEffect, useState} from 'react'
 import { fetchCustomerTransactionsSummary } from '@/lib/api-util';
 import { useSession } from "next-auth/react";
-import Select from '@/shared/Select';
 
 const TransactionSummary = () => {
     const [transDetails, setTransDetails] = useState([])
     const { data: session, status } = useSession();
     const bearerToken = session?.accessToken;
     const [selectedMonth, setSelectedMonth] = useState([])
+    
 
     const handleMonthChange = (e) => {
         setSelectedMonth( e.target.value );
       }
+      
 
     
     const filteredData = transDetails.filter(item => item.month === selectedMonth);  
@@ -21,12 +22,13 @@ const TransactionSummary = () => {
         fetchCustomerTransactionsSummary(bearerToken)
         .then((data)=> {
           setTransDetails(data)
+          setSelectedMonth(data[0].month)
         })
         .catch((error) =>{
           console.error('Error:', error);
         })
         
-    }, []);
+    }, [bearerToken]);
 
   return (
     <>

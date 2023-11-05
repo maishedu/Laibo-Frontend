@@ -20,7 +20,7 @@ const Transactions = () => {
           console.error('Error:', error);
         })
         
-    }, []);
+    }, [bearerToken]);
 
   return (
     <div className="relative w-72 bg-neutral-800 rounded-lg shadow-2xl  p-5">
