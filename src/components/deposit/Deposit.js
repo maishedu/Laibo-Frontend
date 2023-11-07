@@ -17,6 +17,7 @@ const Deposit = () => {
     const [userDetails, setUserDetails] = useState([])
     const fcm = userDetails?.fcm_key;
     const [myNumber,setMyNumber] = useState([])
+    const [defaulyNumber,setDefaultNumber] = useState([])
     const [amount, setAmount] = useState([])
 
     const depositDetails = {
@@ -27,10 +28,10 @@ const Deposit = () => {
 
     const handleChange = (e) => {
       if (e.target.value === "Other"){
-        setMyNumber("")
+          setMyNumber("")
       }
       else{
-        setMyNumber(myNumber)
+        setMyNumber(defaulyNumber)
       }
 
     }
@@ -51,6 +52,7 @@ const Deposit = () => {
         .then((data)=> {
           setUserDetails(data)
           setMyNumber(data?.msisdn)
+          setDefaultNumber(data?.msisdn);
         })
         .catch((error) =>{
           console.error('Error:', error);
@@ -96,7 +98,7 @@ const Deposit = () => {
                     </label>
                     <input
                       placeholder="0700000000"
-                      defaultValue={myNumber}
+                      value={myNumber}
                       onChange={({ target }) => setMyNumber(target?.value)}
                       // onChange={handleValueChange}
                       required
@@ -114,12 +116,11 @@ const Deposit = () => {
                      Amount
                     </label>
                     <input
-                      placeholder="600.00"
+                      placeholder="Amount"
                       value={amount}
                       onChange={({ target }) => setAmount(target?.value)}
-                      // onChange={handleValueChange}
                       required
-                      type="text"
+                      type="number"
                       className="flex-grow w-full text-white h-10 px-4 mb-2 transition duration-200 bg-neutral-700   rounded-lg shadow-sm  "
                       id="amount"
                       name="amount"

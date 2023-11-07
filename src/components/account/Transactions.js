@@ -21,9 +21,16 @@ const Transactions = () => {
         })
         
     }, [bearerToken]);
+    if (transDetails == null){
+        return (
+            <div className="relative mt-4 w-72 bg-neutral-800 font-semibold rounded-lg shadow-2xl  p-5">
+                <h2 className="default-green">No Data</h2>
+            </div>
+        )
+    }
 
   return (
-    <div className="relative w-72 bg-neutral-800 rounded-lg shadow-2xl  p-5">
+    <div className="relative w-80 bg-neutral-800 rounded-lg shadow-2xl  p-5">
         {transDetails?.map((trans, index) =>(
               <div key={index}>
               <div className="flex text-white justify-between">
@@ -35,9 +42,7 @@ const Transactions = () => {
       
             <div className="mb-1 mt-2 sm:mb-2">
               
-              <p className="text-neutral-500 text-sm">
-              {trans.message }
-              </p>
+              <p className="text-neutral-500 text-sm" dangerouslySetInnerHTML={{ __html: trans.message }}/>
             </div>
               </div>
 

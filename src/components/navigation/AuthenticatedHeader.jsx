@@ -170,8 +170,9 @@ const AuthenticatedHeader = () => {
               </p>
              </div>
              <div className="border-r"/>
-             <div className=" px-3">
+             <div className=" px-3 flex">
              <AvatarDropdown/>
+                 <p className="text-white inline">{userDetails?.username}</p>
              </div>
             
          </div>

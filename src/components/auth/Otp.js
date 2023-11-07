@@ -5,6 +5,7 @@ import Image from 'next/image';
 import mobileLogo from '../../images/logo4 copy.png';
 import OtpInput from 'react-otp-input';
 import {verifyOTP} from "@/lib/api-util";
+import {sendOTP} from "@/lib/api-util";
 import Swal from "sweetalert2";
 
 function Otp({phone}){
@@ -26,6 +27,36 @@ function Otp({phone}){
                 'success'
             )
             router.push('/login');
+        }
+    }
+    const resend = async (e)=>{
+        const otpResponse = await sendOTP(phone);
+        if (otpResponse.status === 1){
+            Swal.fire(
+                'OTP Resent',
+                `Success`,
+                'success'
+            )
+            //prevent instant resending
+            e.target.disabled = true
+            e.target.textContent = 'Wait 1 minute to Retry'
+            setTimeout(()=>{
+                e.target.disabled = false;
+                e.target.textContent = 'Resend'
+            },60000)
+        }else {
+            Swal.fire(
+                'OTP Sending Failed',
+                ``,
+                'warning'
+            )
+            //prevent instant resending
+            e.target.disabled = true
+            e.target.textContent = 'Wait 1 minute to Retry'
+            setTimeout(()=>{
+                e.target.disabled = false;
+                e.target.textContent = 'Resend'
+            },60000)
         }
     }
 
@@ -75,7 +106,11 @@ function Otp({phone}){
                   Verify 
                 </button>
                </div>
-           
+                <div className='flex justify-center mt-8'>
+                    <button onClick={resend} className="flex  items-center justify-center w-40 font-semibold rounded-xl  py-2 default-yellow-bg">
+                        Resend
+                    </button>
+                </div>
         </div>
         </div>
     </div>

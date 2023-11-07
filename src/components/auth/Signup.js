@@ -59,7 +59,7 @@ const submitForm = async (event)=>{
     }else {
       Swal.fire(
           'OTP Sending Failed',
-          `You are now signed up as ${otpResponse.message}`,
+          ``,
           'warning'
       )
     }

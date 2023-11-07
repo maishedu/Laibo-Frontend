@@ -9,7 +9,9 @@ const Depositpage = () => {
   const { data: session, status } = useSession()
   if (status === "unauthenticated" && !session) {
     router.push('/login')
-}
+}else if (status === 'loading'){
+    return <h2>loading ...</h2>
+  }
   return (
     <Fragment>
       <Deposit/>

@@ -20,7 +20,7 @@ const Overdraft = () => {
     }, [userId, bearerToken]);
 
   return (
-    <div className="relative w-72 bg-neutral-800 rounded-lg shadow-2xl  p-5">
+    <div className="relative w-80 bg-neutral-800 rounded-lg shadow-2xl  p-5">
       <div className="flex text-white font-semibold justify-between">
         <p>Overdraft limit:</p>
         <p>{userDetails?.overdraft_limit}</p>

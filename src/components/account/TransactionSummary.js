@@ -16,7 +16,7 @@ const TransactionSummary = () => {
       
 
     
-    const filteredData = transDetails.filter(item => item.month === selectedMonth);  
+    const filteredData = transDetails?.filter(item => item.month === selectedMonth);
 
     useEffect(() => {
         fetchCustomerTransactionsSummary(bearerToken)
@@ -29,13 +29,23 @@ const TransactionSummary = () => {
         })
         
     }, [bearerToken]);
+   if (transDetails == null){
+       return (
+
+           <div className="relative mt-4 w-72 bg-neutral-800 font-semibold rounded-lg shadow-2xl  p-5">
+           <h2 className="default-green">No Data</h2>
+           </div>
+
+       )
+   }
+
 
   return (
     <>
     <div className='mt-2 items-center'>
     <label>Select a month:</label>
     <select value={selectedMonth} onChange={handleMonthChange} className='w-24 items-center p-2 rounded'>
-        {transDetails.map(item => item.month).map(month=> (
+        {transDetails?.map(item => item.month).map(month=> (
             <option key={month} value={month}>{month}</option> 
         ))}
         
@@ -43,7 +53,7 @@ const TransactionSummary = () => {
 
     </div>
    
-     <div className="relative mt-4 w-72 bg-neutral-800 font-semibold rounded-lg shadow-2xl  p-5">
+     <div className="relative mt-4 w-80 bg-neutral-800 font-semibold rounded-lg shadow-2xl  p-5">
         {filteredData?.map(item => (
             <>
             <div className="flex default-green justify-between">
