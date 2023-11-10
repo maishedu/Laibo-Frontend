@@ -277,8 +277,8 @@ export async function fetchOffers(bearerToken) {
       throw new Error('Network response was not ok');
     }
 
-    const responseData = await response.json();
-    const data = responseData.data;
+    const data = await response.json();
+    // const data = responseData.data;
       return data;
   } catch (error) {
     console.error('Error fetching user data:', error);
@@ -288,7 +288,7 @@ export async function fetchOffers(bearerToken) {
 
 
 
-export async function fetchDeals(page,userId, bearerToken) {
+export async function fetchDeals(page,userId,bearerToken) {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/customer?page=${page}&limit=10&user_id=${userId}`;
   const headers = {
     'Authorization': `Bearer ${bearerToken}`,
@@ -299,14 +299,16 @@ export async function fetchDeals(page,userId, bearerToken) {
     method: 'GET',
     headers: headers
   });
+  console.log(response)
 
   try {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
 
-    const responseData = await response.json();
-    const data = responseData.data;
+    const data = await response.json();
+    console.log(data)
+    // const data = responseData.data;
       return data;
   } catch (error) {
     console.error('Error fetching user data:', error);
