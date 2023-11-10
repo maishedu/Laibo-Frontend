@@ -47,11 +47,11 @@ const  Post =  () =>  {
 
   
   return (
-    <div className='overflow-hidden py-16 bg-black min-h-screen relative h-2/4'>
+    <div className='overflow-auto w-full py-16 bg-black min-h-screen relative h-2/4'>
     <div className="px-4 py-16  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
     
     {details.type === "Hardcover" ? (
-      <div className="grid max-w-screen-lg gap-8 lg:grid-cols-2">
+      <div className="grid w-full max-w-screen-lg gap-8 lg:grid-cols-2">
       <div className=" h-96 lg:h-full relative ">
        <div className="flex items-center mb-2">
        <Link href={`/user-profile/?id=${details?.customer_id}`}>
@@ -83,7 +83,7 @@ const  Post =  () =>  {
           />
        </div>
 
-      <div className="flex flex-col justify-center w-96">
+      <div className="flex flex-col justify-center w-full">
         
         <div className="px-5 py-5 pb-5 mt-5 rounded ">
             <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">

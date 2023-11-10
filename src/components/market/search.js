@@ -9,6 +9,7 @@ import Select from "@/shared/Select";
 import Label from "../Label";
 import {BsFilter} from 'react-icons/bs';
 import Notfound from '../Notfound';
+import locationIcon from "@/images/location icon.svg";
 
 
 export default function  Search() {
@@ -37,6 +38,15 @@ export default function  Search() {
 
   const handleValueChange = (e) => {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
+  }
+  const clearFilter = ()=>{
+    setSeachDetails({
+      bookType: "",
+      condition: "",
+      location: "",
+      minPrice: "",
+      maxPrice: "",
+    })
   }
 
   
@@ -99,68 +109,24 @@ export default function  Search() {
         <div className="flex flex-col  justify-center lg:flex-row ">
           <div className=" mb-12  w-full">
             <div className=" mb-6">
-            <div className="mx-auto mb-10 flex justify-center w-96 sm:text-center">
-              <div class="relative">
-                  <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                      <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
-                          <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <div className="mx-auto mb-10 flex justify-center w-100 sm:text-center">
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
+                          <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                       </svg>
                   </span>
                   <span
-                   onClick={handleFilterButtonClick}
-                   class="absolute inset-y-0 right-0 flex lg:hidden items-center pr-3">
+                      onClick={handleFilterButtonClick}
+                      className="absolute inset-y-0 right-0 flex lg:hidden items-center pr-3">
 
                     <BsFilter className="w-5 h-5 text-gray-400" />
                   </span>
 
-                  <input type="text" class="w-full py-2 pl-10 pr-4 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
-              </div>
-              </div>
-
-              {isFilterVisible && (
-                <div className="lg:hidden px-5 pt-6 pb-5 rounded sticky ">
-                <Label>Book Type</Label>
-                  <div className="mb-3 rounded-xl bg-neutral-800 ">
-                  <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>
-                    <option value="E-book">E-book</option>
-                    <option value="Hardcover">Hardcover</option>
-                  </Select>
-                  </div>
-      
-                  <Label>Condition</Label>
-                    <div className="mb-3 rounded-xl bg-neutral-800 ">
-                    <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" value={searchDetails.condition} onChange={handleValueChange}>
-                      <option value="Brand new"  >Brand new</option>
-                      <option value="New">New</option>
-                      <option value="Good">Good</option>
-                      <option value="Ok">Ok</option>
-                      <option value="Bad">Bad</option>
-                      <option value="Used">Used</option>
-                      <option value="very-bad">Very bad</option>
-                    </Select>
-                  </div>
-      
-                  <Label>Location</Label>
-                    <div className="mb-3 rounded-lg bg-neutral-800 ">
-                      <input placeholder="Location" name="location" value={searchDetails.location} onChange={handleValueChange} className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
-                  
-                  </div>
-                    <Label>Price</Label>
-                    <div className="flex justify-center mb-3 space-x-3">
-                      <input placeholder="Min price" name="minPrice" value={searchDetails.minPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>
-                      <input placeholder="Max price" name="maxPrice" value={searchDetails.maxPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>
-                    </div>
-                    
-                  <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
-                    <Link  href={`/market/search/?bookType=${searchDetails.bookType}&condition=${searchDetails.condition}&location=${searchDetails.location}&maxPrice=${searchDetails.maxPrice}&minPrice=${searchDetails.minPrice}`} >
-                    <button type="submit" className="rounded-lg text-center">Show results </button>
-                    </Link>
-                  
-                  </div>
-                
+                  <input type="text" className="w-full py-2 pl-16 lg:pl-32 lg:pr-32 pr-16 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
                 </div>
-
-              )}
+              </div>
+              {isFilterVisible && <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="lg:hidden xl:hidden" />}
               {posts?.length > 0 ? (
               <div className="grid grid-cols-2 gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
                
@@ -176,20 +142,20 @@ export default function  Search() {
                       />
                     </div>
                     </Link>
-                
-                   <div className="flex flex-col ">
-                   <p className="text-sm text-white font-bold">{post.title}</p>
-                     <p className="mb-2 text-xs text-gray-200">
-                       {post.location}
-                     </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
-                       Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> 
-                     </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
-                       Ask: {post.last_price}
-                     </p>
-                     
-                   </div>
+
+                     <div className="flex flex-col leading-3">
+                       <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
+                       <p className="mb-2 text-lg text-gray-500 mb-[-5px]">
+                         {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
+                       </p>
+                       <p className="mb-2 text-lg text-gray-200 font-semibold mb-[-5px]">
+                         Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span>
+                       </p>
+                       <p className="mb-2 text-lg text-gray-200 font-semibold mb-[-5px]">
+                         Ask: {post.last_price}
+                       </p>
+
+                     </div>
                  </div>
 
                 ))}
@@ -202,7 +168,7 @@ export default function  Search() {
             </div>
           </div>
 
-          <Filter searchDetails={searchDetails} handleValueChange={handleValueChange} />
+          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="hidden lg:block" />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import {BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import {BsFilter} from 'react-icons/bs';
 import Filter from "../Filter";
+import locationIcon from "../../images/location icon.svg"
 // import { fetchPosts } from "@/lib/api-util";
 
   
@@ -29,6 +30,15 @@ export default function  Market () {
 
   const handleValueChange = (e) => {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
+  }
+  const clearFilter = ()=>{
+    setSeachDetails({
+      bookType: "",
+      condition: "",
+      location: "",
+      minPrice: "",
+      maxPrice: "",
+    })
   }
 
   const handleLoadMore = async () => {
@@ -73,10 +83,9 @@ export default function  Market () {
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-between lg:flex-row">
 
-          <div
-           className="mb-12 lg:mb-0 w-full  ">
+          <div className="mb-12 lg:mb-0 w-full  ">
             <div className=" mb-6">
-              <div className="mx-auto mb-10 flex justify-center w-96 sm:text-center">
+              <div className="mx-auto mb-10 flex justify-center w-100 sm:text-center">
               <div className="relative">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                       <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
@@ -90,16 +99,16 @@ export default function  Market () {
                     <BsFilter className="w-5 h-5 text-gray-400" />
                   </span>
 
-                  <input type="text" className="w-full py-2 pl-10 pr-4 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
+                  <input type="text" className="w-full py-2 pl-16 lg:pl-32 lg:pr-32 pr-16 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
               </div>
               </div>
 
             {isFilterVisible && (
-              <Filter searchDetails={searchDetails} handleValueChange={handleValueChange} className="lg:hidden" />
+              <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="lg:hidden xl:hidden" />
           )}
 
               <div
-               className="grid grid-cols-2 gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
+               className="grid grid-cols-2 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
                 {posts?.map((post,index) =>(
                    <div key={index} >
                     <Link href={`/market/${post.post_id}`}>
@@ -111,15 +120,15 @@ export default function  Market () {
                       />
                     </div>
                     </Link>
-                   <div className="flex flex-col ">
-                   <p className="text-sm text-white font-bold">{post.title}</p>
-                     <p className="mb-2 text-xs text-gray-200">
-                       {post.location}
+                   <div className="flex flex-col leading-3">
+                   <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
+                     <p className="mb-2 text-lg text-gray-500 mb-[-5px]">
+                       {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
                      </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
+                     <p className="mb-2 text-lg text-gray-200 font-semibold mb-[-5px]">
                        Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> 
                      </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
+                     <p className="mb-2 text-lg text-gray-200 font-semibold mb-[-5px]">
                        Ask: {post.last_price}
                      </p>
                      
@@ -135,9 +144,7 @@ export default function  Market () {
               </div>
             </div>
           </div>
-
-          <Filter searchDetails={searchDetails} handleValueChange={handleValueChange} />
-
+          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="hidden lg:block" />
         </div>
       </div>
     </div>
