@@ -15,6 +15,15 @@ export interface TaxonomyType {
   href: Route<string>;
   count?: number;
   thumbnail?: string;
+  title?: string;
+  buyer_first_name?: string;
+  buyer_last_name?: string;
+  selling_price?: string;
+  market_price?: string;
+  amount?: string;
+  quantity?: string;
+  buyer_image_url?: string;
+  photos?: string;
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
