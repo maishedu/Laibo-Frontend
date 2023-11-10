@@ -1,17 +1,31 @@
 @import url('https://fonts.cdnfonts.com/css/helvetica-neue-5');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@font-face {
+    font-family: 'Proxima Nova Normal';
+    src: url('../font/Proxima Nova Font.otf'),
+    url('../font/Proxima Nova Font.otf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Proxima Nova Bold';
+    src: url('../font/Proxima Nova ScOsf Bold.otf'),
+    url('../font/Proxima Nova ScOsf Bold.otf') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Proxima Nova Normal', sans-serif;
     --default-yellow:#E1E138;
     --default-green:#2EA625 ;
 }
 h1,h2,h3,h4,h5,h6{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Proxima Nova Bold', sans-serif;
     font-weight: bold;
 }
 .default-yellow{

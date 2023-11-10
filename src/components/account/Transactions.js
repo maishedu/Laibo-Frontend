@@ -30,7 +30,7 @@ const Transactions = () => {
     }
 
   return (
-    <div className="relative w-80 bg-neutral-800 rounded-lg shadow-2xl  p-5">
+    <div className="relative w-full bg-neutral-800 rounded-lg shadow-2xl  p-5">
         {transDetails?.map((trans, index) =>(
               <div key={index}>
               <div className="flex text-white justify-between">

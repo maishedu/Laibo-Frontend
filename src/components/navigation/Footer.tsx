@@ -17,18 +17,17 @@ const widgetMenus: WidgetFooterMenu[] = [
     id: "5",
     title: "About us",
     menus: [
-      { href: "/press", label: "Our story" },
-      
+      { href: "/press", label: "Press" },
+      { href: "/how-it-works", label: "How it works" },
     ],
   },
   {
     id: "1",
     title: "Support",
     menus: [
-      
-      { href: "#", label: "support@laibo.co.ke" },
+
+      { href: "mailto:support@laibo.co.ke", label: "support@laibo.co.ke" },
       { href: "/contact", label: "Contact us" },
-      
     ],
   },
   {
