@@ -9,36 +9,12 @@ import nullUser from '../../images/user.png';
 import { fetchPost } from '@/lib/api-util';
 
 
-const  Post =  () =>  {
+function  Post ({details}) {
 
 
-  const params = useParams()
-  const postId = params.postId
-  const [details, setDetails] = useState([])
-
-
-  async function fetchData() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/postdetails/${postId}`);
-    try {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      setDetails(data?.data)
-      return data;
-
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      throw new Error('Failed to fetch posts');
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, []);
-
-
+  // const params = useParams()
+  // const postId = params.postId
+  // const [details, setDetails] = useState([])
   const handleImageError = (e) => {
     e.target.onerror = null; 
     e.target.src = nullUser.src; 
