@@ -147,8 +147,8 @@ const AuthenticatedHeader = () => {
 
               <div className="flex space-x-2 justify-center ">
               <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
-                <p className="text-lg text-center text-gray-200 font-semibold">
-                    <span className="default-green">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span>
+                <p className="text-xl text-center text-gray-200 font-semibold">
+                    <span className="default-green ">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span>
                 </p>
              </div>
 
@@ -159,10 +159,10 @@ const AuthenticatedHeader = () => {
       )}
 
      
-       <div className="hidden  w-full   lg:flex lg:flex-row justify-end z-30 items-center gap-y-6  p-6 rounded-xl   lg:gap-y-0 lg:p-0   lg:w-8/12">
+       <div className="hidden  w-full lg:flex lg:flex-row justify-end z-30 items-center gap-y-6  p-6 rounded-xl   lg:gap-y-0 lg:p-0   lg:w-8/12">
            
          <div className=" lg:flex w-full space-x-3   lg:space-y-0 sm:w-max ">
-             <div className="flex space-x-2 justify-center ">
+             <div className="flex space-x-2 items-center ">
              <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
               <p className="text-lg text-center text-gray-200 font-semibold">
                 
@@ -170,9 +170,9 @@ const AuthenticatedHeader = () => {
               </p>
              </div>
              <div className="border-r"/>
-             <div className=" px-3 flex">
+             <div className=" px-3 space-x-3 flex items-center">
              <AvatarDropdown/>
-                 <p className="text-white inline">{userDetails?.username}</p>
+                 <p className="text-white inline items-center">{userDetails?.username}</p>
              </div>
             
          </div>
