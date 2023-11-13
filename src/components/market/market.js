@@ -1,6 +1,5 @@
 'use client'
-
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import {BsFilter} from 'react-icons/bs';
@@ -9,11 +8,11 @@ import locationIcon from "../../images/location icon.svg"
 // import { fetchPosts } from "@/lib/api-util";
 
   
-export default function  Market () {
+export default function  Market ({post}) {
  
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState(post)
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
 
   const handleFilterButtonClick = () => {
     setIsFilterVisible(!isFilterVisible);
@@ -69,14 +68,6 @@ export default function  Market () {
       throw new Error('Failed to fetch posts');
     }
   }
-
- 
- 
-  useEffect(() => {
-    fetchPosts(page);
-    
-  }, []);
-
 
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
