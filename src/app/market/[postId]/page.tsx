@@ -6,9 +6,7 @@ import Notfound from "@/components/Notfound";
 import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
-    params: {
-        postId: any;
-        id: string }
+    params: { postId: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
@@ -38,7 +36,7 @@ export async function generateMetadata(
 }
 
 
-export default async function PageMarket({ params }) {
+export default async function PageMarket({ params}:Props) {
     const { postId } = params;
     const post = await fetchPost(postId);
     if (post.status === 0){
