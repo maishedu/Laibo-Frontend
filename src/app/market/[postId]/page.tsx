@@ -6,7 +6,9 @@ import Notfound from "@/components/Notfound";
 import { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
-    params: { id: string }
+    params: {
+        postId: any;
+        id: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }
 
