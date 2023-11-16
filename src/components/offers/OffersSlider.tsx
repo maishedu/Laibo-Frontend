@@ -37,6 +37,7 @@ const OffersSlider: FC<OffersSliderProps> = ({
 
 
   const windowWidth = useWindowSize().width;
+  
   useEffect(() => {
     if (windowWidth < 320) {
       return setNumberOfitem(1);
