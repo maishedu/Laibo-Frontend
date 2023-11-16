@@ -278,7 +278,7 @@ export async function fetchOffers(bearerToken) {
     }
 
     const data = await response.json();
-    // const data = responseData.data;
+    
       return data;
   } catch (error) {
     console.error('Error fetching user data:', error);
@@ -299,7 +299,6 @@ export async function fetchDeals(page,userId,bearerToken) {
     method: 'GET',
     headers: headers
   });
-  console.log(response)
 
   try {
     if (!response.ok) {
@@ -307,8 +306,6 @@ export async function fetchDeals(page,userId,bearerToken) {
     }
 
     const data = await response.json();
-    console.log(data)
-    // const data = responseData.data;
       return data;
   } catch (error) {
     console.error('Error fetching user data:', error);

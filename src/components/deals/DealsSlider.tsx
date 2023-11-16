@@ -28,7 +28,7 @@ export interface DealsSliderProps {
 const DealsSlider: FC<DealsSliderProps> = ({
   className = "",
   itemClassName = "",
-  itemPerRow = 4,
+  itemPerRow = 3,
   id = "",
   deals = [],
   
@@ -41,13 +41,14 @@ const DealsSlider: FC<DealsSliderProps> = ({
 
 
   const windowWidth = useWindowSize().width;
+  console.log(windowWidth)
   useEffect(() => {
 
     if (windowWidth < 320) {
       return setNumberOfitem(1);
     }
     if (windowWidth < 500) {
-      return setNumberOfitem(itemPerRow - 3);
+      return setNumberOfitem(itemPerRow - 4);
     }
     if (windowWidth < 1024) {
       return setNumberOfitem(itemPerRow - 2);

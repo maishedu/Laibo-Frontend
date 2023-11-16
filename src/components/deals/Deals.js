@@ -1,6 +1,7 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import DealsSlider from './DealsSlider'
+import DealsCardMobile from './DealsCardMobile';
 import { useSession} from "next-auth/react";
 import { fetchDeals } from '@/lib/api-util';
 import Loader from '../Loader';
@@ -31,7 +32,11 @@ const Deals = () => {
       <div className="px-4 py-16 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-20">
        <div className="mx-auto  text-center items-center">
         {deals?.length > 0 ? (
-           <DealsSlider id={userId} deals={deals} />
+          <>
+          <DealsSlider id={userId} deals={deals} className='hidden lg:flex' />
+           <DealsCardMobile  deals={deals} className='flex md:hidden lg:hidden'/>
+          </>
+           
 
         ): loading === 1 ? <Loader/> :
 

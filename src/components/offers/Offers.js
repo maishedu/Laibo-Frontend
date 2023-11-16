@@ -1,6 +1,7 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import OffersSlider from './OffersSlider';
+import OffersCardMobile from './OffersCardMobile'
 import { fetchOffers } from '@/lib/api-util';
 import { useSession} from "next-auth/react";
 import {BsEmojiFrown} from 'react-icons/bs';
@@ -29,7 +30,11 @@ const Offers = () => {
       <div className="px-4 py-16 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-20">
        <div className="mx-auto  text-center items-center">
         {offers?.length > 0 ? (
-           <OffersSlider offers={offers}/>
+          <>
+            <OffersSlider offers={offers} className='hidden lg:flex'/>
+            <OffersCardMobile offers={offers}/>
+          </>
+           
 
         ): loading === 1 ? <Loader/> :
         <div className='items-center py-16'>

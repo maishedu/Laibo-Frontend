@@ -47,49 +47,36 @@ const OffersCard: FC<OffersCardProps> = ({
   return (
     <>
       {showAlert && <SnackBar message={message} showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
-    <div  className={`nc-CardCategory3 flex flex-col  ${className}`}>
-
-      <div className=" mb-4 sm:text-center w-full">
-          <div className="flex">
-            <img
-              className="object-cover w-10 h-10 mr-4 rounded-2xl shadow"
-              src={buyer_image_url}
-              // onError={handleImageError}
-              alt="Buyer image"
-            />
-            <div className="flex flex-col justify-center">
-              <p className=" text-white font-semibold">{buyer_first_name} {buyer_last_name}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className=" relative mb-4 lg:w-96 aspect-w-5 aspect-h-5 transition-shadow duration-300 hover:shadow-xl   ">
-            <img
-              className="object-cover rounded shadow-lg sm:h-64 md:h-80 lg:h-64"
-              src={photos || ""}
-              alt=""
-              
-            />
-          </div>
-
-      {/* <div> */}
-      <div className={`bg-neutral-800 p-2 items-center lg:w-fit rounded-lg text-white font-semibold `}>
-          <p>Mkt : <span className={`default-green`}>{market_price}</span> </p>
-          <p >Ask : {selling_price}</p>
-          <p>Offer : {amount}</p>
-          <p>Quantity : {quantity}</p>
+   
+      <Link
+      href={'#'}
+      className={`nc-CardCategory5 flex flex-col ${className}`}
+      data-nc-id="CardCategory5"
+    >
+      <div
+        className={`flex-shrink-0 relative w-full   rounded-2xl  `}
+      >
+        <img
+          alt=""
+          src={photos || ""}
+          className="object-cover w-full h-full rounded-2xl"
+          sizes="(max-width: 400px) 100vw, 400px"
+        />
+        <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
+      </div>
+      <div className={`bg-neutral-800 mt-4 p-2 text-center rounded-lg text-white font-semibold `}>
+        <p>Mkt : <span className={`default-green`}>{market_price}</span> </p>
+        <p>Ask : {selling_price}</p>
+        <p>Offer : {amount}</p>
+        <p>Quantity : {quantity}</p>
 
       </div>
-
       <div className='mt-4 flex space-x-5 justify-between text-xs font-semibold '>
-          <button onClick={handleSubmitAccept(id)} className='default-green-bg text-white p-2 rounded-lg '>DEAL</button>
-          <button onClick={handleSubmitDeny(id)} className='bg-red-600 text-white p-2 rounded-lg  '>NO DEAL</button>
-      </div>
-
-
-      {/* </div> */}
-
-      </div>
+          <button onClick={handleSubmitAccept(id)} className='default-green-bg text-white p-2 w-full rounded-lg '>DEAL</button>
+          <button onClick={handleSubmitDeny(id)} className='bg-red-600 text-white p-2 w-full rounded-lg  '>NO DEAL</button>
+     </div>
+      
+    </Link>
     </>
     
   );
