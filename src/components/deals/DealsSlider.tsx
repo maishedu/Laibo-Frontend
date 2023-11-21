@@ -41,7 +41,7 @@ const DealsSlider: FC<DealsSliderProps> = ({
 
 
   const windowWidth = useWindowSize().width;
-  console.log(windowWidth)
+  
   useEffect(() => {
 
     if (windowWidth < 320) {

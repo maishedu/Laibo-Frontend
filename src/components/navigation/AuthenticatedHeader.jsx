@@ -118,7 +118,7 @@ const AuthenticatedHeader = () => {
               </Link>
             </li>
             <li>
-              <Link href="/contact" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/settings" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Settings</span>
               </Link>
             </li>
@@ -176,7 +176,6 @@ const AuthenticatedHeader = () => {
              </div>
             
          </div>
-
        </div>
         </div>
       </div>
