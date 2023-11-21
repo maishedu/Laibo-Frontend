@@ -8,7 +8,7 @@ const SnackBar = ({ message, showAlert, setShowAlert, alertSeverity}) => {
               open={showAlert}
               autoHideDuration={6000}
               onClose={() => setShowAlert(false)}
-              message={message}
+              message={showAlert}
             >
               <Alert severity={alertSeverity}>{showAlert}</Alert>
             </Snackbar>

@@ -14,10 +14,15 @@ const DealsCardMobile = ({ deals}) => {
 
   const handleSubmitAccept  = (deal_id) => () => {
     const deal_status = 1;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken);
+    acceptOrDenyDeal(deal_id,deal_status, bearerToken)
+    .then((data)=> {
+      setShowAlert(data.message);
+    })
+    .catch((error) =>{
+      console.error('Error:', error);
+    })
     setSeverity('success');
-    setShowAlert(true);
-    setMessage('Deal accepted succesfully!');
+    
   }
 
   const handleSubmitDeny = (deal_id) => () => {
@@ -51,11 +56,22 @@ const DealsCardMobile = ({ deals}) => {
             <p className="text-sm">{deal.title}</p>
             <p className="text-neutral-400">Buyer: {deal.buyer_first_name} {deal.buyer_last_name} </p>
             <p className="text-neutral-400">Sold : <span className="default-green">{deal.selling_price}</span></p>
-            <p className="text-xs text-neutral-400">Have you given the book?</p>
+            {deal.status === "BID_SELLER_INCOMPLETE_EXCHANGE" ? (
+            <>
+             <p className="text-xs ">Have you given the book?</p>
             <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
-              <button onClick={handleSubmitAccept(deal.id)} className='default-green-bg text-white p-1 rounded-lg w-full  '>YES</button>
-              <button onClick={handleSubmitDeny(deal.id)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
-            </div>
+            <button onClick={handleSubmitAccept(deal.id)} className='default-green-bg text-white p-1 rounded-lg w-full  '>YES</button>
+            <button onClick={handleSubmitDeny(deal.id)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
+          </div>
+            </>
+          ): 
+          <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
+            <p>
+              Pending confirmation from buyer
+            </p>
+          </div>
+          }
+           
 
         </div>
         

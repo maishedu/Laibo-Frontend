@@ -3,6 +3,7 @@ import React from 'react'
 import Overdraft from './Overdraft'
 import TransactionSummary from './TransactionSummary'
 import Transaction from './Transactions'
+import Link from 'next/link'
 
 const Account = () => {
   return (
@@ -13,6 +14,9 @@ const Account = () => {
           <div className="w-full mb-12">
             <Overdraft/>
             <TransactionSummary/>
+            <div className='mt-4'>
+              <Link href={'/apply-loan-overdraft'} className='text-blue-700 font-semibold underline'>Apply for traders overdraft</Link>
+            </div>
           </div>
 
           <div className="w-full max-w-xl xl:px-8 xl:w-5/12">

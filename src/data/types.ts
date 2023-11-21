@@ -24,6 +24,7 @@ export interface TaxonomyType {
   quantity?: string;
   buyer_image_url?: string;
   photos?: string;
+  status?: string;
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";

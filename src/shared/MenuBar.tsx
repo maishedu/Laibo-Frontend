@@ -22,7 +22,7 @@ const MenuBar: React.FC<MenuBarProps> = ({
 
   const handleOpenMenu = () => {
     setIsVisable(true);
-    console.log('clicked')
+    
   }
   //  setIsVisable(true);
   const handleCloseMenu = () => setIsVisable(false);

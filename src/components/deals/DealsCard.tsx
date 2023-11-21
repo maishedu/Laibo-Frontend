@@ -15,9 +15,9 @@ const DealsCard: FC<CardCategory3Props> = ({
   className = "",
   taxonomy,
 }) => {
-  const { id, buyer_first_name, buyer_last_name, selling_price, photos, title } = taxonomy;
+  const { id, buyer_first_name, buyer_last_name, selling_price, photos, status, title } = taxonomy;
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const bearerToken = session?.accessToken;
   const [showAlert, setShowAlert] = useState(false)
   const [alertSeverity, setSeverity] = useState("success");
@@ -25,10 +25,16 @@ const DealsCard: FC<CardCategory3Props> = ({
 
   const handleSubmitAccept  = (deal_id: string | number) => () => {
     const deal_status = 1;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken);
+    acceptOrDenyDeal(deal_id,deal_status, bearerToken)
+    .then((data)=> {
+      setMessage(data.message);
+    })
+    .catch((error) =>{
+      console.error('Error:', error);
+    })
     setSeverity('success');
     setShowAlert(true);
-    setMessage('Deal accepted succesfully!');
+    // setMessage('Deal accepted succesfully!');
   }
 
   const handleSubmitDeny = (deal_id: string | number) => () => {
@@ -59,12 +65,24 @@ const DealsCard: FC<CardCategory3Props> = ({
       <div className={`bg-neutral-800 mt-2 p-2 text-xs text-center rounded-lg text-white font-semibold `}>
          <p className="text-sm">{title}</p>
           <p>Buyer: {buyer_first_name} {buyer_last_name } </p>
-          <p>Sold : {selling_price}</p>
-          <p className="text-xs ">Have you given the book?</p>
-          <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
+          <p className="text-neutral-400">Sold : <span className="default-green">{selling_price}</span></p>
+         
+          {status === "BID_SELLER_INCOMPLETE_EXCHANGE" ? (
+            <>
+             <p className="text-xs ">Have you given the book?</p>
+            <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
             <button onClick={handleSubmitAccept(id)} className='default-green-bg text-white p-1 rounded-lg w-full  '>YES</button>
             <button onClick={handleSubmitDeny(id)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
           </div>
+            </>
+          ): 
+          <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
+            <p>
+              Pending confirmation from buyer
+            </p>
+          </div>
+          }
+          
 
       </div>
       
