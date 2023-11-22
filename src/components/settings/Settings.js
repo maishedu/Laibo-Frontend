@@ -1,11 +1,12 @@
 "use client"
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,useRef} from 'react'
 import nullUser from '../../images/user.png';
-import { fetchUserData, updateProfilePicture, requestWithdrawal } from '@/lib/api-util';
+import { fetchUserData, updateProfilePicture, requestWithdrawal,updateName,updateUsername } from '@/lib/api-util';
 import { useSession} from "next-auth/react";
 import Popper from '@/components/popper/Popper'
 import SettingsModal from './SettingsModal'
 import SnackBar from '../snackBar';
+import Swal from 'sweetalert2'
 
 const Settings = () => {
     const { data: session, status } = useSession();
@@ -13,7 +14,8 @@ const Settings = () => {
     const bearerToken = session?.accessToken;
     const [userDetails, setUserDetails] = useState([])
     const [open, setOpen] = useState(false)
-    const [showAddService, setshowAddService] = useState(false)
+    const [showName, setShowName] = useState(false)
+    const [showUserName, setShowUserName] = useState(false)
     const [toEdit, setToEdit] = useState([])
     const [changeProfile, setChangeProfile] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
@@ -23,9 +25,64 @@ const Settings = () => {
     const [btnText, setBtnText]= useState('Upload');
     const [amount, setAmount] = useState([]);
 
-    const [editingField, setEditingField] = useState(null);
-
-    
+    //refs
+    const first_name = useRef();
+    const last_name = useRef();
+    const username = useRef();
+//refresh
+    const refreshUser = async ()=>{
+        fetchUserData(userId, bearerToken)
+            .then((data)=> {
+                setUserDetails(data)
+            })
+            .catch((error) =>{
+                console.error('Error:', error);
+            })
+    }
+    //update field functions
+    const updateNames = async (e)=>{
+        e.preventDefault();
+        const details = {
+            first_name : first_name.current.value,
+            last_name : last_name.current.value
+        }
+        const data = await updateName(bearerToken,details);
+        setShowName(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
+    const updateUser_Name = async (e)=>{
+        e.preventDefault();
+        const details = username.current.value;
+        const data = await updateUsername(bearerToken,details)
+        setShowUserName(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
     const handleImageError = (e) => {
         e.target.onerror = null; 
         e.target.src = nullUser.src; 
@@ -67,11 +124,7 @@ const Settings = () => {
       
       }
 
-    const handleClick = (field) => {
-        setshowAddService(true)
-        setEditingField(field)
 
-    }  
 
       useEffect(() => {
         fetchUserData(userId, bearerToken)
@@ -91,7 +144,7 @@ const Settings = () => {
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-16 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-20">
       {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
-      <Popper size={"sm"} title={"Update"} open={showAddService} setOpen={setshowAddService}><SettingsModal editingField={editingField} setOpen={setshowAddService} /></Popper>
+
        <div className="mx-auto  text-center items-center w-full lg:w-5/12">
        <div className="flex flex-col justify-center w-full">
         
@@ -144,7 +197,7 @@ const Settings = () => {
                 <div className=''>
                     <div className='w-full cursor-pointer'>
                         <h2 className="text-gray-400 text-sm text-start ">Names</h2>  
-                        <div onClick={()=>handleClick('names')} className="mb-3 rounded-xl bg-neutral-800 px-3 py-2 ">
+                        <div onClick={()=>setShowName(true)} className="mb-3 rounded-xl bg-neutral-800 px-3 py-2 ">
                         <p className="text-gray-400 ">{userDetails.first_name} {userDetails.last_name}</p>
                         </div>
                     </div>
@@ -153,7 +206,7 @@ const Settings = () => {
                
 
                 <h2 className="text-gray-400 text-start  text-sm ">Username</h2>  
-                 <div className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
+                 <div onClick={()=>setShowUserName(true)} className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
                  <p className="text-gray-400 ">{userDetails.username}</p>
                 </div>
 
@@ -207,6 +260,21 @@ const Settings = () => {
           </div>
          </div>
         </div>
+        {/* Name modal */}
+        <Popper size={"sm"} title={"Update Names"} open={showName} setOpen={setShowName}>
+            <SettingsModal setOpen={setShowName} >
+                <input type="text" className="m-2 focus:border-black border-teal-700" defaultValue={userDetails.first_name} name="first_name" ref={first_name}/>
+                <input type="text" className="m-2" defaultValue={userDetails.last_name} name="first_name" ref={last_name}/>
+                <button onClick={updateNames} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
+        {/* User Name modal */}
+        <Popper size={"sm"} title={"Update Username"} open={showUserName} setOpen={setShowUserName}>
+            <SettingsModal setOpen={setShowUserName} >
+                <input type="text" className="m-2 focus:border-black border-teal-700" defaultValue={userDetails.username} name="username" ref={username}/>
+                <button onClick={updateUser_Name} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
     </div>
   )
 }
