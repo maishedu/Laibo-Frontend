@@ -3,7 +3,8 @@ import Reac, {useRef, useState} from 'react'
 import Image from 'next/image'
 import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
-import {FaFacebookF} from 'react-icons/fa'
+import {FaFacebookF,FaEye, FaEyeSlash} from 'react-icons/fa'
+
 import Link from 'next/link'
 import * as sweetalert2 from "sweetalert2";
 import {signUp,sendOTP} from "@/lib/api-util";
@@ -24,6 +25,16 @@ function Signup() {
   const dob = useRef(null);
   const password = useRef(null);
   const confirmPassword = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
 const submitForm = async (event)=>{
   event.preventDefault();
@@ -160,28 +171,43 @@ const submitForm = async (event)=>{
                     name="dob"
                   />
                 </div>
-                <div className="mb-1 sm:mb-2">
+                <div className="relative mb-1 sm:mb-2">
 
                   <input
                       placeholder="Password"
                       required
                       ref={password}
-                      type="password"
+                      type={showPassword ? 'text' : 'password'}
                       className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
                       id="password"
                       name="password"
                   />
+                  <button
+                    type="button"
+                    onClick={toggleShowPassword}
+                    className="absolute inset-y-0 right-0 px-4 py-2 text-gray-700"
+                    >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+
                 </div>
-                <div className="mb-1 sm:mb-2">
+                <div className="relative mb-1 sm:mb-2">
                   <input
                       placeholder="Confirm Password"
                       required
                       ref={confirmPassword}
-                      type="password"
+                      type={showConfirmPassword ? 'text' : 'password'}
                       className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
                       id="confirmPassword"
                       name="confirmPassword"
                   />
+                   <button
+                    type="button"
+                    onClick={toggleShowConfirmPassword}
+                    className="absolute inset-y-0 right-0 px-4 py-2 text-gray-700"
+                    >
+                    {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                 </div>
 
                 <div className="mt-2  mb-2 sm:mb-4">

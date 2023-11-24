@@ -431,11 +431,11 @@ export async function updateUserPhone(bearerToken, phone) {
 
 }
 
-export async function updateUserPassword(bearerToken, newPass , oldPass) {
+export async function updateUserPassword(bearerToken, details) {
 
   var params = JSON.stringify({
-    old_password: oldPass,
-    password: newPass
+    old_password: details.oldPass,
+    password: details.newPass
   });
 
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/updatepassword`;

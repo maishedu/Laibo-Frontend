@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react";
 import Image from 'next/image'
 import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
-import {FaFacebookF} from 'react-icons/fa'
+import {FaFacebookF,FaEye, FaEyeSlash} from 'react-icons/fa'
 import Link from 'next/link'
 import {login} from "@/lib/api-util";
 import Swal from 'sweetalert2'
@@ -15,6 +15,11 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     if (errorMessage) {
@@ -74,17 +79,25 @@ function Login() {
                     name="email"
                   />
                 </div>
-                <div className="mb-1 sm:mb-2">
+                <div className="relative mb-1 sm:mb-2">
 
                   <input
                     placeholder="Password"
                     required
                     ref={passwordRef}
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
                     id="password"
                     name="password"
                   />
+
+                    <button
+                    type="button"
+                    onClick={toggleShowPassword}
+                    className="absolute inset-y-0 right-0 px-4 py-2 text-gray-700"
+                    >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                 </div>
                   {errorMessage &&
                       <div className="default-yellow-bg border border-red-400 text-black px-4 py-3 rounded relative" role="alert">
