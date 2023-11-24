@@ -60,8 +60,8 @@ const AuthenticatedHeader = () => {
               <Link href={`/deposit`}>
                <button className="font-semibold text-center w-32 text-sm ">DEPOSIT</button>
               </Link>
-               
             </div>
+            
 
            </div>
 
@@ -93,7 +93,7 @@ const AuthenticatedHeader = () => {
               </Link>
             </li>
             <li>
-              <Link href="/market" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/stock" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>My stock</span>
               </Link>
             </li>
@@ -103,7 +103,7 @@ const AuthenticatedHeader = () => {
                 <span>The rich list</span>
               </Link>
             </li>
-              <Link href="/authors" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/publisher" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Publisher</span>
               </Link>
           
@@ -123,7 +123,7 @@ const AuthenticatedHeader = () => {
               </Link>
             </li>
             <li>
-              <Link href="/contact" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/feedback" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>Reports an issue</span>
               </Link>
             </li>

@@ -503,6 +503,132 @@ export async function requestWithdrawal(phone,amount, bearerToken) {
 
 }
 
+export  async function fetchCategories() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/categories/fetch`);
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    throw new Error('Failed to fetch categories');
+  }
+}
+
+export  async function uploadPosts(selectedFile, userId, bookDetails, bearerToken)  {
+  
+  
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/upload`;
+
+  const formData = new FormData();
+
+
+  formData.append("photos", selectedFile);
+  formData.append("user_id", userId);
+  formData.append("category_id", bookDetails.category);
+  formData.append("title", bookDetails.title);
+  formData.append("author", bookDetails.author);
+  formData.append("description", bookDetails.description);
+  formData.append("location", bookDetails.location);
+  formData.append("selling_price", bookDetails.askPrice);
+  formData.append("last_price", bookDetails.lastPrice);
+  formData.append("condition", bookDetails.condition);
+  formData.append("type", bookDetails.bookType);
+  formData.append("quantity", bookDetails.quantity);
+  
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    }
+  })
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  
+  } catch (error) {
+    console.error('Error uploaading your post:', error);
+    throw new Error('Failed to upload your post');
+  }
+
+
+};
+
+export  async function editPosts(selectedFile, userId, bookDetails, bearerToken)  {
+  // console.log(bookDetails)
+  
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/edit`;
+
+  const formData = new FormData();
+
+
+  formData.append("photos", selectedFile);
+  formData.append("user_id", userId);
+  formData.append("category_id", bookDetails.category);
+  formData.append("title", bookDetails.title);
+  formData.append("author", bookDetails.author);
+  formData.append("description", bookDetails.description);
+  formData.append("location", bookDetails.location);
+  formData.append("selling_price", bookDetails.askPrice);
+  formData.append("last_price", bookDetails.lastPrice);
+  formData.append("condition", bookDetails.condition);
+  formData.append("type", bookDetails.bookType);
+  formData.append("quantity", bookDetails.quantity);
+  
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    }
+  })
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data;
+  
+  } catch (error) {
+    console.error('Error uploaading your post:', error);
+    throw new Error('Failed to upload your post');
+  }
+
+
+};
+
+export async function postFeedback(bearerToken, userId, feedback) {
+
+  var params = JSON.stringify({
+    user_id : userId,
+    feedback : feedback
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/feedback/submit`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+
 
 
 

@@ -121,7 +121,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       
                     </Link>
                     <Link
-                      href={"/#"}
+                      href={"/feedback"}
                       className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
