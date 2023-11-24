@@ -1,22 +1,26 @@
 "use client"
 import React, {useState, useEffect,useRef} from 'react'
 import nullUser from '../../images/user.png';
-import { fetchUserData, updateProfilePicture, requestWithdrawal,updateName,updateUsername } from '@/lib/api-util';
+import { fetchUserData, updateProfilePicture, requestWithdrawal,updateName,updateUsername, updateUserEmail, updateUserPassword, updateUserPhone } from '@/lib/api-util';
 import { useSession} from "next-auth/react";
 import Popper from '@/components/popper/Popper'
 import SettingsModal from './SettingsModal'
 import SnackBar from '../snackBar';
 import Swal from 'sweetalert2'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Settings = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const bearerToken = session?.accessToken;
     const [userDetails, setUserDetails] = useState([])
-    const [open, setOpen] = useState(false)
     const [showName, setShowName] = useState(false)
     const [showUserName, setShowUserName] = useState(false)
-    const [toEdit, setToEdit] = useState([])
+    const [showUserEmail, setShowUserEmail] = useState(false)
+    const [showUserPassword, setShowUserPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showUserPhone, setShowUserPhone] = useState(false)
     const [changeProfile, setChangeProfile] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
     const [isSelected, setIsSelected] = useState();
@@ -29,6 +33,10 @@ const Settings = () => {
     const first_name = useRef();
     const last_name = useRef();
     const username = useRef();
+    const email = useRef();
+    const newPass = useRef();
+    const oldPass = useRef();
+    const phone = useRef();
 //refresh
     const refreshUser = async ()=>{
         fetchUserData(userId, bearerToken)
@@ -83,6 +91,81 @@ const Settings = () => {
             });
         }
     }
+
+    const updateUser_Email = async (e)=>{
+        e.preventDefault();
+        const details = email.current.value;
+        const data = await updateUserEmail(bearerToken,details)
+        setShowUserEmail(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
+
+    const updateUser_Phone = async (e)=>{
+        e.preventDefault();
+        const details = phone.current.value;
+        const data = await updateUserPhone(bearerToken,details)
+        setShowUserPhone(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
+
+    const updateUser_Password = async (e)=>{
+        e.preventDefault();
+        const details = {
+           newPass: newPass.current.value,
+           oldPass: oldPass.current.value
+        }
+        const data = await updateUserPassword(bearerToken,details)
+        setShowUserPassword(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+      };
+
+    const toggleShowNewPassword = () => {
+    setShowNewPassword(!showNewPassword);
+    };  
+
     const handleImageError = (e) => {
         e.target.onerror = null; 
         e.target.src = nullUser.src; 
@@ -211,12 +294,12 @@ const Settings = () => {
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Email</h2>  
-                 <div className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
+                 <div onClick={()=>setShowUserEmail(true)} className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
                  <p className="text-gray-400  ">{userDetails.email}</p>
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Phone number</h2>  
-                 <div className="mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2">
+                 <div onClick={()=> setShowUserPhone(true)} className="mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2">
                  <p className="text-gray-400 ">{userDetails.msisdn}</p>
                 </div>
 
@@ -230,7 +313,7 @@ const Settings = () => {
                     </div>
                     
                     <div className="mt-5 cursor-pointer rounded-xl bg-white h-10 py-2  w-full">
-                      <button  className="text-gray-900 text-sm">{"Change password"}</button>
+                      <button onClick={()=> setShowUserPassword(true)}  className="text-gray-900 text-sm">{"Change password"}</button>
                     </div>
                 </div>
 
@@ -263,18 +346,68 @@ const Settings = () => {
         {/* Name modal */}
         <Popper size={"sm"} title={"Update Names"} open={showName} setOpen={setShowName}>
             <SettingsModal setOpen={setShowName} >
-                <input type="text" className="m-2 focus:border-black border-teal-700" defaultValue={userDetails.first_name} name="first_name" ref={first_name}/>
-                <input type="text" className="m-2" defaultValue={userDetails.last_name} name="first_name" ref={last_name}/>
+                <input type="text" className="m-2 px-2 py-2 rounded-lg focus:border-black border border-black" defaultValue={userDetails.first_name} name="first_name" ref={first_name}/>
+                <input type="text" className="m-2 px-2 py-2 rounded-lg focus:border-black border border-black" defaultValue={userDetails.last_name} name="first_name" ref={last_name}/>
                 <button onClick={updateNames} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
             </SettingsModal>
         </Popper>
         {/* User Name modal */}
         <Popper size={"sm"} title={"Update Username"} open={showUserName} setOpen={setShowUserName}>
             <SettingsModal setOpen={setShowUserName} >
-                <input type="text" className="m-2 focus:border-black border-teal-700" defaultValue={userDetails.username} name="username" ref={username}/>
+                <input type="text" className="m-2 px-2 focus:border-black border border-black rounded-lg" defaultValue={userDetails.username} name="username" ref={username}/>
                 <button onClick={updateUser_Name} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
             </SettingsModal>
         </Popper>
+        {/* User Email modal */}
+        <Popper size={"sm"} title={"Update Email"} open={showUserEmail} setOpen={setShowUserEmail}>
+            <SettingsModal setOpen={setShowUserEmail} >
+                <input type="text" className="m-2 px-2 rounded-lg focus:border-black border border-black" defaultValue={userDetails.email} name="email" ref={email}/>
+                <button onClick={updateUser_Email} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
+        {/* User Password modal */}
+        <Popper size={"sm"} title={"Update Password"} open={showUserPassword} setOpen={setShowUserPassword}>
+            <SettingsModal setOpen={setShowUserPassword} >
+                <div className='relative'>
+                <input type={showPassword ? 'text' : 'password'} placeholder='Current password' className="m-2 px-2 py-2 rounded-lg focus:border-black border border-black" defaultValue={""} name="oldPass" ref={oldPass}
+
+                />
+                <button
+                type="button"
+                onClick={toggleShowPassword}
+                className="absolute inset-y-0 right-0 px-4 py-2 text-gray-700"
+                >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+
+                </div>
+
+                <div className='relative'>
+                <input type={showNewPassword ? 'text' : 'password'} placeholder='New password' className="m-2 px-2 py-2 rounded-lg focus:border-black border border-black" defaultValue={""} name="newPass" ref={newPass}/>
+                <button
+                type="button"
+                onClick={toggleShowNewPassword}
+                className="absolute inset-y-0 right-0 px-4 py-2 text-gray-700"
+                >
+                {showNewPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
+
+                </div>
+                
+                <button onClick={updateUser_Password} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
+
+        {/* User Phone modal */}
+        <Popper size={"sm"} title={"Update Phone number"} open={showUserPhone} setOpen={setShowUserPhone}>
+            <SettingsModal setOpen={setShowUserPhone} >
+                <input type="text" className="m-2 rounded-lg focus:border-black border px-2 border-black" defaultValue={userDetails.msisdn} name="phone" ref={phone}/>
+                <button onClick={updateUser_Phone} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
+
+
+
     </div>
   )
 }
