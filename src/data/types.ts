@@ -25,10 +25,33 @@ export interface TaxonomyType {
   buyer_image_url?: string;
   photos?: string;
   status?: string;
+  deals?: number;
   desc?: string;
   color?: TwMainColor | string;
   taxonomy: "category" | "tag";
   listingType?: "stay" | "experiences" | "car";
+}
+
+export interface DealsType {
+  id: string | number;
+  name: string;
+  href: Route<string>;
+  deals?: number;
+  offers?: number;
+  thumbnail?: string;
+  msisdn?: string;
+  username?: string;
+  buyer_last_name?: string;
+  selling_price?: string;
+  market_price?: string;
+  amount?: string;
+  quantity?: string;
+  imageUrl?: string;
+  photos?: string;
+  status?: string;
+  desc?: string;
+  color?: TwMainColor | string;
+  
 }
 
 export interface AuthorType {
