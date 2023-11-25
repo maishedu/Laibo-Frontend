@@ -85,7 +85,7 @@ const Post = () => {
              value={bookDetails.category} onChange={handleValueChange}
              >
                 {categories?.map((cat, index)=>(
-                    <option value={cat.id}>{cat.name}</option>
+                    <option key={index} value={cat.id}>{cat.name}</option>
                 ))}
             </Select>
             </div>
