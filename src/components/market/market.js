@@ -1,16 +1,16 @@
 'use client'
 import React, {useState} from "react";
-import {BiSolidUpArrow} from 'react-icons/bi'
+import {BiSolidUpArrow} from 'react-icons/bi';
 import Link from "next/link";
 import {BsFilter} from 'react-icons/bs';
 import Filter from "../Filter";
-import locationIcon from "../../images/location icon.svg"
-// import { fetchPosts } from "@/lib/api-util";
+import locationIcon from "../../images/location icon.svg";
+
 
   
 export default function  Market ({post}) {
  
-  const [posts, setPosts] = useState(post)
+  const [posts, setPosts] = useState(post);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [page, setPage] = useState(1);
 

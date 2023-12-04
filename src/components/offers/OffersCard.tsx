@@ -1,26 +1,23 @@
 import React, { FC, useState } from "react";
 import { TaxonomyType } from "@/data/types";
 import Link from "next/link";
-import Image from "next/image";
 import { acceptOrDenyDeal } from "@/lib/api-util";
-import nullUser from '../../images/user.png';
 import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
 
 export interface OffersCardProps {
   className?: string;
   taxonomy: TaxonomyType;
+  fetchOffers:(message:any) => void;
 }
 
 const OffersCard: FC<OffersCardProps> = ({
   className = "",
   taxonomy,
+  fetchOffers
 }) => {
   const { id, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
-  // const handleImageError = (e) => {
-  //   e.target.onerror = null; 
-  //   e.target.src = nullUser.src; 
-  // };
+  
 
   const { data: session, status } = useSession();
   const bearerToken = session?.accessToken;
@@ -31,17 +28,25 @@ const OffersCard: FC<OffersCardProps> = ({
   const handleSubmitAccept  = (deal_id: string | number) => () => {
     const deal_status = 1;
     acceptOrDenyDeal(deal_id,deal_status, bearerToken)
-    setSeverity('success');
-    setMessage('Deal accepted succesfully!');
-    setShowAlert(true);
+    .then((data)=>{
+      setSeverity('success');
+      setShowAlert(data.messsage);
+      fetchOffers(bearerToken)
+
+    })
+    
   }
 
   const handleSubmitDeny = (deal_id: string | number) => () => {
     const deal_status = 0;
     acceptOrDenyDeal(deal_id,deal_status, bearerToken)
-    setSeverity('warning');
-    setMessage('You have rejected the deal!')
-    setShowAlert(true);
+    .then((data)=>{
+      setSeverity('warning');
+      setShowAlert(data.message);
+      fetchOffers(bearerToken);
+
+    })
+    
   }
 
   return (
@@ -58,7 +63,7 @@ const OffersCard: FC<OffersCardProps> = ({
       >
         <img
           alt=""
-          src={photos || ""}
+          src={photos?.[0] || ""}
           className="object-cover w-full h-full rounded-2xl"
           sizes="(max-width: 400px) 100vw, 400px"
         />

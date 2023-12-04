@@ -1,22 +1,24 @@
 import React, {  useState } from "react";
-import { acceptOrDenyDeal } from "@/lib/api-util";
+import { dealResponses } from "@/lib/api-util";
 import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
 
 
-const DealsCardMobile = ({ deals}) => {
+const DealsCardMobile = ({ deals, fetchDeals}) => {
   
   const { data: session, status } = useSession();
   const bearerToken = session?.accessToken;
+  const userId = session?.user.id;
   const [showAlert, setShowAlert] = useState(false)
   const [alertSeverity, setSeverity] = useState("success");
-  const [message, setMessage] = useState("")
+  
 
-  const handleSubmitAccept  = (deal_id) => () => {
+  const handleSubmitAccept  = (deal_id, status) => () => {
     const deal_status = 1;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken)
+    dealResponses(deal_id,deal_status,status, bearerToken)
     .then((data)=> {
       setShowAlert(data.message);
+      fetchDeals(1,userId,bearerToken);
     })
     .catch((error) =>{
       console.error('Error:', error);
@@ -25,17 +27,23 @@ const DealsCardMobile = ({ deals}) => {
     
   }
 
-  const handleSubmitDeny = (deal_id) => () => {
+  const handleSubmitDeny = (deal_id, status) => () => {
     const deal_status = 0;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken);
-    setSeverity('warning');
-    setShowAlert(true);
-    setMessage('You have rejected the deal!')
+    dealResponses(deal_id,deal_status,status, bearerToken)
+    .then((data)=> {
+      setSeverity('warning');
+      setShowAlert(data.message);
+      fetchDeals(1,userId,bearerToken);
+    })
+    .catch((error) =>{
+      console.error('Error:', error);
+    })
+    
   }
 
   return (
     <>
-     {showAlert && <SnackBar message={message} showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
+     {showAlert && <SnackBar showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
      {deals?.map((deal, index)=> (
       <>
       <div key={index} className={`flex flex-row lg:hidden mb-6`} data-nc-id="CardCategory5" >
@@ -45,7 +53,7 @@ const DealsCardMobile = ({ deals}) => {
         >
           <img
             alt=""
-            src={deal.photos || ""}
+            src={deal.photos?.[0] || ""}
             className="object-cover w-40 h-56 rounded-2xl"
             
           />
@@ -54,14 +62,17 @@ const DealsCardMobile = ({ deals}) => {
 
         <div className={`mt-2 space-y-4 p-2 text-sm text-start ml-4 rounded-lg text-white font-semibold `}>
             <p className="text-sm">{deal.title}</p>
-            <p className="text-neutral-400">Buyer: {deal.buyer_first_name} {deal.buyer_last_name} </p>
-            <p className="text-neutral-400">Sold : <span className="default-green">{deal.selling_price}</span></p>
-            {deal.status === "BID_SELLER_INCOMPLETE_EXCHANGE" ? (
+            <p className="text-neutral-400"> {userId == deal.seller_customer_id ? 'Buyer' : "Seller "}: {userId == deal.seller_customer_id ? deal.buyer_first_name : deal.seller_first_name }  {userId == deal.seller_customer_id ? deal.buyer_last_name : deal.seller_last_name } </p>
+            <p className="text-neutral-400">{userId == deal.seller_customer_id ? 'Sold' : "Bought "} : <span className="default-green">{deal.selling_price}</span></p>
+            
+            {userId == deal.seller_customer_id? (
+              <>
+               {deal.status === "BID_SELLER_INCOMPLETE_EXCHANGE" ? (
             <>
-             <p className="text-xs ">Have you given the book?</p>
+            <p className="text-xs ">{userId == deal.seller_customer_id ? 'Have you given the book?' : 'Have you received the book?'}</p>
             <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
-            <button onClick={handleSubmitAccept(deal.id)} className='default-green-bg text-white p-1 rounded-lg w-full  '>YES</button>
-            <button onClick={handleSubmitDeny(deal.id)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
+            <button onClick={handleSubmitAccept(deal.id,deal.status)} className='default-green-bg text-white p-1 rounded-lg w-full'>YES</button>
+            <button onClick={handleSubmitDeny(deal.id,deal.status)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
           </div>
             </>
           ): 
@@ -71,6 +82,27 @@ const DealsCardMobile = ({ deals}) => {
             </p>
           </div>
           }
+              </>
+            ):
+            <>
+             {deal.status === "BID_BUYER_INCOMPLETE_EXCHANGE" ? (
+            <>
+            <p className="text-xs ">{userId == deal.seller_customer_id ? 'Have you given the book?' : 'Have you received the book?'}</p>
+            <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
+            <button onClick={handleSubmitAccept(deal.id,deal.status)} className='default-green-bg text-white p-1 rounded-lg w-full'>YES</button>
+            <button onClick={handleSubmitDeny(deal.id,deal.status)} className='bg-red-600 text-white p-1 rounded-lg w-full '>NO</button>
+          </div>
+            </>
+          ): 
+          <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
+            <p>
+              Pending confirmation from seller
+            </p>
+          </div>
+          }
+            </>
+            }
+           
            
 
         </div>

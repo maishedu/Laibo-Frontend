@@ -101,8 +101,7 @@ export async function fetchUserPosts(page, userId) {
       throw new Error('Network response was not ok');
     }
 
-    const responseData = await response.json();
-    const data = responseData.data;
+    const data = await response.json();
     return data;
   
   } catch (error) {
@@ -258,6 +257,34 @@ export async function acceptOrDenyDeal(deal_id,deal_status ,bearerToken) {
 
 }
 
+export async function dealResponses(deal_id,deal_status,status,bearerToken) {
+ 
+ 
+  var params = JSON.stringify({
+    id: deal_id,
+    status: status,
+    is_books_exchanged: deal_status
+   
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/exchangedone`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+
 export async function fetchOffers(bearerToken) {
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/offers/customer`;
   const headers = {
@@ -327,14 +354,7 @@ export  async function updateProfilePicture (selectedFile, bearerToken)  {
 
   const data = await response.json()
   return data;
-    // .then((response) => response.json())
-
-    // .then((result) => {
-    //   console.log("Success:", result);
-    // })
-    // .catch((error) => {
-    //   console.error("Error:", error);
-    // });
+    
 
 };
 
@@ -518,15 +538,19 @@ export  async function fetchCategories() {
   }
 }
 
-export  async function uploadPosts(selectedFile, userId, bookDetails, bearerToken)  {
+export  async function uploadPosts(newPhotos, userId, bookDetails, bearerToken)  {
+  
   
   
   const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/upload`;
 
   const formData = new FormData();
+    newPhotos?.forEach((file) => {
+      formData.append('photos', file);
+    });
 
 
-  formData.append("photos", selectedFile);
+  // formData.append("photos", selectedFile);
   formData.append("user_id", userId);
   formData.append("category_id", bookDetails.category);
   formData.append("title", bookDetails.title);
@@ -538,6 +562,8 @@ export  async function uploadPosts(selectedFile, userId, bookDetails, bearerToke
   formData.append("condition", bookDetails.condition);
   formData.append("type", bookDetails.bookType);
   formData.append("quantity", bookDetails.quantity);
+  formData.append("latitude", 0.0);
+  formData.append("longitude", 0.0);
   
   const response = await fetch(url, {
     method: "POST",
@@ -561,26 +587,35 @@ export  async function uploadPosts(selectedFile, userId, bookDetails, bearerToke
 
 };
 
-export  async function editPosts(selectedFile, userId, bookDetails, bearerToken)  {
-  // console.log(bookDetails)
+export  async function editPosts( userId, postId, bookDetails,newPhotos, deleted, bearerToken)  {
   
   const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/edit`;
 
   const formData = new FormData();
 
+  if(newPhotos.length > 0){
+    newPhotos?.forEach((file) => {
+      formData.append('photos', file);
+    });
+  }
 
-  formData.append("photos", selectedFile);
+
+  // formData.append("photos", newPhotos);
   formData.append("user_id", userId);
-  formData.append("category_id", bookDetails.category);
+  formData.append("post_id", postId);
+  formData.append("category_id", bookDetails.category_id);
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
   formData.append("description", bookDetails.description);
   formData.append("location", bookDetails.location);
-  formData.append("selling_price", bookDetails.askPrice);
-  formData.append("last_price", bookDetails.lastPrice);
-  formData.append("condition", bookDetails.condition);
-  formData.append("type", bookDetails.bookType);
+  formData.append("selling_price", bookDetails.selling_price);
+  formData.append("last_price", bookDetails.last_price);
+  formData.append("condition", bookDetails.book_condition);
+  formData.append("type", bookDetails.type);
   formData.append("quantity", bookDetails.quantity);
+  formData.append("latitude", 0.0);
+  formData.append("longitude", 0.0);
+  formData.append("deleted_files",deleted);
   
   const response = await fetch(url, {
     method: "POST",
@@ -597,12 +632,32 @@ export  async function editPosts(selectedFile, userId, bookDetails, bearerToken)
     return data;
   
   } catch (error) {
-    console.error('Error uploaading your post:', error);
+    console.error('Error uploading your post:', error);
     throw new Error('Failed to upload your post');
   }
 
 
 };
+
+export async function deletePost(bearerToken, postId) {
+
+  
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/delete/${postId}`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'DELETE',
+    headers: headers,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
 
 export async function postFeedback(bearerToken, userId, feedback) {
 
@@ -627,6 +682,95 @@ export async function postFeedback(bearerToken, userId, feedback) {
   return data;
 
 }
+
+export async function makeBidOffer(bearerToken, details) {
+  const newQuantity = parseFloat(details.quantity)
+  var params = JSON.stringify({
+    quantity: newQuantity,
+    amount: details.amount,
+    post_id: details.postId,
+    deal_type: 6,
+    deal_from: details.customer_id
+    
+  });
+  
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/makeoffer`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+export async function makeExchangeOffer(bearerToken, details, books_exchanged) {
+  const newQuantity = parseFloat(details.quantity)
+
+  var params = JSON.stringify({
+    quantity: newQuantity,
+    books_exchanged: books_exchanged,
+    post_id: details.post_id,
+    deal_type: 7,
+    deal_from: details.customer_id
+    
+  });
+ 
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/makeoffer`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
+export async function makeBorrowOffer(bearerToken, details) {
+  const newQuantity = parseFloat(details.quantity)
+  var params = JSON.stringify({
+    quantity: newQuantity,
+    return_date: details.returnDate,
+    post_id: details.postId,
+    deal_type: 5,
+    deal_from: details.customer_id
+    
+  });
+  
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/makeoffer`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
 
 
 

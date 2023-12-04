@@ -4,33 +4,38 @@ import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
 
 
-const OffersCardMobile = ({ offers}) => {
-  
+const OffersCardMobile = ({ offers, fetchOffers}) => {
   const { data: session, status } = useSession();
   const bearerToken = session?.accessToken;
   const [showAlert, setShowAlert] = useState(false)
   const [alertSeverity, setSeverity] = useState("success");
-  const [message, setMessage] = useState("")
-
+  
   const handleSubmitAccept  = (deal_id) => () => {
     const deal_status = 1;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken);
-    setSeverity('success');
-    setShowAlert(true);
-    setMessage('Deal accepted succesfully!');
+    acceptOrDenyDeal(deal_id,deal_status, bearerToken)
+    .then((data)=>{
+      setSeverity('success');
+      setShowAlert(data.message);
+      fetchOffers(bearerToken)
+    
+    })
+    
   }
 
   const handleSubmitDeny = (deal_id) => () => {
     const deal_status = 0;
-    acceptOrDenyDeal(deal_id,deal_status, bearerToken);
-    setSeverity('warning');
-    setShowAlert(true);
-    setMessage('You have rejected the deal!')
+    acceptOrDenyDeal(deal_id,deal_status, bearerToken)
+    .then((data)=> {
+      setSeverity('warning');
+      setShowAlert(data.message);
+      fetchOffers(bearerToken)
+    })
+    
   }
 
   return (
     <>
-     {showAlert && <SnackBar message={message} showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
+     {showAlert && <SnackBar showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
      {offers?.map((offer, index)=> (
       <>
       <div key={index} className={`flex flex-row lg:hidden mb-6`} data-nc-id="CardCategory5" >
@@ -40,7 +45,7 @@ const OffersCardMobile = ({ offers}) => {
         >
           <img
             alt=""
-            src={offer.photos || ""}
+            src={offer.photos[0] || ""}
             className="object-cover w-40 h-56 rounded-2xl"
             
           />

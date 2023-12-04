@@ -26,7 +26,7 @@ const AuthenticatedHeader = () => {
     const pathname = usePathname();
     const router  = useRouter()
 
-    const isMarketPage = router.pathname === '/market';
+    const isMarketPage = pathname === '/market';
     
   const toggleMenu = () => {
 
@@ -74,7 +74,7 @@ const AuthenticatedHeader = () => {
               </Link>
             </div>
             {isMarketPage && (
-              <div className="flex default-yellow-bg h-10 items-center text-center  rounded-xl">
+              <div className="flex default-yellow-bg h-10 items-center text-center rounded-xl">
                 <Link href={`/post`}>
                 <button className="font-semibold text-center w-20 text-sm ">POST</button>
                 </Link>
@@ -140,7 +140,7 @@ const AuthenticatedHeader = () => {
             </li>
            
             <li>
-              <Link href="/stock" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+              <Link href="/my-stock" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>My stock</span>
               </Link>
             </li>

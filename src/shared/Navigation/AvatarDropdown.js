@@ -27,7 +27,7 @@ const AvatarDropdown =  ({data }) => {
                 alt="avatar"
                 className="relative object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
-              {/* <RxAvatar className="text-white w-8  h-8 sm:w-9 sm:h-9" /> */}
+              
               <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{data?.offers + data?.deals}</span>
             </Popover.Button>
             <Transition
@@ -116,7 +116,7 @@ const AvatarDropdown =  ({data }) => {
                     </Link>
 
                     <Link
-                      href={"/author"}
+                      href={"/my-stock"}
                       className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >

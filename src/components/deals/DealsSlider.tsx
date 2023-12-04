@@ -10,7 +10,6 @@ import NextBtn from "../NextBtn";
 import { variants } from "@/utils/animationVariants";
 import { useWindowSize } from "react-use";
 
-
 export interface DealsSliderProps {
   id?:string;
   deals?: TaxonomyType[];
@@ -22,6 +21,8 @@ export interface DealsSliderProps {
   categoryCardType?: "card3" | "card4" | "card5";
   itemPerRow?: 4 | 5;
   sliderStyle?: "style1" | "style2";
+  fetchDeals:(message:string | number) => void;
+  
 }
 
 
@@ -31,6 +32,8 @@ const DealsSlider: FC<DealsSliderProps> = ({
   itemPerRow = 3,
   id = "",
   deals = [],
+  fetchDeals,
+  
   
   
   sliderStyle = "style1",
@@ -38,8 +41,7 @@ const DealsSlider: FC<DealsSliderProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [numberOfItems, setNumberOfitem] = useState(0);
-
-
+  
   const windowWidth = useWindowSize().width;
   
   useEffect(() => {
@@ -86,7 +88,7 @@ const DealsSlider: FC<DealsSliderProps> = ({
   });
 
   const renderCard = (item: TaxonomyType) => {
-        return <DealsCard taxonomy={item} />;
+        return <DealsCard taxonomy={item} fetchDeals={fetchDeals} userid={id} />;
      
   };
 

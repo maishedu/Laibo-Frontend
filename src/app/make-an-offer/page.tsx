@@ -1,11 +1,11 @@
 'use client'
-import React, {Fragment} from 'react'
-import Post from '@/components/post/Post';
+import React, {Fragment} from 'react';
+import MakeOffer from '@/components/offers/MakeOffer';
 import { useSession } from "next-auth/react";
 import {  useRouter } from 'next/navigation'
 import Loader from '@/components/Loader';
 
-const Postpage = () => {
+const MakeOfferpage = () => {
   const router  = useRouter();
   const { data: session, status } = useSession()
   if (status === "unauthenticated" && !session) {
@@ -16,9 +16,9 @@ const Postpage = () => {
   }
   return (
     <Fragment>
-      <Post/>
+        <MakeOffer/>
     </Fragment>
   )
 }
 
-export default Postpage;
+export default MakeOfferpage;
