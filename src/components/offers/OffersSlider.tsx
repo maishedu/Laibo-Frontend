@@ -20,6 +20,7 @@ export interface OffersSliderProps {
   categoryCardType?: "card3" | "card4" | "card5";
   itemPerRow?: 4 | 5;
   sliderStyle?: "style1" | "style2";
+  fetchOffers:(message:string | number) => void;
 }
 
 
@@ -28,6 +29,7 @@ const OffersSlider: FC<OffersSliderProps> = ({
   itemClassName = "",
   offers = [],
   itemPerRow = 4,
+  fetchOffers,
   
   sliderStyle = "style1",
 }) => {
@@ -79,7 +81,7 @@ const OffersSlider: FC<OffersSliderProps> = ({
   });
 
   const renderCard = (item: TaxonomyType) => {
-        return <OffersCard taxonomy={item} />;
+        return <OffersCard taxonomy={item} fetchOffers={fetchOffers} />;
      
   };
 

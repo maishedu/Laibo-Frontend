@@ -3,10 +3,9 @@ import React, {useState, useEffect} from 'react'
 import { useSession} from "next-auth/react";
 import Label from '../Label'
 import Select from '@/shared/Select'
-import Link from 'next/link'
 import { FaPlus } from "react-icons/fa";
 import { fetchCategories, uploadPosts } from '@/lib/api-util'
-import FileUpload from '@/components/FileUpload';
+import SnackBar from '../snackBar';
 
 const Post = () => {
     const { data: session, status } = useSession();
@@ -14,21 +13,21 @@ const Post = () => {
     const bearerToken = session?.accessToken;
     const [categories, setCategories]= useState([])
     const [upload, setUpload] = useState(false);
-    const [selectedFile, setSelectedFile] = useState();
     const [isSelected, setIsSelected] = useState();
-    const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertSeverity, setSeverity] = useState("success");
+    const [newPhotos, setNewPhotos] = useState([]);
+    const [displayPhotos, setDisplayPhotos] = useState([])
 
-    const handleFilesUpload = (files) => {
-        // Update the state with the uploaded files
-        setUploadedFiles(files);
+  
+
+      const handleAdd = (event) => {
+        const newFiles = Array.from(event.target.files);
+        setNewPhotos((prevPhotos) => [...prevPhotos, ...newFiles]);
+        const displayPics = Array.from(event.target.files).map((file) => URL.createObjectURL(file));
+        setDisplayPhotos((prevPhotos) => [...prevPhotos, ...displayPics]);
       };
 
-    // console.log(uploadedFiles)
-
-    function changeHandler  (event) {
-        setSelectedFile(event.target.files[0]);
-        setIsSelected(true);
-      };
 
     const [bookDetails, setBookDetails] = useState({
         bookType: "",
@@ -48,9 +47,15 @@ const Post = () => {
       }
 
       const handlePostsUpload = () => {
-        uploadPosts(uploadedFiles,userId,bookDetails,bearerToken)
+        uploadPosts(newPhotos,userId,bookDetails,bearerToken)
         .then((data)=>{
-            console.log(data)
+          if(data.status === 1){
+            setShowAlert(data.message)
+            setBookDetails("")
+          }else{
+            setSeverity('warning')
+            setShowAlert('Failed, try again!')
+          }
         })
       }
  
@@ -66,16 +71,17 @@ const Post = () => {
     }, []);
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
+      {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
       <div className="px-4 py-8 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-10">
       <div className="mx-auto  text-center items-center w-full lg:w-5/12 ">
-      <div className={` px-5 pt-2 lg:mt-12 pb-5 text-start rounded sticky`}>
+      <div className={`px-5 pt-2 lg:mt-12 pb-5 text-start rounded sticky`}>
             <Label>Book Type</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType"
              value={bookDetails.bookType} onChange={handleValueChange}
              >
-            <option value="E-book">Hardcover (Original)</option>
-            <option value="Hardcover">Hardcover (Generic)</option>
+            <option value="Hardcover (Original)">Hardcover (Original)</option>
+            <option value="Hardcover (Generic)">Hardcover (Generic)</option>
             </Select>
             </div>
 
@@ -93,24 +99,28 @@ const Post = () => {
             <div>
                 <p className='default-yellow'>Add pictures</p>
                 <p className='text-neutral-600 text-sm'>The first photo will be used as your cover</p>
-                <div 
-                onClick={()=> setUpload(true)}
-                 className='flex mt-2  flex-col px-2  justify-center mb-2 default-yellow-bg w-32 h-20 rounded-xl items-center py-5'>
-                <FaPlus className='w-10 h-10'/>
-                    
-               </div>
-               <div>
-                <h1 className='text-white'>Multiple File Upload</h1>
-                <FileUpload onFilesUpload={handleFilesUpload} uploadedFiles={uploadedFiles} />
-                <div>
-                    <h2 className='text-white'>Uploaded Files:</h2>
-                    <ul className='text-white'>
-                    {uploadedFiles.map((file, index) => (
-                        <li key={index}>{file.name}</li>
+                  
+                  <div className='flex space-x-3 mt-3'>
+                  {displayPhotos?.map((pic, index)=>(
+                      <div key={index} className=" relative mb-2">
+                      <img src={pic} alt="book image" className="relative object-fit w-20 h-20 rounded-lg" />
+                      <span 
+                      // onClick={() => handleDelete(index)} 
+                      className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full cursor-pointer">X</span>
+                     </div>
+
                     ))}
-                    </ul>
-                </div>
-                </div>
+
+                    <div 
+                      onClick={()=> setUpload(true)}
+                      className='flex   flex-col px-2  justify-center mb-2 default-yellow-bg w-20 h-20 rounded-xl items-center py-5'>
+                      <FaPlus className='w-10 h-10'/>
+                          
+                    </div>
+
+                  </div>
+
+
                {upload ? (
                     <div className='bg-white py-2 px-2 rounded-lg'>
                         <input
@@ -120,10 +130,12 @@ const Post = () => {
                             name="file"
                             
                             // webkitdirectory
-                            onChange={changeHandler}
+                            onChange={handleAdd}
                         />
                         {isSelected ? (
-                            <div className=''></div>
+                            <div className=''>
+                              {/* <img src={selectedFile}/> */}
+                            </div>
                         ) : (
                             <p className=''>Select a file to show details</p>
                         )}
@@ -203,10 +215,7 @@ const Post = () => {
                 <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
                     <button onClick={handlePostsUpload} type="submit" className="rounded-lg font-semibold text-center">POST </button>
                 </div>
-                {/* <div className="mb-3 text-center rounded-xl bg-white px-3 py-2">
-                    <button onClick={clear} className="rounded-lg text-center">Clear Filter</button>
-                </div> */}
-        
+               
             </div>
 
         </div>

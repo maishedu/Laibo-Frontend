@@ -14,27 +14,31 @@ const Deals = () => {
   const bearerToken = session?.accessToken;
   const [deals, setDeals] = useState([]);
   const [page, setPage] = useState(1)
-  const [loading, setLoading] = useState(1)
+  const [loading, setLoading] = useState(1);
+
+  const getDeals = async ()=>{
+   const deals = await fetchDeals(1,userId,bearerToken);
+   if(deals.status === 1){
+    fetchDeals(1,userId,bearerToken);
+    setDeals(deals.data)
+    setLoading(0)
+   }else{
+    console.error('Error:', error);
+   }
+  }
 
   useEffect(() => {
-    fetchDeals(page,userId, bearerToken)
-      .then((data)=> {
-        setDeals(data.data)
-        setLoading(0)
-      })
-      .catch((error) =>{
-        console.error('Error:', error);
-      })
+    getDeals();
     
-  }, []);
+  },[]);
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-16 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-20">
        <div className="mx-auto  text-center items-center">
         {deals?.length > 0 ? (
           <>
-          <DealsSlider id={userId} deals={deals} className='hidden lg:flex' />
-           <DealsCardMobile  deals={deals} className='flex md:hidden lg:hidden'/>
+          <DealsSlider id={userId} deals={deals} fetchDeals={getDeals} className='hidden lg:flex' />
+           <DealsCardMobile  deals={deals} fetchDeals={getDeals} className='flex md:hidden lg:hidden'/>
           </>
            
 

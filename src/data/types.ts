@@ -18,6 +18,9 @@ export interface TaxonomyType {
   title?: string;
   buyer_first_name?: string;
   buyer_last_name?: string;
+  seller_customer_id?: string | number;
+  seller_first_name?: string,
+  seller_last_name?: string,
   selling_price?: string;
   market_price?: string;
   amount?: string;

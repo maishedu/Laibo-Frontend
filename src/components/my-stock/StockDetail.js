@@ -1,15 +1,38 @@
 "use client"
 
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import Link from 'next/link';
 import GallerySlider from '@/components/GallerySlider';
 import {BiSolidUpArrow} from 'react-icons/bi'
-import { useParams } from 'next/navigation'
+import { useSession} from "next-auth/react";
 import nullUser from '../../images/user.png';
-import { fetchPost } from '@/lib/api-util';
+import { deletePost } from '@/lib/api-util';
+import { CiWarning } from "react-icons/ci";
+import SnackBar from '../snackBar';
 
 
-function  Post ({details}) {
+function  StockDetail ({details}) {
+    const { data: session, status } = useSession();
+    const userId = session?.user.id;
+    const bearerToken = session?.accessToken;
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertSeverity, setSeverity] = useState("success");
+
+    const postId = details?.post_id;
+
+    const handleDeletePost = () => {
+        deletePost(bearerToken, postId)
+        .then((data)=>{
+            if (data.status === 1){
+                setShowAlert(data.message)
+            }else{
+                setSeverity('error')
+                setShowAlert('Failed, try again!')
+            }
+            
+        })
+
+    }
 
   const handleImageError = (e) => {
     e.target.onerror = null; 
@@ -20,7 +43,9 @@ function  Post ({details}) {
   
   return (
     <div className='overflow-auto w-full py-16 bg-black min-h-screen relative h-2/4'>
+
     <div className="px-4 py-16  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
       <div className="grid w-full max-w-screen-lg gap-8 lg:grid-cols-2">
       <div className=" h-96 lg:h-full relative ">
        <div className="flex items-center mb-2">
@@ -53,15 +78,16 @@ function  Post ({details}) {
           />
        </div>
 
-      <div className="flex flex-col justify-center w-full">
+      <div className="flex flex-col justify-center w-9/12">
         
         <div className="px-5 py-5 pb-5 mt-5 rounded ">
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
                <h2 className="text-white font-semibold ">Mkt: <span className="default-green">{details.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> </h2>
                <h2 className="text-white font-semibold ">Ask: {details.selling_price}</h2>
-               <div className='mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
-                <Link href={`/make-an-offer?id=${details.post_id}`}>
-                 <button className='rounded-lg text-center font-semibold text-sm'>MAKE OFFER</button>
+               <div className='mb-3 text-center rounded-xl bg-white px-3 py-2'>
+                <Link href={`/my-stock/edit/${details.post_id}`}>
+                 <button 
+                  className='rounded-lg text-center font-semibold text-sm'>EDIT</button>
                 </Link>
                
                </div>
@@ -69,29 +95,35 @@ function  Post ({details}) {
             </div>
 
             <h2 className="default-yellow font-semibold ">Title</h2>  
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3 ">
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3 ">
                <p className="text-gray-400 ">{details.title}</p>
             </div>
 
             <h2 className="default-yellow font-semibold ">Author</h2>  
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
                <p className="text-gray-400  ">{details.author}</p>
             </div>
 
             <h2 className="default-yellow font-semibold ">Location</h2>  
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
                <p className="text-gray-400 ">{details.location}</p>
             </div>
 
             <h2 className="default-yellow font-semibold ">Condition</h2>  
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
-               <p className="text-gray-400  ">{details.book_condition}</p>
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
+               <p className="text-gray-400">{details.book_condition}</p>
             </div>
 
             <h2 className="default-yellow font-semibold ">Other details</h2>  
-            <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
-               <p className="text-gray-400 ">{details.description}</p>
+            <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
+               <p className="text-gray-400">{details.description}</p>
             </div>
+
+            <div className='mb-3 text-center rounded-xl bg-red-500 px-3 py-2'>
+                 <button onClick={handleDeletePost} className='rounded-lg text-center  font-semibold text-sm'><span><CiWarning className='w-5 h-5 inline-block ' /> </span>DELETE POST</button>
+               </div>
+
+            
           </div>
       </div>
     </div>
@@ -102,7 +134,7 @@ function  Post ({details}) {
   )
 }
 
-export default Post;
+export default StockDetail;
 
 
 

@@ -9,6 +9,7 @@ import { variants } from "@/utils/animationVariants";
 import Link from "next/link";
 import { Route } from "@/routers/types";
 import imageLoad from '../images/imageload.gif';
+import Loader from "./Loader";
 
 export interface GallerySliderProps {
   className?: string;
@@ -85,7 +86,7 @@ export default function GallerySlider({
                 className="absolute inset-0"
               >
                 <Image
-                    src={currentImage || imageLoad} // provide a default image path or keep it empty as before
+                    src={currentImage || imageLoad } // provide a default image path or keep it empty as before
                     layout="fill"
                     alt="post card gallery"
                     className={`object-cover ${imageClass}`}

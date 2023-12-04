@@ -14,15 +14,21 @@ const Offers = () => {
   const [offers, setOffers] = useState([])
   const [loading, setLoading] = useState(1)
 
+  const getOffers = async ()=>{
+    const offers = await fetchOffers(bearerToken);
+    if(offers.status === 1){
+     fetchOffers(bearerToken);
+     setOffers(offers.data)
+     setLoading(0)
+    }else{
+     console.error('Error:', error);
+    }
+   }
+
   useEffect(() => {
-    fetchOffers(bearerToken)
-      .then((data)=> {
-        setOffers(data.data)
-        setLoading(0)
-      })
-      .catch((error) =>{
-        console.error('Error:', error);
-      })
+
+    getOffers()
+    
     
   }, []);
   return (
@@ -31,8 +37,8 @@ const Offers = () => {
        <div className="mx-auto  text-center items-center">
         {offers?.length > 0 ? (
           <>
-            <OffersSlider offers={offers} className='hidden lg:flex'/>
-            <OffersCardMobile offers={offers}/>
+            <OffersSlider offers={offers} fetchOffers={getOffers} className='hidden lg:flex'/>
+            <OffersCardMobile offers={offers} fetchOffers={getOffers} />
           </>
            
 

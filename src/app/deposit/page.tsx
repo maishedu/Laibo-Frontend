@@ -3,14 +3,15 @@ import React, {Fragment} from 'react'
 import Deposit from '@/components/deposit/Deposit'
 import { useSession } from "next-auth/react";
 import {  useRouter } from 'next/navigation'
+import Loader from '@/components/Loader';
 
 const Depositpage = () => {
   const router  = useRouter();
   const { data: session, status } = useSession()
   if (status === "unauthenticated" && !session) {
     router.push('/login')
-}else if (status === 'loading'){
-    return <h2>loading ...</h2>
+  }else if (status === 'loading'){
+    return <Loader/>
   }
   return (
     <Fragment>
