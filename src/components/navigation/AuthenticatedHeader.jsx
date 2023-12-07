@@ -73,14 +73,14 @@ const AuthenticatedHeader = () => {
                <button className="font-semibold text-center w-18 p-1 text-xs ">DEPOSIT</button>
               </Link>
             </div>
-            {isMarketPage && (
+            {/* {isMarketPage && ( */}
               <div className="flex default-yellow-bg h-10 items-center text-center rounded-xl">
                 <Link href={`/post`}>
                 <button className="font-semibold text-center w-20 p-1 text-xs ">POST</button>
                 </Link>
               </div>
 
-            )}
+            {/* )} */}
             
             
 
@@ -134,6 +134,11 @@ const AuthenticatedHeader = () => {
               </Link>
             </li>
             <li>
+              <Link href="/market" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+                <span>The market</span>
+              </Link>
+            </li>
+            <li>
               <Link href="/rich-list" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
                 <span>The rich list</span>
               </Link>
@@ -149,11 +154,7 @@ const AuthenticatedHeader = () => {
                 <span>Account</span>
               </Link>
             </li>
-            {/* <li>
-              <Link href="/market" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
-                <span>The market</span>
-              </Link>
-            </li> */}
+           
             
            
             
