@@ -17,7 +17,7 @@ const Stock = () => {
     useEffect(() => {
      fetchUserPosts(page, userId)
       .then((data)=> {
-        setPosts(data.data)
+        setPosts(data)
       })
       .catch((error) =>{
         console.error('Error:', error);

@@ -60,9 +60,7 @@ const  Profile = () => {
         console.error('Error:', error);
       })
 
- 
-    
-  }, [page]);
+  }, [page, userId, bearerToken]);
   
   
 
