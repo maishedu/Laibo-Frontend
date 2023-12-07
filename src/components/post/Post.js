@@ -6,6 +6,8 @@ import Select from '@/shared/Select'
 import { FaPlus } from "react-icons/fa";
 import { fetchCategories, uploadPosts } from '@/lib/api-util'
 import SnackBar from '../snackBar';
+import { useRouter } from 'next/navigation';
+import {PulseLoader} from 'react-spinners'
 
 const Post = () => {
     const { data: session, status } = useSession();
@@ -18,8 +20,10 @@ const Post = () => {
     const [alertSeverity, setSeverity] = useState("success");
     const [newPhotos, setNewPhotos] = useState([]);
     const [displayPhotos, setDisplayPhotos] = useState([])
-
-  
+    const [category, setCategory] = useState([])
+    const router = useRouter()
+    const [btnText, setBtnText] = useState('POST')
+    const [loading, setLoading] = useState(false);
 
       const handleAdd = (event) => {
         const newFiles = Array.from(event.target.files);
@@ -28,13 +32,18 @@ const Post = () => {
         setDisplayPhotos((prevPhotos) => [...prevPhotos, ...displayPics]);
       };
 
+      const handleDelete = (index) => {
+        setDisplayPhotos((prevPhotos) => [...prevPhotos.slice(0, index), ...prevPhotos.slice(index + 1)])
+        setNewPhotos((prevPhotos) => [...prevPhotos.slice(0, index), ...prevPhotos.slice(index + 1)]);
+      };
+
 
     const [bookDetails, setBookDetails] = useState({
-        bookType: "",
-        category: "",
+        bookType: "Hardcover (Original)",
+        // category: "",
         title : "",
         author: "",
-        condition: "",
+        condition: "Brand new",
         location: "",
         askPrice: "",
         lastPrice: "",
@@ -46,16 +55,24 @@ const Post = () => {
         setBookDetails({ ...bookDetails, [e.target.name]: e.target.value})
       }
 
+      
+
       const handlePostsUpload = () => {
-        uploadPosts(newPhotos,userId,bookDetails,bearerToken)
+        setLoading(true)
+        setBtnText('Uploading...')
+        uploadPosts(newPhotos,userId,bookDetails,category,bearerToken)
         .then((data)=>{
           if(data.status === 1){
             setShowAlert(data.message)
             setBookDetails("")
+            router.push('/my-stock');
           }else{
             setSeverity('warning')
             setShowAlert('Failed, try again!')
           }
+        })
+        .finally(()=>{
+          setLoading(false);
         })
       }
  
@@ -63,6 +80,7 @@ const Post = () => {
      fetchCategories()
       .then((data)=> {
         setCategories(data.data)
+        setCategory(data.data[0].id)
        
       })
       .catch((error) =>{
@@ -88,7 +106,9 @@ const Post = () => {
             <Label>Category</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="category"
-             value={bookDetails.category} onChange={handleValueChange}
+             value={category}
+             onChange={({ target }) => setCategory(target?.value)}
+              
              >
                 {categories?.map((cat, index)=>(
                     <option key={index} value={cat.id}>{cat.name}</option>
@@ -105,7 +125,7 @@ const Post = () => {
                       <div key={index} className=" relative mb-2">
                       <img src={pic} alt="book image" className="relative object-fit w-20 h-20 rounded-lg" />
                       <span 
-                      // onClick={() => handleDelete(index)} 
+                      onClick={() => handleDelete(index)} 
                       className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full cursor-pointer">X</span>
                      </div>
 
@@ -213,7 +233,7 @@ const Post = () => {
                 </div>
             
                 <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
-                    <button onClick={handlePostsUpload} type="submit" className="rounded-lg font-semibold text-center">POST </button>
+                    <button onClick={handlePostsUpload} disabled={loading} type="submit" className="rounded-lg font-semibold text-center"> {loading ? ( <>Uploading <PulseLoader color='black' size={10} /></>) : (btnText)} </button>
                 </div>
                
             </div>

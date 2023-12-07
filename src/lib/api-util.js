@@ -101,7 +101,8 @@ export async function fetchUserPosts(page, userId) {
       throw new Error('Network response was not ok');
     }
 
-    const data = await response.json();
+    const responseData = await response.json();
+    const data = responseData.data;
     return data;
   
   } catch (error) {
@@ -538,8 +539,7 @@ export  async function fetchCategories() {
   }
 }
 
-export  async function uploadPosts(newPhotos, userId, bookDetails, bearerToken)  {
-  
+export  async function uploadPosts(newPhotos, userId, bookDetails,category, bearerToken)  {
   
   
   const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/upload`;
@@ -549,10 +549,8 @@ export  async function uploadPosts(newPhotos, userId, bookDetails, bearerToken) 
       formData.append('photos', file);
     });
 
-
-  // formData.append("photos", selectedFile);
   formData.append("user_id", userId);
-  formData.append("category_id", bookDetails.category);
+  formData.append("category_id", category);
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
   formData.append("description", bookDetails.description);
@@ -580,7 +578,7 @@ export  async function uploadPosts(newPhotos, userId, bookDetails, bearerToken) 
     return data;
   
   } catch (error) {
-    console.error('Error uploaading your post:', error);
+    console.error('Error uploading your post:', error);
     throw new Error('Failed to upload your post');
   }
 

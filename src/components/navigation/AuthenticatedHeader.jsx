@@ -65,18 +65,18 @@ const AuthenticatedHeader = () => {
            <div className="flex space-x-3 ">
            <Image src={piggyBank} alt="money bag image" height={30} width={40} />
            <div className="">
-              <p className="text-gray-400 text-sm font-semibold">My account</p>
-              <span className="text-white "> {userDetails?.walletBalance?.toFixed(2)} <span className="default-yellow">KES</span> </span>
+              <p className="text-gray-400 text-xs font-semibold">My account</p>
+              <span className="text-white text-xs"> {userDetails?.walletBalance?.toFixed(2)} <span className="default-yellow">KES</span> </span>
             </div>
             <div className="flex bg-white h-10 items-center text-center  rounded-xl">
               <Link href={`/deposit`}>
-               <button className="font-semibold text-center w-20 text-sm ">DEPOSIT</button>
+               <button className="font-semibold text-center w-18 p-1 text-xs ">DEPOSIT</button>
               </Link>
             </div>
             {isMarketPage && (
               <div className="flex default-yellow-bg h-10 items-center text-center rounded-xl">
                 <Link href={`/post`}>
-                <button className="font-semibold text-center w-20 text-sm ">POST</button>
+                <button className="font-semibold text-center w-20 p-1 text-xs ">POST</button>
                 </Link>
               </div>
 

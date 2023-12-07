@@ -16,7 +16,6 @@ const EditPost = () => {
     const bearerToken = session?.accessToken;
     const [categories, setCategories]= useState([])
     const [upload, setUpload] = useState(false);
-    const [selectedFile, setSelectedFile] = useState();
     const [isSelected, setIsSelected] = useState();
     const [showAlert, setShowAlert] = useState(false)
     const [alertSeverity, setSeverity] = useState("success");

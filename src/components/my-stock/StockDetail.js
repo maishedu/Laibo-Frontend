@@ -9,9 +9,11 @@ import nullUser from '../../images/user.png';
 import { deletePost } from '@/lib/api-util';
 import { CiWarning } from "react-icons/ci";
 import SnackBar from '../snackBar';
+import { useRouter } from 'next/navigation';
 
 
 function  StockDetail ({details}) {
+    const router   = useRouter()
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const bearerToken = session?.accessToken;
@@ -25,6 +27,7 @@ function  StockDetail ({details}) {
         .then((data)=>{
             if (data.status === 1){
                 setShowAlert(data.message)
+                router.push('/my-stock')
             }else{
                 setSeverity('error')
                 setShowAlert('Failed, try again!')
@@ -78,7 +81,7 @@ function  StockDetail ({details}) {
           />
        </div>
 
-      <div className="flex flex-col justify-center w-9/12">
+      <div className="flex flex-col justify-center lg:w-9/12">
         
         <div className="px-5 py-5 pb-5 mt-5 rounded ">
             <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
