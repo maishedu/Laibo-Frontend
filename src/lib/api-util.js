@@ -598,7 +598,6 @@ export  async function editPosts( userId, postId, bookDetails,newPhotos, deleted
   }
 
 
-  // formData.append("photos", newPhotos);
   formData.append("user_id", userId);
   formData.append("post_id", postId);
   formData.append("category_id", bookDetails.category_id);

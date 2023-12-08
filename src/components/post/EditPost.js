@@ -19,11 +19,11 @@ const EditPost = () => {
     const [isSelected, setIsSelected] = useState();
     const [showAlert, setShowAlert] = useState(false)
     const [alertSeverity, setSeverity] = useState("success");
-    const [post, setPost] = useState([])
     const [deleted, setDeleted] = useState([])
     const [photos, setPhotos] = useState([])
     const [newPhotos, setNewPhotos] = useState([]);
-    
+    const [post, setPost] = useState([])
+    console.log(post)
 
     const handleDelete = (index) => {
       setPhotos((prevPhotos) => {
@@ -108,7 +108,7 @@ const EditPost = () => {
 
             <Label>Category</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
-            <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" id='category' name="category"
+            <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" id='category' name="category_id"
              value={post.category_id} onChange={handleValueChange}
              >
                 {categories?.map((cat, index)=>(
@@ -181,7 +181,7 @@ const EditPost = () => {
 
             <Label>Condition</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
-            <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" 
+            <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="book_condition" 
             value={post.book_condition} onChange={handleValueChange}
             >
                 <option value="Brand new">Brand new</option>
