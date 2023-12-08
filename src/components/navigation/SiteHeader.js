@@ -41,13 +41,27 @@ const SiteHeader = () => {
                 </Link>
 
                 <div className="flex items-center lg:hidden max-h-10">
-                  <label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2 hamburger" onClick={toggleMenu}>
-                    {isMenuOpen ? (
-                        <AiOutlineClose className="w-5 h-5 default-yellow" />
-                    ) : (
-                        <AiOutlineMenu className="w-5 h-5 default-yellow" />
-                    )}
-                  </label>
+                    <Link href={'/login'}>
+                        <button type="button" className="w-16 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900 m-1 mt-3">
+                         <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
+                             LOG IN
+                         </span>
+                        </button>
+                    </Link>
+                    <Link href={'/signup'}>
+                        <button type="button"  className="w-20 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 m-2 mt-4">
+                          <span className="block text-yellow-900 font-semibold text-sm">
+                              SIGN UP
+                          </span>
+                        </button>
+                    </Link>
+                  {/*<label role="button" htmlFor="toggle_nav" aria-label="humburger" id="hamburger" className="relative w-10 h-auto p-2 hamburger" onClick={toggleMenu}>*/}
+                  {/*  {isMenuOpen ? (*/}
+                  {/*      <AiOutlineClose className="w-5 h-5 default-yellow" />*/}
+                  {/*  ) : (*/}
+                  {/*      <AiOutlineMenu className="w-5 h-5 default-yellow" />*/}
+                  {/*  )}*/}
+                  {/*</label>*/}
                 </div>
               </div>
 

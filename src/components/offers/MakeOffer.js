@@ -149,18 +149,18 @@ const MakeOffer = () => {
               
                 <p className="text-base text-gray-200 font-semibold mb-[-5px]">
                   <span className="mr-2">Mkt :</span>
-                    <span className={postDetails.market_change === "UP" ? 'default-green' : postDetails.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{postDetails.market_price.toFixed(2)}
+                    <span className={postDetails.market_change === "UP" ? 'default-green' : postDetails.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{postDetails.market_price?.toFixed(2)}
                         {postDetails.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : postDetails.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
                     </span>
                 </p>
                 <p className="text-base">
-                  <span className="mr-2">Ask :</span>{postDetails?.selling_price.toFixed(2)}
+                  <span className="mr-2">Ask :</span>{postDetails?.selling_price?.toFixed(2)}
                 </p>
                 <p className="text-base">
-                  <span className="mr-2">Last :</span>{postDetails?.last_price.toFixed(2)}
+                  <span className="mr-2">Last :</span>{parseFloat(postDetails?.last_price).toFixed(2)}
                 </p>
                   <p className="text-base">
-                  <span className="mr-2">Top bid :</span> {postDetails?.top_bid.toFixed(2)}
+                  <span className="mr-2">Top bid :</span> {postDetails?.top_bid?.toFixed(2)}
                 </p>
               </div>
 

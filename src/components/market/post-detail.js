@@ -56,10 +56,10 @@ function  Post ({details}) {
         
         <div className="px-5 py-5 pb-5 mt-5 rounded ">
             <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
-               <h2 className="text-white font-semibold ">Mkt: <span className={details.market_change === "UP" ? 'default-green' : details.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>
+               <p className="text-white font-semibold ">Mkt: <span className={details.market_change === "UP" ? 'default-green' : details.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>
                    {details.market_price.toFixed(2)} {details.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : details.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
-               </span> </h2>
-               <h2 className="text-white font-semibold ">Ask: {details.selling_price.toFixed(2)}</h2>
+               </span> </p>
+               <p className="text-white font-semibold ">Ask: {details.selling_price.toFixed(2)}</p>
                <div className='mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
                 <Link href={`/make-an-offer?id=${details.post_id}`}>
                  <button className='rounded-lg text-center font-semibold text-sm'>MAKE OFFER</button>

@@ -4,7 +4,7 @@ import { fetchUserPosts } from '@/lib/api-util';
 import { useSession} from "next-auth/react";
 import Link from "next/link";
 import locationIcon from "../../images/location icon.svg";
-import {BiSolidUpArrow} from 'react-icons/bi';
+import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi';
 
 const Stock = () => {
     const { data: session, status } = useSession();
@@ -50,10 +50,11 @@ const Stock = () => {
                        {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
                      </p>
                      <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> 
+                         Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
+                         {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
                      </p>
                      <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Ask: {post.last_price}
+                       Ask: {post.last_price.toFixed(2)}
                      </p>
                      
                    </div>
