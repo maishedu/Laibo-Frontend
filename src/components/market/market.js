@@ -1,6 +1,6 @@
 'use client'
-import React, {useState} from "react";
-import {BiSolidUpArrow} from 'react-icons/bi';
+import React, {useRef, useState} from "react";
+import {BiSolidUpArrow, BiSolidDownArrow} from 'react-icons/bi';
 import Link from "next/link";
 import {BsFilter} from 'react-icons/bs';
 import Filter from "../Filter";
@@ -13,6 +13,16 @@ export default function  Market ({post}) {
   const [posts, setPosts] = useState(post);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [page, setPage] = useState(1);
+
+  const submitButtonRef = useRef(null); // Reference to the submit button
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is 'Enter'
+    console.log('yy')
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default action
+      submitButtonRef.current.click(); // Programmatically click the submit button
+    }
+  };
 
   const handleFilterButtonClick = () => {
     setIsFilterVisible(!isFilterVisible);
@@ -70,7 +80,7 @@ export default function  Market ({post}) {
   }
 
   return (
-    <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
+    <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4" onKeyDown={handleKeyPress}>
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-between lg:flex-row">
 
@@ -117,10 +127,11 @@ export default function  Market ({post}) {
                        {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
                      </p>
                      <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> 
+                       Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
+                       {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
                      </p>
                      <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Ask: {post.last_price}
+                       Ask: {post.last_price.toFixed(2)}
                      </p>
                      
                    </div>
@@ -135,7 +146,7 @@ export default function  Market ({post}) {
               </div>
             </div>
           </div>
-          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="hidden lg:block" />
+          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} enterButton={submitButtonRef} classes="hidden lg:block" />
         </div>
       </div>
     </div>

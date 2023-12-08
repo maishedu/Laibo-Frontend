@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from 'react'
 import Link from 'next/link';
 import GallerySlider from '@/components/GallerySlider';
-import {BiSolidUpArrow} from 'react-icons/bi'
+import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import { useParams } from 'next/navigation'
 import nullUser from '../../images/user.png';
 import { fetchPost } from '@/lib/api-util';
@@ -15,9 +15,6 @@ function  Post ({details}) {
     e.target.onerror = null; 
     e.target.src = nullUser.src; 
   };
-   
-
-  
   return (
     <div className='overflow-auto w-full py-16 bg-black min-h-screen relative h-2/4'>
     <div className="px-4 py-16  mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -35,14 +32,16 @@ function  Post ({details}) {
             </p>
             </Link>
             <div>
+                <Link href={`/user-profile/?id=${details?.customer_id}`}>
               <p
                 aria-label="Author"
-                className="font-semibold default-yellow "
+                className="font-semibold text-white"
               >
-                {details.seller_first_name}
+                @{details.seller_username}
               </p>
+                </Link>
             </div>
-            
+
           </div>
 
           <GallerySlider
@@ -57,8 +56,10 @@ function  Post ({details}) {
         
         <div className="px-5 py-5 pb-5 mt-5 rounded ">
             <div className="mb-3 rounded-xl bg-neutral-800 px-3 py-3">
-               <h2 className="text-white font-semibold ">Mkt: <span className="default-green">{details.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> </h2>
-               <h2 className="text-white font-semibold ">Ask: {details.selling_price}</h2>
+               <h2 className="text-white font-semibold ">Mkt: <span className={details.market_change === "UP" ? 'default-green' : details.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>
+                   {details.market_price.toFixed(2)} {details.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : details.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+               </span> </h2>
+               <h2 className="text-white font-semibold ">Ask: {details.selling_price.toFixed(2)}</h2>
                <div className='mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
                 <Link href={`/make-an-offer?id=${details.post_id}`}>
                  <button className='rounded-lg text-center font-semibold text-sm'>MAKE OFFER</button>

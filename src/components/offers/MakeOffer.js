@@ -1,6 +1,6 @@
 "use client"
 import React, {useState, useEffect} from "react";
-import { BiSolidUpArrow } from "react-icons/bi";
+import {BiSolidDownArrow, BiSolidUpArrow} from "react-icons/bi";
 import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { FaPlus } from "react-icons/fa";
@@ -134,7 +134,8 @@ const MakeOffer = () => {
                   value={quantity}
                   onChange={({ target }) => setQuantity(target?.value)}
                   required
-                  type="text"
+                  type="number"
+                  min="1" max="5"
                   className="flex-grow w-full text-center text-white h-10 px-4 mb-2 transition duration-200 bg-neutral-800 rounded-lg shadow-sm"
                   id="quantity"
                   name="quantity"
@@ -144,19 +145,22 @@ const MakeOffer = () => {
 
               
 
-              <div className={`bg-neutral-800 mt-4 p-2 text-center leading-3 rounded-lg text-white font-semibold`}>
+              <div className={`bg-neutral-800 mt-4 p-2 text-center leading-3 rounded-lg text-white`}>
               
                 <p className="text-base text-gray-200 font-semibold mb-[-5px]">
                   <span className="mr-2">Mkt :</span>
-                  <span className="default-green">
-                    {postDetails?.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5" />
-                  </span>
-                </p>
-                <p className="text-base ">
-                  <span className="mr-2">Ask :</span>{postDetails?.selling_price}
+                    <span className={postDetails.market_change === "UP" ? 'default-green' : postDetails.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{postDetails.market_price.toFixed(2)}
+                        {postDetails.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : postDetails.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+                    </span>
                 </p>
                 <p className="text-base">
-                  <span className="mr-2">Top bid :</span> {postDetails?.top_bid}
+                  <span className="mr-2">Ask :</span>{postDetails?.selling_price.toFixed(2)}
+                </p>
+                <p className="text-base">
+                  <span className="mr-2">Last :</span>{postDetails?.last_price.toFixed(2)}
+                </p>
+                  <p className="text-base">
+                  <span className="mr-2">Top bid :</span> {postDetails?.top_bid.toFixed(2)}
                 </p>
               </div>
 

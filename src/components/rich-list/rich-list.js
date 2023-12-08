@@ -78,12 +78,12 @@ const RichList = () => {
             <tr class="flex justify-between ">
                 <td class="px-2 py-2">
                 <span className='text-white font-semibold  text-lg'>{post?.rank}
-                  <p className='text-neutral-600 font-normal inline-block ml-4'>{post?.first_name}</p>
+                  <p className='text-neutral-600 font-normal inline-block ml-4'>{post?.first_name} {post?.last_name}</p>
                   </span>
                 </td>
                
                 <td class="px-2 py-2">
-                <p className='default-green font-semibold '>{post?.total_stock_value}</p>
+                <p className='default-green font-semibold '>{post?.total_stock_value.toFixed(2)}</p>
                 </td>
             </tr>
             </tbody>

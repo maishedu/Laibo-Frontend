@@ -58,27 +58,27 @@ const TransactionSummary = () => {
             <>
             <div className="flex default-green justify-between">
                 <p>Revenue</p>
-                <p>{item.revenue}</p>
+                <p>{item.revenue.toFixed(2)}</p>
             </div>
             <div className="flex mb-2 text-neutral-600 justify-between">
                 <p>Pending</p>
-                <p>{item.pending}</p>
+                <p>{item.pending.toFixed(2)}</p>
             </div>
             <div className="flex text-red-600 justify-between">
                 <p>Spend</p>
-                <p>{item.spend}</p>
+                <p>{item.spend.toFixed(2)}</p>
             </div>
             <div className="flex mb-2 text-neutral-600 justify-between">
                 <p>Held</p>
-                <p>{item.held}</p>
+                <p>{item.held.toFixed(2)}</p>
             </div>
             <div className="flex text-white justify-between">
                 <p>Deposited</p>
-                <p>{item.deposit}</p>
+                <p>{item.deposit.toFixed(2)}</p>
             </div>
             <div className="flex text-white justify-between">
                 <p>Withdrawn</p>
-                <p>{item.withdrawn}</p>
+                <p>{item.withdrawn.toFixed(2)}</p>
             </div>
             </>
         ))}

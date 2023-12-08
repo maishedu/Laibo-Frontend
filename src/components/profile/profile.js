@@ -3,12 +3,13 @@
 import React, {useEffect, useState} from "react";
 import { useSearchParams } from 'next/navigation'
 import { useSession,signOut } from "next-auth/react";
-import {BiSolidUpArrow} from 'react-icons/bi'
+import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import Image from "next/image";
 import moneyImg from '@/images/money-bag-@2x.png'
 import nullUser from '@/images/user.png';
 import { fetchUserPosts , fetchUserData} from "@/lib/api-util";
+import locationIcon from "../../images/location icon.svg";
 
 
 const  Profile = () => {
@@ -82,20 +83,19 @@ const  Profile = () => {
                 alt="Person"
                 />
             </div>
-            <div className="flex flex-col justify-center mt-5 sm:mt-0 sm:p-5 sm:col-span-2">
-                <p className="text-lg font-bold text-white">{userDetails?.username}</p>
-                <p className="mb-4 text-xs text-neutral-600">{userDetails?.first_name + " " +  userDetails?.last_name}</p>
-                
+            <div className="flex flex-col justify-center mt-2">
+                <p className="text-lg font-bold text-white">@{userDetails?.username}</p>
+                <p className="mb-1 text-xs text-neutral-600">{userDetails?.first_name + " " +  userDetails?.last_name}</p>
                 <div className="flex items-center space-x-2">
-                        <Image src={moneyImg} alt="money bag image" height={10} width={20} /> 
+                        <Image src={moneyImg} alt="money bag image" height={10} width={20} />
                         <p className="text-sm text-center text-gray-200 font-semibold">
-                            <span className="default-green">{userDetails?.walletBalance} <BiSolidUpArrow className="inline-block w-3"/></span> 
+                            <span className="default-green">{userDetails?.rank} <BiSolidUpArrow className="inline-block w-3"/></span>
                         </p>
                 </div>
             </div>
             </div>
-            <div className="border-b mb-5 w-64 border-neutral-400"/>
-          
+            <div className="border-b mb-8 w-64 border-neutral-400"/>
+
 
               <div
                className="grid grid-cols-2 gap-5 mx-auto sm:grid-cols-2 lg:grid-cols-6 ">
@@ -110,20 +110,21 @@ const  Profile = () => {
                       />
                     </div>
                     </Link>
-                   <div className="flex flex-col ">
-                   <p className="text-sm text-white font-bold">{post.title}</p>
-                     <p className="mb-2 text-xs text-gray-200">
-                       {post.location}
-                     </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
-                       Mkt : <span className="default-green">{post.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> 
-                     </p>
-                     <p className="mb-2 text-xs text-gray-200 font-semibold">
-                       Ask: {post.last_price}
-                     </p>
-                     
+                       <div className="flex flex-col leading-3">
+                           <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
+                           <p className=" text-lg text-gray-500 mb-[-5px]">
+                               {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
+                           </p>
+                           <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
+                               Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
+                               {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
+                           </p>
+                           <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
+                               Ask: {post.last_price.toFixed(2)}
+                           </p>
+
+                       </div>
                    </div>
-                 </div>
 
                 ))}
 
