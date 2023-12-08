@@ -24,8 +24,7 @@ function Howitworks() {
                     RAHISISHA BIZ. <br /> TUMIA LAIBO <br /> KUUZA VITABU!
                   </p>
                   <p className="text-md font-semibold text-white">
-                    Buy, sell, borrow and exchange books <br/> with other  users on laibo.
-                    
+                    Buy, sell, borrow and exchange books <br/> with other  users on Laibo.
                   </p>
                 </div>
               </div>
