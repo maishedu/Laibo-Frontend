@@ -56,30 +56,36 @@ const TransactionSummary = () => {
      <div className="relative mt-4 w-full lg:w-96 bg-neutral-800 font-semibold rounded-lg shadow-2xl  p-5">
         {filteredData?.map(item => (
             <>
-            <div className="flex default-green justify-between">
-                <p>Revenue</p>
-                <p>{item.revenue.toFixed(2)}</p>
-            </div>
-            <div className="flex mb-2 text-neutral-600 justify-between">
-                <p>Pending</p>
-                <p>{item.pending.toFixed(2)}</p>
-            </div>
-            <div className="flex text-red-600 justify-between">
-                <p>Spend</p>
-                <p>{item.spend.toFixed(2)}</p>
-            </div>
-            <div className="flex mb-2 text-neutral-600 justify-between">
-                <p>Held</p>
-                <p>{item.held.toFixed(2)}</p>
-            </div>
-            <div className="flex text-white justify-between">
-                <p>Deposited</p>
-                <p>{item.deposit.toFixed(2)}</p>
-            </div>
-            <div className="flex text-white justify-between">
-                <p>Withdrawn</p>
-                <p>{item.withdrawn.toFixed(2)}</p>
-            </div>
+                <div className="flex default-green justify-between">
+                    <p>Revenue</p>
+                    <p>{item.revenue.toFixed(2)}</p>
+                </div>
+                <div className="flex mb-2 text-neutral-600 justify-between">
+                    <p>Pending</p>
+                    <p>{item.pending.toFixed(2)}</p>
+                </div>
+                <div className="flex text-red-600 justify-between">
+                    <p>Spend</p>
+                    <p>{item.spend.toFixed(2)}</p>
+                </div>
+
+                <div className="flex mb-2 text-neutral-600 justify-between">
+                    <p>Held</p>
+                    <p>{item.held.toFixed(2)}</p>
+                </div>
+
+                <div className="flex mb-2 text-yellow justify-between">
+                    <p>Profit</p>
+                    <p>{(item.revenue- item.spend).toFixed(2)}</p>
+                </div>
+                <div className="flex text-white justify-between">
+                    <p>Deposited</p>
+                    <p>{item.deposit.toFixed(2)}</p>
+                </div>
+                <div className="flex text-white justify-between">
+                    <p>Withdrawn</p>
+                    <p>{item.withdrawn.toFixed(2)}</p>
+                </div>
             </>
         ))}
       

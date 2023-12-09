@@ -34,6 +34,23 @@ export async function fetchPost(postId) {
     throw new Error('Failed to fetch posts');
   }
 }
+export async function searchUsername(query) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/search?query=${query}&page=1&limit=10`);
+
+  try {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw new Error('Failed to fetch usernames');
+  }
+}
 
 export async function login(email,password){
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/login`, {
@@ -181,7 +198,7 @@ export async function sendSTK(phone,amount,fcm, bearerToken) {
 }
 
 export async function fetchCustomerTransactions(bearerToken) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/transactions/customer`;
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/transactions/customer?&page=1&limit=5`;
   const headers = {
     'Authorization': `Bearer ${bearerToken}`,
     'Content-Type': 'application/json' 

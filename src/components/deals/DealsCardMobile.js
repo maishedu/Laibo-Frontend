@@ -1,5 +1,6 @@
 import React, {  useState } from "react";
 import { dealResponses } from "@/lib/api-util";
+import Link from "next/link";
 import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
 
@@ -51,12 +52,14 @@ const DealsCardMobile = ({ deals, fetchDeals}) => {
         <div
           className={`flex-shrink-0 relative  rounded-2xl`}
         >
+          <Link href={`/deals/${deal.post_id}`}>
           <img
             alt=""
             src={deal.photos?.[0] || ""}
             className="object-cover w-40 h-56 rounded-2xl"
             
           />
+          </Link>
           
         </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import { useSearchParams } from 'next/navigation'
@@ -10,11 +10,15 @@ import Label from "../Label";
 import {BsFilter} from 'react-icons/bs';
 import Notfound from '../Notfound';
 import locationIcon from "@/images/location icon.svg";
+import {searchUsername} from "@/lib/api-util";
 
 
 export default function  Search() {
   const [posts, setPosts] = useState([]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  const queryInput = useRef();
 
   const handleFilterButtonClick = () => {
     setIsFilterVisible(!isFilterVisible);
@@ -22,6 +26,8 @@ export default function  Search() {
 
   const searchParams = useSearchParams();
 
+  const query = searchParams.get('query')
+  const customer_id = searchParams.get('customer_id')
   const bookType = searchParams.get('bookType')
   const location = searchParams.get('location')
   const condition = searchParams.get('condition')
@@ -29,11 +35,13 @@ export default function  Search() {
   const minPrice = searchParams.get('minPrice')
 
   const [searchDetails, setSeachDetails] = useState({
-    bookType: "",
-    condition: "",
-    location: "",
-    minPrice: "",
-    maxPrice: "",
+    query:query,
+    customer_id:query,
+    bookType: bookType,
+    condition: condition,
+    location: location,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
   })
 
   const handleValueChange = (e) => {
@@ -41,6 +49,8 @@ export default function  Search() {
   }
   const clearFilter = ()=>{
     setSeachDetails({
+      query:"",
+      customer_id:"",
       bookType: "",
       condition: "",
       location: "",
@@ -52,7 +62,7 @@ export default function  Search() {
   
   
     async function searchPosts() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/search?query=&maxPrice=${maxPrice}&condition=${condition}&location=${location}&minPrice=${minPrice}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/search?query=${searchDetails.query}&customer_id=${searchDetails.customer_id}&bookType=${searchDetails.bookType}&maxPrice=${searchDetails.maxPrice}&condition=${searchDetails.condition}&location=${searchDetails.location}&minPrice=${searchDetails.minPrice}&page=1&limit=10`);
       try {
         
         if (!response.ok) {
@@ -74,6 +84,17 @@ export default function  Search() {
       setSeachDetails((prevSearchDetails) => ({
         ...prevSearchDetails,
         condition,
+      }));
+    }
+    if (query) {
+      setSeachDetails((prevSearchDetails) => ({
+        ...prevSearchDetails,
+        query,
+      }));
+    }if (customer_id) {
+      setSeachDetails((prevSearchDetails) => ({
+        ...prevSearchDetails,
+        customer_id,
       }));
     }
 
@@ -100,8 +121,38 @@ export default function  Search() {
    
     searchPosts();
     
-  }, [condition,location, minPrice, maxPrice]);
+  }, [condition,location, minPrice, maxPrice,customer_id,query]);
 
+  const handleQuery = async (e)=>{
+    if (e.target.value[0] == "@"){
+      const query = e.target.value.slice(1);
+      try {
+        const result = await searchUsername(query);
+        const userResult = await result.data.map(user => ({ id: user.id, username: user.username }))
+        await setUsers(userResult);
+        setSeachDetails({ ...searchDetails, query: e.target.value});
+        e.target.value = `@${query}`;
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+      return;
+    }
+    setUsers([]);
+    setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
+  }
+  const handleUsername = (id,username)=>{
+    setSeachDetails(prevSearchDetails => ({
+      ...prevSearchDetails,
+      customer_id: id,
+      query: ''
+    }));
+    setUsers([]);
+    queryInput.current.value = `@${username}`
+  }
+  const handleBlur = () => {
+    // Sets users to null when the input or container loses focus
+    setUsers([]);
+  };
 
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
@@ -123,7 +174,16 @@ export default function  Search() {
                     <BsFilter className="w-5 h-5 text-gray-400" />
                   </span>
 
-                  <input type="text" className="w-full py-2 pl-16 lg:pl-32 lg:pr-32 pr-16 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
+                  <input type="text" name="query" ref={queryInput} onChange={handleQuery}  className="w-full py-2 pl-16 lg:pl-32 lg:pr-32 pr-16 text-gray-300 text-center bg-neutral-700  rounded-md " placeholder="Search"/>
+                  <div>
+                    { users.length > 0 && (
+                        <ul tabIndex="-1">
+                          {users.map((user, index) => (
+                              <li key={index} className="text-yellow border-b p-2" onClick={()=>handleUsername(user.id,user.username)} onBlur={handleBlur}>{user.username}</li>
+                          ))}
+                        </ul>
+                    )}
+                  </div>
                 </div>
               </div>
               {isFilterVisible && <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="lg:hidden xl:hidden" />}

@@ -20,7 +20,7 @@ const MakeOffer = () => {
     const searchParams = useSearchParams();
     const postId = searchParams.get('id')
     const [amount, setAmount] = useState([])
-    const [quantity, setQuantity] = useState([])
+    const [quantity, setQuantity] = useState('')
     const [postDetails, setPostDetails ] = useState([])
     const [borrow, setShowBorrow] = useState(false)
     const [returnDate, setReturnDate] = useState([])
@@ -32,6 +32,7 @@ const MakeOffer = () => {
     const [book1, setBook1] = useState()
     const [book2, setBook2] = useState()
     const [book3, setBook3] = useState()
+    const[quantityError,setQuantityError]= useState(false);
     
 
     const customer_id = postDetails?.customer_id;
@@ -61,6 +62,17 @@ const MakeOffer = () => {
           }
         })
     }
+    const handleQuantity = (e) => {
+        const newQuantity = e.target.value;
+        if (parseInt(newQuantity) > postDetails.quantity) {
+            setQuantityError(true);
+            setQuantity(''); // Clear the quantity
+        } else {
+            setQuantityError(false);
+            setQuantity(newQuantity); // Update the quantity
+        }
+    }
+
 
     const handleMakeExchangeOffer = () => {
       const details = {quantity,postId,customer_id}
@@ -132,14 +144,14 @@ const MakeOffer = () => {
                 <input
                   placeholder="1"
                   value={quantity}
-                  onChange={({ target }) => setQuantity(target?.value)}
+                  onChange={handleQuantity}
                   required
                   type="number"
-                  min="1" max="5"
                   className="flex-grow w-full text-center text-white h-10 px-4 mb-2 transition duration-200 bg-neutral-800 rounded-lg shadow-sm"
                   id="quantity"
                   name="quantity"
                 />
+                    {quantityError && <p className="text-yellow"> The maximum quantity is {postDetails.quantity}</p>}
                
               </div>
 

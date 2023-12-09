@@ -11,6 +11,7 @@ export interface CustomLink {
 //  ##########  PostDataType ######## //
 export interface TaxonomyType {
   id: string | number;
+  post_id:string|number;
   name: string;
   href: Route<string>;
   count?: number;
@@ -37,6 +38,7 @@ export interface TaxonomyType {
 
 export interface DealsType {
   id: string | number;
+  post_id:string|number;
   name: string;
   href: Route<string>;
   deals?: number;

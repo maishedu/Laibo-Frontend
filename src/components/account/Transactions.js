@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import { fetchCustomerTransactions } from '@/lib/api-util';
 import { useSession } from "next-auth/react";
 import moment from 'moment';
@@ -30,13 +30,13 @@ const Transactions = () => {
     }
 
   return (
-    <div className="relative w-full bg-neutral-800 rounded-lg shadow-2xl  p-5">
-        {transDetails?.map((trans, index) =>(
+      <Fragment>
+      {transDetails?.map((trans, index) =>(
+          <div className="relative w-full bg-neutral-800 rounded-lg shadow-2xl m-2 p-5" key={index}>
               <div key={index}>
               <div className="flex text-white justify-between">
                   <p>
-                     
-                     {moment(new Date(trans.date).toISOString()).utc().format('ddd,DD MMM YYYY [at] H:mm')}
+                      {moment(new Date(trans.date).toISOString()).utc().format('ddd,DD MMM YYYY [at] H:mm')}
                      </p>
               </div>
       
@@ -45,11 +45,10 @@ const Transactions = () => {
               <p className="text-neutral-500 text-sm" dangerouslySetInnerHTML={{ __html: trans.message }}/>
             </div>
               </div>
+          </div>
 
         )) }
-      
-     
-    </div>
+      </Fragment>
   );
 }
 

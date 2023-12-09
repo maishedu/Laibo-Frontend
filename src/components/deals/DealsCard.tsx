@@ -18,7 +18,7 @@ const DealsCard: FC<CardCategory3Props> = ({
   userid,
   fetchDeals,
 }) => {
-  const { id, buyer_first_name, buyer_last_name, selling_price,seller_customer_id, seller_first_name,seller_last_name, photos, status, title } = taxonomy;
+  const { id, post_id, buyer_first_name, buyer_last_name, selling_price,seller_customer_id, seller_first_name,seller_last_name, photos, status, title } = taxonomy;
 
   const { data: session } = useSession();
   const bearerToken = session?.accessToken;
@@ -56,18 +56,18 @@ const DealsCard: FC<CardCategory3Props> = ({
   return (
     <>
      {showAlert && <SnackBar message={message} showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
-     <Link href={'#'} className={`flex flex-col  ${className}`} data-nc-id="CardCategory5" >
+     <Link href={`/deals/${post_id}`} className={`flex flex-col  ${className}`} data-nc-id="CardCategory5" >
 
      <div
         className={`flex-shrink-0 relative w-full rounded-2xl`}
       >
-        <img
+         <img
           alt=""
           src={photos?.[0] || ""}
           className="object-cover w-full h-full rounded-2xl"
           sizes="(max-width: 400px) 100vw, 400px"
         />
-        <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
+         <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
       </div>
 
       <div className={`bg-neutral-800 mt-2 p-2 text-xs text-center rounded-lg text-white font-semibold `}>

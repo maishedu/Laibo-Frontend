@@ -4,8 +4,7 @@ import Select from '@/shared/Select'
 import Link from 'next/link'
 
 const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) => {
-
-  return (
+    return (
       <div className={`${classes} px-5 pt-6 lg:mt-12 pb-5 rounded sticky`}>
         <Label>Book Type</Label>
      <div className="mb-3 rounded-xl bg-neutral-800 ">
@@ -38,7 +37,7 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
         </div>
 
         <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
-            <Link href={`/market/search/?bookType=${searchDetails.bookType}&condition=${searchDetails.condition}&location=${searchDetails.location}&maxPrice=${searchDetails.maxPrice}&minPrice=${searchDetails.minPrice}`}>
+            <Link href={`/market/search/?query=${searchDetails.query}&customer_id=${searchDetails.customer_id}&bookType=${searchDetails.bookType}&condition=${searchDetails.condition}&location=${searchDetails.location}&maxPrice=${searchDetails.maxPrice}&minPrice=${searchDetails.minPrice}&page=1&limit=10`}>
                 <button ref={enterButton} type="submit" className="rounded-lg text-center">Show results</button>
             </Link>
         </div>
