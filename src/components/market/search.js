@@ -18,6 +18,7 @@ export default function  Search() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [users, setUsers] = useState([]);
 
+  const submitButtonRef = useRef(null); // Reference to the submit button
   const queryInput = useRef();
 
   const handleFilterButtonClick = () => {
@@ -44,6 +45,13 @@ export default function  Search() {
     maxPrice: maxPrice,
   })
 
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is 'Enter'
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default action
+      submitButtonRef.current.click(); // Programmatically click the submit button
+    }
+  };
   const handleValueChange = (e) => {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
   }
@@ -155,7 +163,7 @@ export default function  Search() {
   };
 
   return (
-    <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
+    <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4" onKeyDown={handleKeyPress}>
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col  justify-center lg:flex-row ">
           <div className=" mb-12  w-full">
@@ -228,7 +236,7 @@ export default function  Search() {
             </div>
           </div>
 
-          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="hidden lg:block" />
+          <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} enterButton={submitButtonRef} classes="hidden lg:block" />
         </div>
       </div>
     </div>
