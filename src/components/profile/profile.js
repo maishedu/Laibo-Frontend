@@ -15,6 +15,7 @@ import locationIcon from "../../images/location icon.svg";
 const  Profile = () => {
     const searchParams = useSearchParams();
     const userId = searchParams.get('id')
+    const username = searchParams.get('username')
 
     const { data: session, status } = useSession();
     const bearerToken = session?.accessToken;

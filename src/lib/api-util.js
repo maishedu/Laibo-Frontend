@@ -493,6 +493,29 @@ export async function updateUserPassword(bearerToken, details) {
 
 }
 
+export async function setUserPassword(bearerToken, details) {
+
+  var params = JSON.stringify({
+    password: details,
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/setpassword`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json' 
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: headers,
+    body: params,
+  });
+  
+  const data = await response.json();
+  return data;
+
+}
+
 export  async function applyOverdraft(selectedFile, kraPin, bearerToken)  {
   
   const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/overdraftapplication`;

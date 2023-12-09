@@ -4,7 +4,6 @@ import Image from 'next/image'
 import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
 import {FaFacebookF,FaEye, FaEyeSlash} from 'react-icons/fa'
-
 import Link from 'next/link'
 import * as sweetalert2 from "sweetalert2";
 import {signUp,sendOTP} from "@/lib/api-util";
