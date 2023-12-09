@@ -131,8 +131,8 @@ function Login() {
                 <p className="text-xs text-center text-white sm:text-sm">
                   Dont have an account? <Link href={'/signup'} className='default-yellow'>Sign up</Link>
                 </p>
-                <Link href={'/forgot-password'}>
-                  <p className="text-xs text-center default-yellow sm:text-sm">
+                <Link href={'/forgot-password'} >
+                  <p className="text-xs mt-4 text-center default-yellow sm:text-sm">
                     Forgot you password?
                   </p>
                 </Link>
