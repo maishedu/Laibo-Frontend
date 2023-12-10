@@ -104,23 +104,23 @@ const OffersSlider: FC<OffersSliderProps> = ({
             >
               <AnimatePresence initial={false} custom={direction}>
                 {offers.map((item, indx) => (
-                  <motion.li
-                    className={`relative inline-block px-2 xl:px-4 ${itemClassName}`}
-                    custom={direction}
-                    initial={{
-                      x: `${(currentIndex - 1) * -100}%`,
-                    }}
-                    animate={{
-                      x: `${currentIndex * -100}%`,
-                    }}
-                    variants={variants(200, 1)}
-                    key={indx}
-                    style={{
-                      width: `calc(1/${numberOfItems} * 100%)`,
-                    }}
-                  >
-                    {renderCard(item)}
-                  </motion.li>
+                    <motion.li
+                        className={`relative inline-block px-1 xl:px-4 ${itemClassName}`}
+                        custom={direction}
+                        initial={{
+                          x: `${(currentIndex - 1) * -100}%`,
+                        }}
+                        animate={{
+                          x: `${currentIndex * -100}%`,
+                        }}
+                        variants={variants(200, 1)}
+                        key={indx}
+                        style={{
+                          width: `100%`,
+                        }}
+                    >
+                      {renderCard(item)}
+                    </motion.li>
                 ))}
               </AnimatePresence>
             </motion.ul>

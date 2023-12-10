@@ -16,7 +16,7 @@ const OffersCard: FC<OffersCardProps> = ({
   taxonomy,
   fetchOffers
 }) => {
-  const { id,seller_customer_id,buyer_customer_id,buyer_username,seller_username, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
+  const { id,title,seller_customer_id,buyer_customer_id,buyer_username,seller_username, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
   
 
   const { data: session, status } = useSession();
@@ -58,18 +58,21 @@ const OffersCard: FC<OffersCardProps> = ({
       className={`nc-CardCategory5 flex flex-col ${className}`}
       data-nc-id="CardCategory5"
     >
-      <div
-        className={`flex-shrink-0 relative w-full   rounded-2xl  `}
-      >
-        <img
-          alt=""
-          src={photos?.[0] || ""}
-          className="object-cover w-full h-full rounded-2xl"
-          sizes="(max-width: 400px) 100vw, 400px"
-        />
-        <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
-      </div>
+        <div
+            className={`flex-shrink-0 relative w-full rounded-2xl`}
+        >
+          <img
+              alt=""
+              src={photos?.[0] || ""}
+              className="object-cover w-full h-96 rounded-2xl"
+              sizes="(max-width: 400px) 100vw, 400px"
+          />
+          <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
+        </div>
+      </Link>
+
       <div className={`bg-neutral-800 mt-4 p-2 text-center rounded-lg text-white font-semibold `}>
+        <p>Title : <span className={`default-green`}>{title}</span> </p>
         <Link href={`/user-profile/?id=${buyer_customer_id}&username=${buyer_username}`}>
           <p>Buyer: <span className={`default-green`}>{`@${buyer_username}`}</span> </p>
         </Link>
@@ -83,8 +86,6 @@ const OffersCard: FC<OffersCardProps> = ({
           <button onClick={handleSubmitAccept(id)} className='default-green-bg text-white p-2 w-full rounded-lg '>DEAL</button>
           <button onClick={handleSubmitDeny(id)} className='bg-red-600 text-white p-2 w-full rounded-lg  '>NO DEAL</button>
      </div>
-      
-    </Link>
     </>
     
   );

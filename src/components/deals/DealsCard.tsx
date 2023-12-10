@@ -64,11 +64,12 @@ const DealsCard: FC<CardCategory3Props> = ({
          <img
           alt=""
           src={photos?.[0] || ""}
-          className="object-cover w-full h-full rounded-2xl"
+          className="object-cover w-full h-96 rounded-2xl"
           sizes="(max-width: 400px) 100vw, 400px"
         />
          <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
       </div>
+     </Link>
 
       <div className={`bg-neutral-800 mt-2 p-2 text-xs text-center rounded-lg text-white font-semibold `}>
          <p className="text-sm">{title}</p>
@@ -114,9 +115,7 @@ const DealsCard: FC<CardCategory3Props> = ({
           </>
           }
       </div>
-      
-    </Link>
-    </>
+     </>
   
   );
 };

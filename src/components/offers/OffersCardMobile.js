@@ -53,14 +53,15 @@ const OffersCardMobile = ({ offers, fetchOffers}) => {
           
         </div>
 
-        <div className={`mt-2 space-y-4 p-2 text-sm text-start ml-4 rounded-lg text-white font-semibold `}>
-            <div className={` mt-4 space-y-3 p-2 text-start rounded-lg text-white font-semibold `}>
+        <div className={`mt-0 space-y-4 p-2 text-sm text-start ml-4 rounded-lg text-white font-semibold `}>
+            <div className={` mt-0 space-y-3 p-1 text-start rounded-lg text-white font-semibold `}>
+              <p>Title: <span className={`default-green`}>{offer.title}</span> </p>
               <Link href={`/user-profile/?id=${offer.buyer_customer_id}&username=${offer.buyer_username}`}>
                 <p>Buyer: <span className={`default-green`}>{`@${offer.buyer_username}`}</span> </p>
               </Link>
                 <p>Mkt: <span className={`default-green`}>{offer.market_price.toFixed(2)}</span> </p>
                 <p>Ask: {offer.selling_price.toFixed(2)}</p>
-                <p>Offer: {offer.amount}</p>
+                <p>Offer: {offer.amount.toFixed(2)}</p>
                 <p>Quantity: {offer.quantity}</p>
             </div>
             
