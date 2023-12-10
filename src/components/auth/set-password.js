@@ -8,7 +8,10 @@ import SnackBar from '../snackBar';
 import {PulseLoader} from 'react-spinners'
 
 const Password = () => {
-    const bearerToken = sessionStorage.getItem('token')
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        const bearerToken = sessionStorage.getItem('token');
+    }
     const router = useRouter()
     const password = useRef(null);
     const confirmPassword = useRef(null);
