@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { acceptOrDenyDeal } from "@/lib/api-util";
 import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
+import {BiSolidDownArrow, BiSolidUpArrow} from "react-icons/bi";
 
 
 const OffersCardMobile = ({ offers, fetchOffers}) => {
@@ -59,9 +60,11 @@ const OffersCardMobile = ({ offers, fetchOffers}) => {
               <Link href={`/user-profile/?id=${offer.buyer_customer_id}&username=${offer.buyer_username}`}>
                 <p>Buyer: <span className={`default-green`}>{`@${offer.buyer_username}`}</span> </p>
               </Link>
-                <p>Mkt: <span className={`default-green`}>{offer.market_price.toFixed(2)}</span> </p>
-                <p>Ask: {offer.selling_price.toFixed(2)}</p>
-                <p>Offer: {offer.amount.toFixed(2)}</p>
+              <p>Mkt : <span className={offer.market_change === "UP" ? 'default-green' : offer.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{offer.market_price}
+                {offer.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : offer.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
+              </p>
+                <p>Ask: {offer.amount.toFixed(2)}</p>
+                <p>Offer: {offer.selling_price.toFixed(2)}</p>
                 <p>Quantity: {offer.quantity}</p>
             </div>
             

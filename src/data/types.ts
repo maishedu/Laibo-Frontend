@@ -27,6 +27,7 @@ export interface TaxonomyType {
   seller_username?:string
   selling_price?: string|number;
   market_price?: string;
+  market_change?:string
   amount?: string;
   quantity?: string;
   buyer_image_url?: string;

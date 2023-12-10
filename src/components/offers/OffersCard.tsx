@@ -4,6 +4,7 @@ import Link from "next/link";
 import { acceptOrDenyDeal } from "@/lib/api-util";
 import { useSession} from "next-auth/react";
 import SnackBar from "../snackBar";
+import {BiSolidDownArrow, BiSolidUpArrow} from "react-icons/bi";
 
 export interface OffersCardProps {
   className?: string;
@@ -16,7 +17,7 @@ const OffersCard: FC<OffersCardProps> = ({
   taxonomy,
   fetchOffers
 }) => {
-  const { id,title,seller_customer_id,buyer_customer_id,buyer_username,seller_username, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
+  const { id,title,market_change,seller_customer_id,buyer_customer_id,buyer_username,seller_username, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
   
 
   const { data: session, status } = useSession();
@@ -76,9 +77,11 @@ const OffersCard: FC<OffersCardProps> = ({
         <Link href={`/user-profile/?id=${buyer_customer_id}&username=${buyer_username}`}>
           <p>Buyer: <span className={`default-green`}>{`@${buyer_username}`}</span> </p>
         </Link>
-        <p>Mkt : <span className={`default-green`}>{market_price}</span> </p>
-        <p>Ask : {parseFloat(selling_price as string).toFixed(2)}</p>
-        <p>Offer : {parseFloat(amount as string).toFixed(2)}</p>
+        <p>Mkt : <span className={market_change === "UP" ? 'default-green' : market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{market_price}
+          {market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
+        </p>
+        <p>Ask : {parseFloat(amount as string).toFixed(2)}</p>
+        <p>Offer : {parseFloat(selling_price as string).toFixed(2)}</p>
         <p>Quantity : {quantity}</p>
 
       </div>
