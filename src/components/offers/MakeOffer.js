@@ -38,7 +38,7 @@ const MakeOffer = () => {
     const customer_id = userId;
 
     const handleMakeBidOffer = () => {
-        const details = {quantity,amount,postId,userId}
+        const details = {quantity,amount,postId,customer_id}
         makeBidOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){
