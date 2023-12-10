@@ -724,8 +724,8 @@ export async function makeBidOffer(bearerToken, details) {
   const newQuantity = parseFloat(details.quantity)
   var params = JSON.stringify({
     quantity: newQuantity,
-    amount: details.amount,
-    post_id: details.postId,
+    amount: parseFloat(details.amount),
+    post_id: parseFloat(details.postId),
     deal_type: 6,
     deal_from: details.customer_id
     

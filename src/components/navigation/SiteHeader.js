@@ -42,14 +42,14 @@ const SiteHeader = () => {
 
                 <div className="flex items-center lg:hidden max-h-10">
                     <Link href={'/login'}>
-                        <button type="button" className="w-16 p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900 m-1 mt-3">
+                        <button type="button" className="w-16 max-w-prose p-2.5 text-center rounded-md default-yellow-bg hover:bg-sky-900  transition hover:text-white text-gray-900 m-1 mt-3">
                          <span className="block text-yellow-800 dark:text-white font-semibold text-sm">
                              LOG IN
                          </span>
                         </button>
                     </Link>
                     <Link href={'/signup'}>
-                        <button type="button"  className="w-20 p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 m-2 mt-4">
+                        <button type="button"  className="w-20 max-w-prose p-2.5 text-center text-white rounded-md transition default-green-bg hover:bg-sky-900 m-2 mt-4">
                           <span className="block text-yellow-900 font-semibold text-sm">
                               SIGN UP
                           </span>

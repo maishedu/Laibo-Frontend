@@ -45,7 +45,7 @@ const MakeOffer = () => {
             setShowAlert(data.message)
           }else{
             setSeverity('warning')
-            setShowAlert('Failed, trya again!')
+            setShowAlert('Failed, try again!')
           }
         })
     }

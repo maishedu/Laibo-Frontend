@@ -1,6 +1,7 @@
 'use client'
 import React, {useState, useEffect} from 'react'
 import { useSession} from "next-auth/react";
+import Link from 'next/link';
 import Image from 'next/image'
 import { fetchRichList } from '@/lib/api-util'
 import RichListImg from '@/images/the rich list.png'
@@ -62,7 +63,7 @@ const RichList = () => {
             <p className='text-neutral-600 font-semibold inline-block ml-4'>{userDetails?.rank}</p>
           </span>
           
-          <p className="mb-4 text-sm text-white">{'(Ranked by stock list)'}</p>
+          <p className="mb-4 text-sm text-white">{'(Ranked by stock value)'}</p>
           
         </div>
       </div>
@@ -77,9 +78,11 @@ const RichList = () => {
        <tbody>
             <tr class="flex justify-between ">
                 <td class="px-2 py-2">
+                    <Link href={`/user-profile/?id=${post.id}`}>
                 <span className='text-white font-semibold  text-lg'>{post?.rank}
-                  <p className='text-neutral-600 font-normal inline-block ml-4'>{post?.first_name} {post?.last_name}</p>
-                  </span>
+                    <p className='text-neutral-600 font-normal inline-block ml-4'>{post?.first_name} {post?.last_name}</p>
+                    </span>
+                </Link>
                 </td>
                
                 <td class="px-2 py-2">

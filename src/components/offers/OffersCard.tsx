@@ -16,7 +16,7 @@ const OffersCard: FC<OffersCardProps> = ({
   taxonomy,
   fetchOffers
 }) => {
-  const { id, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
+  const { id,seller_customer_id,buyer_customer_id,buyer_username,seller_username, photos, buyer_first_name, buyer_last_name ,market_price, selling_price, quantity, amount,buyer_image_url  } = taxonomy;
   
 
   const { data: session, status } = useSession();
@@ -70,9 +70,12 @@ const OffersCard: FC<OffersCardProps> = ({
         <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
       </div>
       <div className={`bg-neutral-800 mt-4 p-2 text-center rounded-lg text-white font-semibold `}>
+        <Link href={`/user-profile/?id=${buyer_customer_id}&username=${buyer_username}`}>
+          <p>Buyer: <span className={`default-green`}>{`@${buyer_username}`}</span> </p>
+        </Link>
         <p>Mkt : <span className={`default-green`}>{market_price}</span> </p>
-        <p>Ask : {selling_price}</p>
-        <p>Offer : {amount}</p>
+        <p>Ask : {parseFloat(selling_price as string).toFixed(2)}</p>
+        <p>Offer : {parseFloat(amount as string).toFixed(2)}</p>
         <p>Quantity : {quantity}</p>
 
       </div>

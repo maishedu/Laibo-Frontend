@@ -22,7 +22,10 @@ export interface TaxonomyType {
   seller_customer_id?: string | number;
   seller_first_name?: string,
   seller_last_name?: string,
-  selling_price?: string;
+  buyer_username?:string;
+  buyer_customer_id?:string|number;
+  seller_username?:string
+  selling_price?: string|number;
   market_price?: string;
   amount?: string;
   quantity?: string;
