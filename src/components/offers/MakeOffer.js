@@ -35,7 +35,7 @@ const MakeOffer = () => {
     const[quantityError,setQuantityError]= useState(false);
     
 
-    const customer_id = userId;
+    const customer_id = parseFloat(userId);
 
     const handleMakeBidOffer = () => {
         const details = {quantity,amount,postId,customer_id}
