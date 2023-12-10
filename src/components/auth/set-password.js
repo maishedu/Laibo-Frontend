@@ -27,6 +27,7 @@ const Password = () => {
     },[])
 
   const handleResetPassword = (e) => {
+      const bearerToken = sessionStorage.getItem('token');
       if (bearerToken === null){
           setShowAlert('Token not Available');
           return;
