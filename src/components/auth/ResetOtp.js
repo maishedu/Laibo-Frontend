@@ -25,6 +25,7 @@ function ResetOtp({phone}){
                 `Proceed to reset your password`,
                 'success'
             )
+            sessionStorage.setItem('token',verifyResponse.token);
             router.push('/set-password');
         }
     }

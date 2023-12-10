@@ -1,17 +1,14 @@
 "use client"
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Image from 'next/image';
 import mobileLogo from '../../images/logo4 copy.png';
 import { setUserPassword } from '@/lib/api-util';
-import { useSession} from "next-auth/react";
 import { useRouter } from 'next/navigation'
 import SnackBar from '../snackBar';
 import {PulseLoader} from 'react-spinners'
 
 const Password = () => {
-    const { data: session, status } = useSession();
-    const userId = session?.user.id;
-    const bearerToken = session?.accessToken;
+    const bearerToken = sessionStorage.getItem('token')
     const router = useRouter()
     const password = useRef(null);
     const confirmPassword = useRef(null);
@@ -20,7 +17,20 @@ const Password = () => {
     const [alertSeverity, setSeverity] = useState("success");
     const [loading, setLoading] = useState(false);
 
+    useEffect(()=>{
+        if (bearerToken === null){
+            setShowAlert('Token not Available');
+            setTimeout(()=>{
+                router.push('/forgot-password')
+            },2000)
+        }
+    },[])
+
   const handleResetPassword = (e) => {
+      if (bearerToken === null){
+          setShowAlert('Token not Available');
+          return;
+      }
     setLoading(true)
     e.preventDefault();
     if(password.current.value !== confirmPassword.current.value){
@@ -32,10 +42,14 @@ const Password = () => {
     .then((data)=>{
       if(data.status === 1){
         setShowAlert(data.message)
-        router.push('/login')
+          sessionStorage.removeItem('token');
+        setTimeout(()=>{
+            router.push('/login')
+        },2000)
+
       }else {
         setSeverity('error')
-        setShowAlert('Failed, please try again!')
+        setShowAlert(data.message);
       }
     })
     .finally(()=>{
