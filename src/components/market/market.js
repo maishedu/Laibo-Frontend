@@ -6,11 +6,12 @@ import {BsFilter} from 'react-icons/bs';
 import Filter from "../Filter";
 import locationIcon from "../../images/location icon.svg";
 import {searchUsername} from "@/lib/api-util";
+import {useRouter} from "next/navigation";
 
 
   
 export default function  Market ({post}) {
- 
+  const router  = useRouter();
   const [posts, setPosts] = useState(post);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [page, setPage] = useState(1);
@@ -102,13 +103,15 @@ export default function  Market ({post}) {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
   }
   const handleUsername = (id,username)=>{
-    setSeachDetails(prevSearchDetails => ({
-      ...prevSearchDetails,
-      customer_id: id,
-      query: ''
-    }));
-    setUsers([]);
-    queryInput.current.value = `@${username}`
+    // setSeachDetails(prevSearchDetails => ({
+    //   ...prevSearchDetails,
+    //   customer_id: id,
+    //   query: ''
+    // }));
+    //
+    // setUsers([]);
+    // queryInput.current.value = `@${username}`
+    router.push(`/user-profile/?id=${id}&username=${username}`);
   }
   const handleBlur = () => {
     // Sets users to null when the input or container loses focus

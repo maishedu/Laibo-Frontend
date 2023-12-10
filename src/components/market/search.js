@@ -1,19 +1,18 @@
 'use client'
-
 import React, {useEffect, useRef, useState} from "react";
 import {BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import { useSearchParams } from 'next/navigation'
 import Filter from "../Filter";
-import Select from "@/shared/Select";
-import Label from "../Label";
 import {BsFilter} from 'react-icons/bs';
 import Notfound from '../Notfound';
 import locationIcon from "@/images/location icon.svg";
 import {searchUsername} from "@/lib/api-util";
+import {useRouter} from "next/navigation";
 
 
 export default function  Search() {
+  const router  = useRouter();
   const [posts, setPosts] = useState([]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [users, setUsers] = useState([]);
@@ -149,13 +148,14 @@ export default function  Search() {
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
   }
   const handleUsername = (id,username)=>{
-    setSeachDetails(prevSearchDetails => ({
-      ...prevSearchDetails,
-      customer_id: id,
-      query: ''
-    }));
-    setUsers([]);
-    queryInput.current.value = `@${username}`
+    // setSeachDetails(prevSearchDetails => ({
+    //   ...prevSearchDetails,
+    //   customer_id: id,
+    //   query: ''
+    // }));
+    // setUsers([]);
+    // queryInput.current.value = `@${username}`
+    router.push(`/user-profile/?id=${id}&username=${username}`);
   }
   const handleBlur = () => {
     // Sets users to null when the input or container loses focus
