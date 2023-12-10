@@ -8,10 +8,6 @@ import SnackBar from '../snackBar';
 import {PulseLoader} from 'react-spinners'
 
 const Password = () => {
-    if (typeof window !== 'undefined') {
-        // Perform localStorage action
-        const bearerToken = sessionStorage.getItem('token');
-    }
     const router = useRouter()
     const password = useRef(null);
     const confirmPassword = useRef(null);
@@ -21,6 +17,7 @@ const Password = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
+        const bearerToken = sessionStorage.getItem('token');
         if (bearerToken === null){
             setShowAlert('Token not Available');
             setTimeout(()=>{
