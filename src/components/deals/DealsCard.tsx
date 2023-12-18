@@ -32,7 +32,7 @@ const DealsCard: FC<CardCategory3Props> = ({
     const deal_status = 1;
     dealResponses(deal_id, deal_status,status, bearerToken)
     .then((data)=> {
-      setMessage(data.message);
+      setShowAlert(data.message);
       fetchDeals(id);
       
       
@@ -41,16 +41,20 @@ const DealsCard: FC<CardCategory3Props> = ({
     .catch((error) =>{
       console.error('Error:', error);
     })
-    setSeverity('success');
-    setShowAlert(true);
+    
+    
   }
 
   const handleSubmitDeny = (deal_id: string | number) => () => {
     const deal_status = 0;
-    dealResponses(deal_id,deal_status, status, bearerToken);
-    setSeverity('warning');
-    setShowAlert(true);
-    setMessage('You have rejected the deal!')
+    dealResponses(deal_id,deal_status, status, bearerToken)
+    .then((data)=> {
+      setSeverity('warning');
+      setShowAlert(data.message);
+
+    })
+    
+    
   }
 
   return (

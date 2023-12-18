@@ -30,7 +30,7 @@ function  StockDetail ({details}) {
                 router.push('/my-stock')
             }else{
                 setSeverity('error')
-                setShowAlert('Failed, try again!')
+                setShowAlert(data.message)
             }
             
         })

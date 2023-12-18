@@ -45,7 +45,7 @@ const MakeOffer = () => {
             setShowAlert(data.message)
           }else{
             setSeverity('warning')
-            setShowAlert('Failed, try again!')
+            setShowAlert(data.message)
           }
         })
     }
@@ -58,7 +58,7 @@ const MakeOffer = () => {
             setShowAlert(data.message)
           }else{
             setSeverity('warning')
-            setShowAlert('Failed, trya again!')
+            setShowAlert(data.message)
           }
         })
     }
@@ -84,7 +84,7 @@ const MakeOffer = () => {
           setShowAlert(data.message)
         }else {
           setSeverity('warning')
-          setShowAlert("Failed, try again!")
+          setShowAlert(data.message)
         }
        
       })

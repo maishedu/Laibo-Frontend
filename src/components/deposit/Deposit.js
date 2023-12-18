@@ -41,7 +41,7 @@ const Deposit = () => {
       setBtnText('Please wait..')
       sendSTK(myNumber,amount,fcm,bearerToken)
       .then((data)=> {
-        data.status === 1 ?  setShowAlert(data.message) : setShowAlert('Failed, please try again')
+        data.status === 1 ?  setShowAlert(data.message) : setShowAlert(data.message)
       })
 
     }
