@@ -89,6 +89,7 @@ const Post = () => {
     }, []);
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
+        <form action={handlePostsUpload}>
       {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
       <div className="px-4 py-8 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-10">
       <div className="mx-auto  text-center items-center w-full lg:w-5/12 ">
@@ -204,12 +205,12 @@ const Post = () => {
             </div>
                 <Label>Price</Label>
                 <div className="flex justify-center mb-3 space-x-3">
-                <input placeholder="Asking Price" name="askPrice" required
+                <input placeholder="Asking Price" type="number" name="askPrice" required
                  value={bookDetails.askPrice}
                   className="bg-neutral-800 w-full rounded-lg text-white p-2"
                    onChange={handleValueChange}
                    />
-                <input placeholder="Last Price" name="lastPrice" required
+                <input placeholder="Last Price" type="number" name="lastPrice" required
                  value={bookDetails.lastPrice}
                   className="bg-neutral-800 w-full rounded-lg text-white p-2" 
                   onChange={handleValueChange}
@@ -232,14 +233,17 @@ const Post = () => {
                 
                 </div>
             
-                <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
-                    <button onClick={handlePostsUpload} disabled={loading} type="submit" className="rounded-lg font-semibold text-center"> {loading ? ( <>Uploading <PulseLoader color='black' size={10} /></>) : (btnText)} </button>
+                <div className="mb-3 cursor-pointer text-center rounded-xl px-3 py-2">
+                    <button disabled={loading} type="submit" className="inline-flex default-yellow-bg items-center hover:bg-sky-900 justify-center w-full h-10 px-6 font-medium tracking-wide  transition duration-200 rounded-xl shadow-md  focus:shadow-outline focus:outline-none">
+                        {loading ? ( <>Uploading <PulseLoader color='black' size={10} /></>) : (btnText)}
+                    </button>
                 </div>
                
             </div>
 
-        </div>
-       </div>
+            </div>
+           </div>
+        </form>
     </div>
   )
 }

@@ -120,10 +120,10 @@ function Login() {
 
                 </div>
 
-                <div className="mt-4  mb-2 sm:mb-4">
+                <div className="mt-4  mb-2 sm:mb-4 cursor-pointer">
                   <button
                     type="submit"
-                    className="inline-flex default-yellow-bg items-center justify-center w-full h-10 px-6 font-medium tracking-wide  transition duration-200 rounded-xl shadow-md  focus:shadow-outline focus:outline-none"
+                    className="inline-flex default-yellow-bg hover:bg-sky-900 items-center justify-center w-full h-10 px-6 font-medium tracking-wide  transition duration-200 rounded-xl shadow-md  focus:shadow-outline focus:outline-none"
                   >
                     Login
                   </button>

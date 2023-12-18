@@ -60,9 +60,9 @@ function  Post ({details}) {
                    {details.market_price.toFixed(2)} {details.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : details.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
                </span> </p>
                <p className="text-white font-semibold ">Ask: {details.selling_price.toFixed(2)}</p>
-               <div className='mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
+               <div className='hover:bg-sky-900 mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
                 <Link href={`/make-an-offer?id=${details.post_id}`}>
-                 <button className='rounded-lg text-center font-semibold text-sm'>MAKE OFFER</button>
+                 <button className='rounded-lg text-center cursor-pointer font-semibold text-sm'>MAKE OFFER</button>
                 </Link>
                
                </div>

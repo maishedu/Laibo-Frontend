@@ -784,9 +784,9 @@ export async function makeBorrowOffer(bearerToken, details) {
   var params = JSON.stringify({
     quantity: newQuantity,
     return_date: details.returnDate,
-    post_id: details.postId,
+    post_id: parseFloat(details.postId),
     deal_type: 5,
-    deal_from: details.customer_id
+    deal_from: parseFloat(details.customer_id)
     
   });
   
