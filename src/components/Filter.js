@@ -36,7 +36,7 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
          <input placeholder="Max price" name="maxPrice" value={searchDetails.maxPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>
         </div>
 
-        <div className="mb-3 text-center rounded-xl default-yellow-bg px-3 py-2">
+        <div className="mb-3 cursor-pointer text-center rounded-xl default-yellow-bg px-3 py-2">
             <Link href={`/market/search/?query=${searchDetails.query}&customer_id=${searchDetails.customer_id}&bookType=${searchDetails.bookType}&condition=${searchDetails.condition}&location=${searchDetails.location}&maxPrice=${searchDetails.maxPrice}&minPrice=${searchDetails.minPrice}&page=1&limit=10`}>
                 <button ref={enterButton} type="submit" className="rounded-lg text-center">Show results</button>
             </Link>

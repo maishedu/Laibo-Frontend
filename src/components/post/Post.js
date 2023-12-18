@@ -96,7 +96,7 @@ const Post = () => {
             <Label>Book Type</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType"
-             value={bookDetails.bookType} onChange={handleValueChange}
+             value={bookDetails.bookType} onChange={handleValueChange} required
              >
             <option value="Hardcover (Original)">Hardcover (Original)</option>
             <option value="Hardcover (Generic)">Hardcover (Generic)</option>
@@ -106,7 +106,7 @@ const Post = () => {
             <Label>Category</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="category"
-             value={category}
+             value={category} required
              onChange={({ target }) => setCategory(target?.value)}
               
              >
@@ -167,7 +167,7 @@ const Post = () => {
 
             <Label>Title</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
-                <input placeholder="Title" name="title"
+                <input placeholder="Title" name="title" required
                  value={bookDetails.title} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
@@ -175,7 +175,7 @@ const Post = () => {
 
             <Label>Author</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
-                <input placeholder="Author's name" name="author"
+                <input placeholder="Author's name" name="author" required
                  value={bookDetails.author} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
@@ -184,7 +184,7 @@ const Post = () => {
             <Label>Condition</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" 
-            value={bookDetails.condition} onChange={handleValueChange}
+            value={bookDetails.condition} onChange={handleValueChange} required
             >
                 <option value="Brand new"  >Brand new</option>
                 <option value="New">New</option>
@@ -197,19 +197,19 @@ const Post = () => {
 
             <Label>Location</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
-                <input placeholder="Location" name="location"
+                <input placeholder="Location" name="location" required
                  value={bookDetails.location} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
             </div>
                 <Label>Price</Label>
                 <div className="flex justify-center mb-3 space-x-3">
-                <input placeholder="Asking Price" name="askPrice"
+                <input placeholder="Asking Price" name="askPrice" required
                  value={bookDetails.askPrice}
                   className="bg-neutral-800 w-full rounded-lg text-white p-2"
                    onChange={handleValueChange}
                    />
-                <input placeholder="Last Price" name="lastPrice"
+                <input placeholder="Last Price" name="lastPrice" required
                  value={bookDetails.lastPrice}
                   className="bg-neutral-800 w-full rounded-lg text-white p-2" 
                   onChange={handleValueChange}
@@ -218,7 +218,7 @@ const Post = () => {
 
                 <Label>Quantity</Label>
                 <div className="mb-3 rounded-lg bg-neutral-800 ">
-                    <input placeholder="2" name="quantity"
+                    <input placeholder="2" name="quantity" required
                      value={bookDetails.quantity} onChange={handleValueChange}
                     className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
                 

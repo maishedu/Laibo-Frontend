@@ -22,7 +22,7 @@ const Feedback = () => {
                 setFeedback("")
             }else {
                 setSeverity('warning')
-                setShowAlert("Failed, try again!")
+                setShowAlert(data.message)
             }
             
         })
