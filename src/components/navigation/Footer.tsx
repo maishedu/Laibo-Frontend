@@ -5,6 +5,7 @@ import React from "react";
 import { BsInstagram, BsTwitter  } from 'react-icons/bs'
 import {BiLogoFacebook, BiLogoLinkedin } from 'react-icons/bi'
 import  googleLogo from '@/images/google-play.png'
+import Link from "next/link";
 
 export interface WidgetFooterMenu {
   id: string;
@@ -103,11 +104,10 @@ const Footer: React.FC = () => {
 
         <div className="mt-4 text-center">
             <h2 className="text-sm default-yellow tracking-wide">
-              {`© ${new Date().getFullYear()} by Laibo | All rights reserved`}
+              {`© ${new Date().getFullYear()} by Laibo | All rights reserved | `}
+              Powered by <Link href="https://seargentsolutions.com/">Seargent Solutions</Link>
             </h2>
-          </div>
-         
-
+        </div>
       </div>
       
     </>
