@@ -60,13 +60,15 @@ function  Post ({details}) {
                    {details.market_price.toFixed(2)} {details.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : details.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
                </span> </p>
                <p className="text-white font-semibold ">Ask: {details.selling_price.toFixed(2)}</p>
-               <div className='hover:bg-sky-900 mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
-                <Link href={`/make-an-offer?id=${details.post_id}`}>
-                 <button className='rounded-lg text-center cursor-pointer font-semibold text-sm'>MAKE OFFER</button>
-                </Link>
-               
-               </div>
-               
+                {details.quantity >0 ?
+                    <div className='hover:bg-sky-900 mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
+                    <Link href={`/make-an-offer?id=${details.post_id}`}>
+                       <button className='rounded-lg text-center cursor-pointer font-semibold text-sm'>MAKE OFFER</button>
+                   </Link>
+                    </div>:  <div className='mb-3 text-center rounded-xl bg-red-700 px-3 py-2'>
+                        <Link href={`/#`}>
+                       <button className='rounded-lg text-center cursor-pointer font-semibold text-sm'>Sold out</button>
+                   </Link> </div>}
             </div>
 
             <h2 className="default-yellow font-semibold ">Title</h2>  

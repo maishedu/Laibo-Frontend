@@ -39,6 +39,11 @@ const MakeOffer = () => {
 
     const handleMakeBidOffer = () => {
         const details = {quantity,amount,postId,customer_id}
+        if (details.quantity <=0){
+            setSeverity('warning')
+            setShowAlert('Quantity should be greater than 0');
+            return
+        }
         makeBidOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){

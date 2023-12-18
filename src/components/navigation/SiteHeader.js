@@ -37,7 +37,7 @@ const SiteHeader = () => {
                 <Link href={'/'} onClick={()=>setIsMenuOpen(false)} aria-label="logo" className="flex space-x-2 items-center">
                   <Image src={mobileLogo} width={60} className=''   alt="home-image" />
                   <span className="secondary-font default-yellow hide-desktop-logo">LAIBO <span className="text-yellow-700 dark:text-yellow-300"></span></span>
-                  <h2 className="lg:hidden default-yellow text-3xl">LAIBO</h2>
+                  <h2 className="md:hidden default-yellow md:text-3xl sm:text-base">LAIBO</h2>
                 </Link>
 
                 <div className="flex items-center lg:hidden max-h-10">
