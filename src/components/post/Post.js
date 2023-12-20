@@ -55,27 +55,29 @@ const Post = () => {
         setBookDetails({ ...bookDetails, [e.target.name]: e.target.value})
       }
 
-      
 
-      const handlePostsUpload = () => {
-        setLoading(true)
-        setBtnText('Uploading...')
-        uploadPosts(newPhotos,userId,bookDetails,category,bearerToken)
-        .then((data)=>{
-          if(data.status === 1){
-            setShowAlert(data.message)
-            setBookDetails("")
-            router.push('/my-stock');
-          }else{
-            setSeverity('warning')
-            setShowAlert('Failed, try again!')
-          }
-        })
-        .finally(()=>{
-          setLoading(false);
-        })
-      }
- 
+
+    const handlePostsUpload = (e) => {
+        e.preventDefault(); // Prevents the default form submission behavior
+        setLoading(true);
+        setBtnText('Uploading...');
+        uploadPosts(newPhotos, userId, bookDetails, category, bearerToken)
+            .then((data) => {
+                if(data.status === 1){
+                    setShowAlert(data.message);
+                    setBookDetails("");
+                    router.push('/my-stock');
+                }else{
+                    setSeverity('warning');
+                    setShowAlert('Failed, try again!');
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
+
     useEffect(() => {
      fetchCategories()
       .then((data)=> {
@@ -89,7 +91,7 @@ const Post = () => {
     }, []);
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
-        <form action={handlePostsUpload}>
+        <form onSubmit={handlePostsUpload}>
       {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
       <div className="px-4 py-8 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-10">
       <div className="mx-auto  text-center items-center w-full lg:w-5/12 ">
