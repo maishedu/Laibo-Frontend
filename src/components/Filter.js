@@ -9,14 +9,16 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
         <Label>Book Type</Label>
      <div className="mb-3 rounded-xl bg-neutral-800 ">
      <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>
-       <option value="E-book">Hardcover (Original)</option>
-       <option value="Hardcover">Hardcover (Generic)</option>
+       <option value="">Select Type</option>
+       <option value="Hardcover (Original)">Hardcover (Original)</option>
+       <option value="Hardcover (Generic)">Hardcover (Generic)</option>
      </Select>
      </div>
 
      <Label>Condition</Label>
        <div className="mb-3 rounded-xl bg-neutral-800 ">
        <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" value={searchDetails.condition} onChange={handleValueChange}>
+             <option value="">Select Condition</option>
              <option value="Brand new"  >Brand new</option>
              <option value="Good">Good</option>
              <option value="Ok">Ok</option>

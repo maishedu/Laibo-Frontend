@@ -55,6 +55,7 @@ export default function  Market ({post}) {
       minPrice: "",
       maxPrice: "",
     })
+    router.push('/market');
   }
 
   const handleLoadMore = async () => {
@@ -169,17 +170,17 @@ export default function  Market ({post}) {
                     </div>
                     </Link>
                    <div className="flex flex-col leading-3">
-                   <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
-                     <p className=" text-lg text-gray-500 mb-[-5px]">
-                       {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
-                     </p>
-                     <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
-                       {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
-                     </p>
-                     <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                       Ask: {post.last_price.toFixed(2)}
-                     </p>
+                     <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
+                       <p className=" text-lg text-gray-500 mb-[-5px]">
+                         {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
+                       </p>
+                       <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
+                         Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
+                         {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
+                       </p>
+                       <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
+                         Ask: {post.last_price.toFixed(2)}
+                       </p>
                      
                    </div>
                  </div>
