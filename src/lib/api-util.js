@@ -18,8 +18,8 @@ export async function fetchPosts(page) {
 }
 
 export async function fetchPost(postId) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/posts/postdetails/${postId}`);
- 
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/posts/postdetails/${postId}`, { next: { revalidate: 180 } });
+
   try {
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -112,7 +112,7 @@ export async function verifyOTP(phone,code){
 
 
 export async function fetchUserPosts(page, userId) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/user/${userId}?limit=10&page=${page}`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/user/${userId}?limit=10&page=${page}`,{ next: { revalidate: 180 } });
   try {
     if (!response.ok) {
       throw new Error('Network response was not ok');

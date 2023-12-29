@@ -90,7 +90,9 @@ const  Profile = () => {
                 <div className="flex items-center space-x-2">
                         <Image src={moneyImg} alt="money bag image" height={10} width={20} />
                         <p className="text-sm text-center text-gray-200 font-semibold">
-                            <span className="default-green">{userDetails?.rank} <BiSolidUpArrow className="inline-block w-3"/></span>
+                              <span className={userDetails.position_direction === "UP" ? 'default-green' : userDetails.position_direction === "DOWN" ? 'text-red-600' : 'text-white'}>{userDetails?.rank}
+                                  {userDetails.position_direction === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : userDetails.position_direction === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+                </span>
                         </p>
                 </div>
             </div>

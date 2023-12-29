@@ -70,7 +70,7 @@ export default function  Market ({post}) {
 
   
   async function fetchPosts(page) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=${page}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=${page}`,{ next: { revalidate: 180 } });
     try {
       if (!response.ok) {
         throw new Error('Network response was not ok');
