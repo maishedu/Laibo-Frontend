@@ -3,7 +3,7 @@ import React, {  useState, useEffect } from "react";
 import Image from 'next/image';
 import Link from "next/link";
 import './siteheader.css';
-import {BiSolidUpArrow} from 'react-icons/bi'
+import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import mobileLogo from '../../images/logo4 copy.png';
 import { useSession,signOut } from "next-auth/react";
 import moneyImg from '@/images/money-bag-@2x.png'
@@ -192,7 +192,9 @@ const AuthenticatedHeader = () => {
               <div className="flex space-x-2 justify-center items-center">
               <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
                 <p className="text-xl items-center text-center text-gray-200 font-semibold">
-                    <span className="default-green items-center">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span>
+                    <span className={userDetails.stock_direction === "UP" ? 'default-green' : userDetails.stock_direction === "DOWN" ? 'text-red-600' : 'text-white'}>{userDetails?.total_stock_value?.toFixed(2)}
+                        {userDetails.stock_direction === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : userDetails.stock_direction === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+                </span>
                 </p>
              </div>
 
@@ -210,7 +212,10 @@ const AuthenticatedHeader = () => {
              <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
               <p className="text-lg text-center text-gray-200 font-semibold">
                 
-                <span className="default-green">{userDetails?.total_stock_value?.toFixed(2)} <BiSolidUpArrow className="inline-block w-3"/></span> 
+                <span className={userDetails.stock_direction === "UP" ? 'default-green' : userDetails.stock_direction === "DOWN" ? 'text-red-600' : 'text-white'}>{userDetails?.total_stock_value?.toFixed(2)}
+                    {userDetails.stock_direction === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : userDetails.stock_direction === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+                </span>
+
               </p>
              </div>
              <div className="border-r"/>
