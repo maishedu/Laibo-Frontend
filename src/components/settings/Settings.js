@@ -200,7 +200,7 @@ const Settings = () => {
                 setAmount("")
             }else {
                 setSeverity('warning')
-                setShowAlert('An error occured, try again!')
+                setShowAlert(data.message)
 
             }
         })
@@ -324,7 +324,7 @@ const Settings = () => {
                             value={amount}
                             onChange={({ target }) => setAmount(target?.value)}
                             required
-                            type="text"
+                            type="number"
                             className="flex-grow w-full text-center text-white h-10 px-4 mb-2 transition duration-200 bg-neutral-800 rounded-lg shadow-sm"
                             id="amount"
                             name="amount"

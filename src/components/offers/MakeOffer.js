@@ -33,7 +33,8 @@ const MakeOffer = () => {
     const [book2, setBook2] = useState()
     const [book3, setBook3] = useState()
     const[quantityError,setQuantityError]= useState(false);
-    
+    const[amountError,setAmountError]= useState(false);
+
 
     const customer_id = parseFloat(userId);
 
@@ -42,6 +43,17 @@ const MakeOffer = () => {
         if (details.quantity <=0){
             setSeverity('warning')
             setShowAlert('Quantity should be greater than 0');
+            return
+        }
+        if (quantity > postDetails.quantity){
+            setSeverity('warning')
+            setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
+            return
+        }
+        if (amount < postDetails.last_price){
+            setAmountError(true);
+            setSeverity('warning')
+            setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
             return
         }
         makeBidOffer(bearerToken,details)
@@ -76,7 +88,7 @@ const MakeOffer = () => {
         const newQuantity = e.target.value;
         if (parseInt(newQuantity) > postDetails.quantity) {
             setQuantityError(true);
-            setQuantity(''); // Clear the quantity
+            setQuantity(newQuantity);
         } else {
             setQuantityError(false);
             setQuantity(newQuantity); // Update the quantity
@@ -161,7 +173,7 @@ const MakeOffer = () => {
                   id="quantity"
                   name="quantity"
                 />
-                    {quantityError && <p className="text-yellow"> The maximum quantity is {postDetails.quantity}</p>}
+                    {quantityError && <p className="text-yellow"> The seller stock quantity is {postDetails.quantity}</p>}
                
               </div>
 
@@ -195,7 +207,7 @@ const MakeOffer = () => {
                   value={amount}
                   onChange={({ target }) => setAmount(target?.value)}
                   required
-                  type="text"
+                  type="number"
                   className="flex-grow w-full text-center text-white h-10 px-4 mb-2 transition duration-200 bg-neutral-800 rounded-lg shadow-sm"
                   id="amount"
                   name="amount"
@@ -203,6 +215,7 @@ const MakeOffer = () => {
                 <p className="absolute inset-y-0 right-0 px-4 py-2 text-white">
                   {"/="}
                 </p>
+                  {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price}</p>}
               </div>
 
               <div className="flex space-x-2 w-full">
