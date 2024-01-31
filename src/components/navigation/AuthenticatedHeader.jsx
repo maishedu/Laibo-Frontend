@@ -7,7 +7,6 @@ import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import mobileLogo from '../../images/logo4 copy.png';
 import { useSession,signOut } from "next-auth/react";
 import moneyImg from '@/images/money-bag-@2x.png'
-import piggyBank from '@/images/money-pig.png'
 import {  fetchUserData} from "@/lib/api-util";
 import { usePathname, useRouter } from "next/navigation";
 import nullUser from '@/images/user.png';
