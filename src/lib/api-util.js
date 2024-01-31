@@ -18,7 +18,7 @@ export async function fetchPosts(page) {
 }
 
 export async function fetchPost(postId) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/posts/postdetails/${postId}`, { next: { revalidate: 180 } });
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/laibo/api/posts/postdetails/${postId}`, { next: { revalidate: 180 } });
 
   try {
     if (!response.ok) {
