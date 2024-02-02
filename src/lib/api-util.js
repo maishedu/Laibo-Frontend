@@ -35,7 +35,7 @@ export async function fetchPost(postId) {
   }
 }
 export async function searchUsername(query) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}laibo/api/customer/search?query=${query}&page=1&limit=10`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/laibo/api/customer/search?query=${query}&page=1&limit=10`);
 
   try {
     if (!response.ok) {
