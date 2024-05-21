@@ -104,8 +104,8 @@ const Footer: React.FC = () => {
 
         <div className="mt-4 text-center">
             <h2 className="text-sm default-yellow tracking-wide">
-              {`© ${new Date().getFullYear()} by Laibo | All rights reserved`}
-              {/*Powered by <Link href="https://seargentsolutions.com/">Seargent Solutions</Link>*/}
+              {`© ${new Date().getFullYear()} by Laibo | All rights reserved `}
+              Powered by <Link href="https://seargentsolutions.com/">Seargent Solutions</Link>
             </h2>
         </div>
       </div>
