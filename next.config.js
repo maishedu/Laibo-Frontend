@@ -7,7 +7,7 @@ const nextConfig = {
     // typedRoutes: true,
   },
   images: {
-    domains: ['216.219.83.153'],
+    domains: ['216.219.83.153','api.laibo.co.ke'],
     remotePatterns: [
       {
         protocol: 'https',
