@@ -4,6 +4,8 @@ import Select from '@/shared/Select'
 import { useSession,signOut } from "next-auth/react";
 import { fetchUserData, sendSTK } from '@/lib/api-util'
 import Snackbar from '@/components/snackBar'
+import Image from 'next/image';
+import Piggy from '@/images/money-pig.png'
 
 const Deposit = () => {
   const { data: session, status } = useSession();
@@ -64,11 +66,19 @@ const Deposit = () => {
 
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-16">
         {showAlert && <Snackbar showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
-      <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center">
               <div className="rounded shadow-2xl p-7 sm:p-10">
-               
+              <div className='flex  justify-center'>
+              <Image
+                src={Piggy}
+                className="object-cover w-24 h-24 rounded-2xl shadow"
+                alt="Person"
+              />
+              
+              </div>
+              <p className='default-yellow text-center font-semibold mb-4'>Deposit funds</p>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-1 sm:mb-2 text-sm">
                     <label
@@ -129,7 +139,7 @@ const Deposit = () => {
                   <div className="mt-4 mb-2 flex justify-center sm:mb-4">
                     <button
                       type="submit"
-                      className="inline-flex  default-yellow-bg items-center justify-center w-40 h-10 px-6 font-medium tracking-wide  transition duration-200 rounded-xl shadow-md "
+                      className="inline-flex  default-yellow-bg items-center justify-center w-40 h-10 px-6 font-semibold tracking-wide  transition duration-200 rounded-xl shadow-md "
                     >
                       {btnText}
                     </button>

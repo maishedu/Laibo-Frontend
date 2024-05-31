@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 // import Post from '@/components/market/post-detail'
-import StockDetail from '@/components/my-stock/StockDetail'
+import StockDetail from '@/components/my-library/StockDetail'
 import {fetchPost} from "@/lib/api-util";
 import Notfound from "@/components/Notfound";
 

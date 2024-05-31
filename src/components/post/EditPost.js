@@ -23,7 +23,7 @@ const EditPost = () => {
     const [photos, setPhotos] = useState([])
     const [newPhotos, setNewPhotos] = useState([]);
     const [post, setPost] = useState([])
-    console.log(post)
+    
 
     const handleDelete = (index) => {
       setPhotos((prevPhotos) => {

@@ -96,7 +96,10 @@ const AuthenticatedHeader = () => {
                 alt="avatar"
                 className="relative object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{userDetails?.offers + userDetails?.deals}</span>
+              {userDetails?.offers + userDetails?.deals > 0 ? (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{userDetails?.offers + userDetails?.deals}</span>
+              ):null}
+              {/* <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{userDetails?.offers + userDetails?.deals}</span> */}
             </p>
              
             </div>
@@ -113,11 +116,14 @@ const AuthenticatedHeader = () => {
               <Link href="/deals" onClick={toggleMenu} className="block space-x-2 md:px-4 transition hover:text-yellow-700">
                 <span>Deals</span>
                 <span className="flex-grow text-right">
+                  {userDetails?.deals.length > 0 ? (
                     <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
-                        <span className="p-1">
-                            {userDetails?.deals}
-                        </span>
-                    </button>
+                    <span className="p-1">
+                        {userDetails?.deals}
+                    </span>
+                </button>
+                  ):null}
+                    
                 </span>
               </Link>
             </li>
@@ -125,11 +131,14 @@ const AuthenticatedHeader = () => {
               <Link href="/offers" onClick={toggleMenu} className="block space-x-2 md:px-4 transition hover:text-yellow-700">
                 <span>Offers</span>
                 <span className="flex-grow text-right">
+                  {userDetails?.offers.length > 0 ? (
                     <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
-                        <span className="p-1">
-                           {userDetails?.offers}
-                        </span>
-                    </button>
+                    <span className="p-1">
+                       {userDetails?.offers}
+                    </span>
+                </button>
+                  ):null}
+                    
                 </span>
               </Link>
             </li>

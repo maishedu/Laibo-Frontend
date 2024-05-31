@@ -35,7 +35,7 @@ const MakeOffer = () => {
     const[quantityError,setQuantityError]= useState(false);
     const[amountError,setAmountError]= useState(false);
 
-
+  
     const customer_id = parseFloat(userId);
 
     const handleMakeBidOffer = () => {
@@ -223,13 +223,13 @@ const MakeOffer = () => {
                   <div className="bg-lime-600 rounded-lg p-1">
                     <FiArrowUpRight className="w-5 h-5" />
                   </div>
-                  <button onClick={handleMakeBidOffer}>BUY</button>
+                  <button onClick={()=>setShowBorrow(true)} >SELL</button>
                 </div>
                 <div className="flex space-x-2 justify-center font-semibold text-white bg-red-500 p-1 rounded-lg w-full">
                   <div className="bg-red-600 rounded-lg p-1">
                     <FiArrowDownRight className="w-5 h-5" />
                   </div>
-                  <button onClick={()=>setShowBorrow(true)}>SELL</button>
+                  <button onClick={handleMakeBidOffer}>BUY</button>
                 </div>
               </div>
 
@@ -330,10 +330,11 @@ const MakeOffer = () => {
       </div>
       <Popper size={"sm"}  open={borrow} setOpen={setShowBorrow}>
           <BorrowModal setOpen={setShowBorrow} >
-            <p> <span className="default-green font-semibold">Kes {postDetails?.market_price}</span> will be held as security until the book is returned. if the book is not returned
+            <p> <span className="default-green font-semibold">Kes {amount}</span> will be held as security until the book is returned. if the book is not returned
             on time, the money will be released to the owner.
             </p>
-            <p className="mt-4 mb-2 text-gray-900 font-semibold">Return Date</p>
+            <div className="px-4 ml-6">
+            <p className="mt-4 mb-2 text-gray-900 font-semibold">Sell Date</p>
             <input
                 placeholder="Birthday"
                 value={returnDate}
@@ -345,7 +346,60 @@ const MakeOffer = () => {
                 id="returndate"
                 name="returndate"
               />
-              <button onClick={handleMakeBorrowOffer} className="m-2 bg-red-600 hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Borrow</button>
+              
+              <div className='w-full'>
+                <p className="text-gray-900 text-start font-semibold ">Profit</p>  
+                    <div className="mb-3 rounded-xl border border-black text-center px-3 py-2">
+                    <p className="default-green ">+ {amount}</p>
+                    </div>
+                </div>
+              
+              <div className="flex space-x-2">
+                <div>
+                <p className="text-start font-semibold mt-4 text-gray-900">Asking price</p>
+              <div className=" relative mb-1  sm:mb-2  w-full">
+                <input
+                  placeholder="550.00"
+                  value={postDetails.market_price}
+                  // onChange={({ target }) => setAmount(target?.value)}
+                  required
+                  type="number"
+                  className="flex-grow w-full border border-black text-center text-gray-700 h-10 px-4 mb-2 transition duration-200  rounded-lg shadow-sm"
+                  id="asking_price"
+                  name="amount"
+                />
+                <p className="absolute inset-y-0 right-0 px-4 py-2 text-white">
+                  {"/="}
+                </p>
+                  {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price}</p>}
+              </div>
+                </div>
+                <div>
+                <p className="text-start font-semibold mt-4 text-gray-900">Last price</p>
+              <div className=" relative mb-1  sm:mb-2  w-full">
+                <input
+                  placeholder="550.00"
+                  value={amount}
+                  onChange={({ target }) => setAmount(target?.value)}
+                  required
+                  type="number"
+                  className="flex-grow w-full border border-black text-center text-gray-700 h-10 px-4 mb-2 transition duration-200  rounded-lg shadow-sm"
+                  id="last_price"
+                  name="last_price"
+                />
+                <p className="absolute inset-y-0 right-0 px-4 py-2 text-white">
+                  {"/="}
+                </p>
+                  {/* {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price}</p>} */}
+              </div>
+                </div>
+              </div>
+              <div className="flex justify-center">
+              <button onClick={handleMakeBorrowOffer} className=" default-green-bg  hover:text-black text-white text-sm w-40 font-bold py-2 px-4 rounded">Confirm</button>
+              </div>
+
+              
+              </div>
           </BorrowModal>
       </Popper>
 
@@ -388,7 +442,7 @@ const MakeOffer = () => {
                 ):
                 <div className="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3" role="alert">
                   <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
-                  <p>You have no books in your stock at the moment.</p>
+                  <p>You have no books in your library at the moment.</p>
                 </div>
                 }
                

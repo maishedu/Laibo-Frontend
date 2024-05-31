@@ -19,11 +19,11 @@ const Account = () => {
             </div>
           </div>
 
-          <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
+          {/* <div className="w-full max-w-xl xl:px-8 xl:w-5/12">
             <div className="relative">
               <Transaction/>
             </div>
-          </div>
+          </div> */}
 
           </div>
         </div>
