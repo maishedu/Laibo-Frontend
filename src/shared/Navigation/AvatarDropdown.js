@@ -27,8 +27,10 @@ const AvatarDropdown =  ({data }) => {
                 alt="avatar"
                 className="relative object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
+              {data?.offers + data?.deals > 0 ? (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{data?.offers + data?.deals}</span>
+              ):null}
               
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{data?.offers + data?.deals}</span>
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -52,12 +54,15 @@ const AvatarDropdown =  ({data }) => {
                       <div className="ml-4 space-x-1">
                         <span className="text-sm font-medium ">{"Deals"}</span>
                         <span className="flex-grow text-right">
-                          <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
+                          {data?.deals?.length > 0 ? (
+                              <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
                               <span className="p-1">
                                 
                                   {data?.deals}
                               </span>
                           </button>
+                          ):null}
+                        
                       </span>
                       </div>
                     </Link>
@@ -70,12 +75,15 @@ const AvatarDropdown =  ({data }) => {
                       <div className="ml-4 space-x-1">
                       <span className="text-sm font-medium ">{"Offers"}</span>
                       <span className="flex-grow text-right">
-                          <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
-                              <span className="p-1">
-                                
-                                  {data?.offers}
-                              </span>
-                          </button>
+                        {data?.offers?.length > 0 ? (
+                           <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
+                           <span className="p-1">
+                             
+                               {data?.offers}
+                           </span>
+                       </button>
+                        ):null}
+                         
                       </span>
 
                       </div>
@@ -116,13 +124,13 @@ const AvatarDropdown =  ({data }) => {
                     </Link>
 
                     <Link
-                      href={"/my-stock"}
+                      href={"/my-library"}
                       className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
                      
                       <div className="ml-4">
-                        <p className="text-sm font-medium ">{"My stock"}</p>
+                        <p className="text-sm font-medium ">{"My library"}</p>
                       </div>
                     </Link>
 

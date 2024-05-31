@@ -40,7 +40,7 @@ const Stock = () => {
             className="grid grid-cols-2 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
              {posts?.map((post,index) =>(
                 <div key={index} >
-                 <Link href={`/my-stock/${post.post_id}`}>
+                 <Link href={`/my-library/${post.post_id}`}>
                    <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
                    <img
                      className="absolute object-cover w-full h-full rounded"

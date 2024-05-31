@@ -7,7 +7,7 @@ import Popper from '@/components/popper/Popper'
 import SettingsModal from './SettingsModal'
 import SnackBar from '../snackBar';
 import Swal from 'sweetalert2'
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash,FaExclamationCircle } from "react-icons/fa";
 
 const Settings = () => {
     const { data: session, status } = useSession();
@@ -21,6 +21,7 @@ const Settings = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showUserPhone, setShowUserPhone] = useState(false)
+    const [showUserLocation, setShowUserLocation] = useState(false)
     const [changeProfile, setChangeProfile] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
     const [isSelected, setIsSelected] = useState();
@@ -28,6 +29,12 @@ const Settings = () => {
     const [alertSeverity, setSeverity] = useState("success");
     const [btnText, setBtnText]= useState('Upload');
     const [amount, setAmount] = useState([]);
+
+    const firstName = userDetails?.first_name;
+    const lastName = userDetails?.last_name;
+    const nameExists = firstName || lastName;
+
+    
 
     //refs
     const first_name = useRef();
@@ -37,6 +44,7 @@ const Settings = () => {
     const newPass = useRef();
     const oldPass = useRef();
     const phone = useRef();
+    const location = useRef();
 //refresh
     const refreshUser = async ()=>{
         fetchUserData(userId, bearerToken)
@@ -118,6 +126,27 @@ const Settings = () => {
         const details = phone.current.value;
         const data = await updateUserPhone(bearerToken,details)
         setShowUserPhone(false);
+        if (data.status === 1){
+            await refreshUser()
+            Swal.fire({
+                title: "Success",
+                text: data.message,
+                icon: "success"
+            });
+        }else{
+            Swal.fire({
+                title: "Failed",
+                text: data.message,
+                icon: "error"
+            });
+        }
+    }
+
+    const updateUser_Location = async (e)=>{
+        e.preventDefault();
+        const details = location.current.value;
+        const data = await updateUserLocation(bearerToken,details)
+        setShowUserLocation(false);
         if (data.status === 1){
             await refreshUser()
             Swal.fire({
@@ -280,28 +309,61 @@ const Settings = () => {
                 <div className=''>
                     <div className='w-full cursor-pointer'>
                         <h2 className="text-gray-400 text-sm text-start ">Names</h2>  
-                        <div onClick={()=>setShowName(true)} className="mb-3 rounded-xl bg-neutral-800 px-3 py-2 ">
-                        <p className="text-gray-400 ">{userDetails.first_name} {userDetails.last_name}</p>
+                        
+                         <div
+                            onClick={() => setShowName(true)}
+                            className="relative mb-3 rounded-xl bg-neutral-800 px-3 py-2 flex items-center justify-between"
+                        >
+                            <p className="text-gray-400 flex-grow">
+                            {nameExists ? `${firstName || ''} ${lastName || ''}`.trim() : "Name not provided"}
+                            </p>
+                            {!nameExists && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
                         </div>
+                    
                     </div>
                     
                 </div>
                
 
                 <h2 className="text-gray-400 text-start  text-sm ">Username</h2>  
-                 <div onClick={()=>setShowUserName(true)} className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
-                 <p className="text-gray-400 ">{userDetails.username}</p>
+                 
+                <div
+                    onClick={() => setShowUserName(true)}
+                    className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
+                >
+                    <p className="text-gray-400 flex-grow text-center">{userDetails.username || "Username not updated"}</p>
+                    {!userDetails.username && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Email</h2>  
-                 <div onClick={()=>setShowUserEmail(true)} className="mb-3 cursor-pointer rounded-xl bg-neutral-800 px-3 py-2">
-                 <p className="text-gray-400  ">{userDetails.email}</p>
+                
+                <div
+                    onClick={() => setShowUserEmail(true)}
+                    className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
+                >
+                    <p className="text-gray-400 flex-grow text-center">{userDetails.email || "Email not updated"}</p>
+                    {!userDetails.email && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Phone number</h2>  
-                 <div onClick={()=> setShowUserPhone(true)} className="mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2">
-                 <p className="text-gray-400 ">{userDetails.msisdn}</p>
-                </div>
+                
+                <div
+                    onClick={() => setShowUserPhone(true)}
+                    className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
+                >
+                    <p className="text-gray-400 flex-grow text-center">{userDetails.msisdn || "Phone number not updated"}</p>
+                    {!userDetails?.msisdn && <FaExclamationCircle className=" absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
+                </div> 
+
+                <h2 className="text-gray-400 text-start text-sm ">Location</h2> 
+                <div
+                    onClick={() => setShowUserLocation(true)}
+                    className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 "
+                >
+                    <p className="text-gray-400 flex-grow text-center">{userDetails?.location || "Location not updated"}</p>
+                    {!userDetails?.location && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 py-2 h-10 w-10" />}
+                </div> 
+                 
 
                 
                 <div className='flex space-x-3'>
@@ -331,8 +393,8 @@ const Settings = () => {
                         />
                     </div>
                     
-                    <div className=" cursor-pointer rounded-xl bg-white h-10 py-2  w-full  ">
-                      <button onClick={handleWithdraw}  className="text-gray-900 text-sm">{"Withdraw"}</button>
+                    <div className=" cursor-pointer rounded-xl default-green-bg h-10 py-2  w-full  ">
+                      <button onClick={handleWithdraw}  className="text-gray-200 text-sm">{"Withdraw"}</button>
                     </div>
                 </div>
 
@@ -403,6 +465,14 @@ const Settings = () => {
             <SettingsModal setOpen={setShowUserPhone} >
                 <input type="text" className="m-2 rounded-lg focus:border-black border px-2 border-black" defaultValue={userDetails.msisdn} name="phone" ref={phone}/>
                 <button onClick={updateUser_Phone} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
+            </SettingsModal>
+        </Popper>
+
+                {/* user Location modal */}
+        <Popper size={"sm"} title={"Update Location"} open={showUserLocation} setOpen={setShowUserLocation}>
+            <SettingsModal setOpen={setShowUserLocation} >
+                <input type="text" className="m-2 rounded-lg focus:border-black border px-2 border-black" defaultValue={userDetails.location} name="phone" ref={location}/>
+                <button onClick={updateUser_Location} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
             </SettingsModal>
         </Popper>
 

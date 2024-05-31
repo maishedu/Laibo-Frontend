@@ -1,5 +1,5 @@
 "use client"
-import Reac, {useRef, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import Image from 'next/image'
 import BgImg from '@/images/cashathand 2.png'
 import {AiOutlineGoogle} from 'react-icons/ai'
@@ -9,8 +9,8 @@ import * as sweetalert2 from "sweetalert2";
 import {signUp,sendOTP} from "@/lib/api-util";
 import RegisterModal from "@/components/modal/RegisterModal";
 import Otp from "@/components/auth/Otp";
-import React from "react";
 import Swal from "sweetalert2";
+import zxcvbn from 'zxcvbn';
 
 function Signup() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -18,14 +18,17 @@ function Signup() {
   const [otpModal,setOTPModal]=useState(false);
   const firstName = useRef(null);
   const lastName = useRef(null);
+  const username = useRef(null);
   const email = useRef(null);
   const phone = useRef(null);
   const gender = useRef(null);
   const dob = useRef(null);
-  const password = useRef(null);
+  const passwordRef = useRef(null);
   const confirmPassword = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [passwordFeedback, setPasswordFeedback] = useState('');
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -35,9 +38,16 @@ function Signup() {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    const result = zxcvbn(password);
+    setPasswordStrength(result.score);
+    setPasswordFeedback(result.feedback.suggestions.join(' '));
+  };
+
 const submitForm = async (event)=>{
   event.preventDefault();
-  if(password.current.value !== confirmPassword.current.value){
+  if(passwordRef.current.value !== confirmPassword.current.value){
     setErrorMessage("Password do not match")
     setTimeout(function(){ setErrorMessage("")}, 3000);
     return;
@@ -45,11 +55,12 @@ const submitForm = async (event)=>{
   const details =JSON.stringify({
     "first_name":firstName.current.value,
     "last_name":lastName.current.value,
+    "username" : username.current.value,
     "email":email.current.value,
     "msisdn":phone.current.value,
     "gender":gender.current.value,
     "dob":dob.current.value,
-    "password":password.current.value
+    "password":passwordRef.current.value,
   })
   const response = await signUp(details);
   if (response.status === 0){
@@ -124,6 +135,18 @@ const submitForm = async (event)=>{
                 <div className="mb-1 sm:mb-2">
                   
                   <input
+                    placeholder="Username"
+                    required
+                    ref={username}
+                    type="text"
+                    className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
+                    id="username"
+                    name="username"
+                  />
+                </div>
+                <div className="mb-1 sm:mb-2">
+                  
+                  <input
                     placeholder="Email"
                     required
                     ref={email}
@@ -175,11 +198,12 @@ const submitForm = async (event)=>{
                   <input
                       placeholder="Password"
                       required
-                      ref={password}
+                      ref={passwordRef}
                       type={showPassword ? 'text' : 'password'}
                       className="flex-grow w-full h-10 px-4 mb-2 transition duration-200 bg-white rounded-xl"
                       id="password"
                       name="password"
+                      onChange={handlePasswordChange}
                   />
                   <button
                     type="button"
@@ -188,8 +212,14 @@ const submitForm = async (event)=>{
                     >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
+                    
 
                 </div>
+                <div className="text-sm mt-1 mb-1">
+                      <PasswordStrengthMeter score={passwordStrength} />
+                      {passwordFeedback && <p className="text-red-500">{passwordFeedback}</p>}
+                </div>
+
                 <div className="relative mb-1 sm:mb-2">
                   <input
                       placeholder="Confirm Password"
@@ -242,5 +272,26 @@ const submitForm = async (event)=>{
   </div>
   )
 }
+
+const PasswordStrengthMeter = ({ score }) => {
+  const getColor = (score) => {
+    switch (score) {
+      case 0: return 'bg-red-500';
+      case 1: return 'bg-orange-500';
+      case 2: return 'bg-yellow-500';
+      case 3: return 'bg-blue-500';
+      case 4: return 'bg-green-500';
+      default: return 'bg-gray-500';
+    }
+  };
+
+  return (
+    <div className="flex items-center">
+      {[...Array(5)].map((_, i) => (
+        <div key={i} className={`w-1/5 h-2 rounded ${i <= score ? getColor(score) : 'bg-gray-300'}`}></div>
+      ))}
+    </div>
+  );
+};
 
 export default Signup

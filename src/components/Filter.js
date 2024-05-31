@@ -10,8 +10,8 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
      <div className="mb-3 rounded-xl bg-neutral-800 ">
      <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>
        <option value="">Select Type</option>
-       <option value="Hardcover (Original)">Hardcover (Original)</option>
-       <option value="Hardcover (Generic)">Hardcover (Generic)</option>
+       <option value="Original">Original</option>
+       <option value="Generic">Generic</option>
      </Select>
      </div>
 
@@ -19,7 +19,7 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
        <div className="mb-3 rounded-xl bg-neutral-800 ">
        <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" value={searchDetails.condition} onChange={handleValueChange}>
              <option value="">Select Condition</option>
-             <option value="Brand new"  >Brand new</option>
+             <option value="Mint"  >Mint</option>
              <option value="Good">Good</option>
              <option value="Ok">Ok</option>
              <option value="Bad">Bad</option>
@@ -27,11 +27,11 @@ const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) =>
        </Select>
      </div>
 
-     <Label>Location</Label>
+     {/* <Label>Location</Label>
        <div className="mb-3 rounded-lg bg-neutral-800 ">
          <input placeholder="Location" name="location" value={searchDetails.location} onChange={handleValueChange} className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
       
-     </div>
+     </div> */}
         <Label>Price</Label>
         <div className="flex justify-center mb-3 space-x-3">
          <input placeholder="Min price" name="minPrice" value={searchDetails.minPrice} className="bg-neutral-800 w-full rounded-lg text-white p-2" onChange={handleValueChange}/>

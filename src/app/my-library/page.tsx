@@ -1,6 +1,6 @@
 'use client'
 import React, {Fragment} from 'react';
-import Stock from '@/components/my-stock/Stock'
+import Stock from '@/components/my-library/Stock'
 import { useSession } from "next-auth/react";
 import {  useRouter } from 'next/navigation'
 import Loader from '@/components/Loader';

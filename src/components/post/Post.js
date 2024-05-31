@@ -101,8 +101,8 @@ const Post = () => {
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType"
              value={bookDetails.bookType} onChange={handleValueChange} required
              >
-            <option value="Hardcover (Original)">Hardcover (Original)</option>
-            <option value="Hardcover (Generic)">Hardcover (Generic)</option>
+            <option value="Original">Original</option>
+            <option value="Generic">Generic</option>
             </Select>
             </div>
 
@@ -189,7 +189,7 @@ const Post = () => {
             <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="condition" 
             value={bookDetails.condition} onChange={handleValueChange} required
             >
-                <option value="Brand new"  >Brand new</option>
+                <option value="Mint"  >Mint</option>
                 <option value="New">New</option>
                 <option value="Good">Good</option>
                 <option value="Ok">Ok</option>
@@ -198,13 +198,13 @@ const Post = () => {
             </Select>
             </div>
 
-            <Label>Location</Label>
+            {/* <Label>Location</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
                 <input placeholder="Location" name="location" required
                  value={bookDetails.location} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
-            </div>
+            </div> */}
                 <Label>Price</Label>
                 <div className="flex justify-center mb-3 space-x-3">
                 <input placeholder="Asking Price" type="number" name="askPrice" required

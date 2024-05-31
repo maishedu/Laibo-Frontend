@@ -71,6 +71,7 @@ export default function  Market ({post}) {
   
   async function fetchPosts(page) {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=20&page=${page}`,{ next: { revalidate: 180 } });
+   
     try {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -156,38 +157,36 @@ export default function  Market ({post}) {
               <Filter searchDetails={searchDetails} clear={clearFilter} handleValueChange={handleValueChange} classes="lg:hidden xl:hidden" />
           )}
 
-              <div
-               className="grid grid-cols-2 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
-                {posts?.map((post,index) =>(
-                   <div key={index} >
-                    <Link href={`/market/${post.post_id}`}>
-                      <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
+            <div className="grid grid-cols-2 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
+              {posts?.filter(post => post.quantity > 0).map((post, index) => (
+                <div key={index}>
+                  <Link href={`/market/${post.post_id}`}>
+                    <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
                       <img
                         className="absolute object-cover w-full h-full rounded"
                         src={post.photos[0]}
                         alt="book background image"
                       />
                     </div>
-                    </Link>
-                   <div className="flex flex-col leading-3">
-                     <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
-                       <p className=" text-lg text-gray-500 mb-[-5px]">
-                         {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
-                       </p>
-                       <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                         Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>{post.market_price.toFixed(2)}
-                         {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
-                       </p>
-                       <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                         Ask: {post.last_price.toFixed(2)}
-                       </p>
-                     
-                   </div>
-                 </div>
-
-                ))}
-
-              </div>
+                  </Link>
+                  <div className="flex flex-col leading-3">
+                    <p className="text-lg text-white font-bold mb-[-5px]">{post.title}</p>
+                    <p className="text-lg text-gray-500 mb-[-5px]">
+                      {post.location} <img className="inline" src={locationIcon.src} alt="location icon" width="10"/>
+                    </p>
+                    <p className="text-lg text-gray-200 font-semibold mb-[-5px]">
+                      Mkt : <span className={post.market_change === "UP" ? 'default-green' : post.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>
+                        {post.market_price.toFixed(2)}
+                        {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
+                      </span>
+                    </p>
+                    <p className="text-lg text-gray-200 font-semibold mb-[-5px]">
+                      Last: {post.last_price.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
               <div className="mt-4 flex justify-center">
                 <button onClick={handleLoadMore} className="text-gray-900 font-semibold p-2 default-yellow-bg rounded-lg w-36">Load more</button>

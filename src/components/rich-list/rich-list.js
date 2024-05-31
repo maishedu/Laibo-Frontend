@@ -63,7 +63,7 @@ const RichList = () => {
             <p className='text-neutral-600 font-semibold inline-block ml-4'>{userDetails?.rank}</p>
           </span>
           
-          <p className="mb-4 text-sm text-white">{'(Ranked by stock value)'}</p>
+          <p className="mb-4 text-sm text-white">{'(Ranked by library value)'}</p>
           
         </div>
       </div>
