@@ -18,7 +18,7 @@ export interface OffersSliderProps {
   categories?: TaxonomyType[];
   offers?: TaxonomyType[];
   categoryCardType?: "card3" | "card4" | "card5";
-  itemPerRow?: 4 | 5;
+  itemPerRow?: 3 | 4;
   sliderStyle?: "style1" | "style2";
   fetchOffers:(message:string | number) => void;
 }
@@ -115,9 +115,9 @@ const OffersSlider: FC<OffersSliderProps> = ({
                         }}
                         variants={variants(200, 1)}
                         key={indx}
-                        style={{
-                          width: `100%`,
-                        }}
+                        // style={{
+                        //   width: `100%`,
+                        // }}
                     >
                       {renderCard(item)}
                     </motion.li>

@@ -66,7 +66,7 @@ const Post = () => {
                 if(data.status === 1){
                     setShowAlert(data.message);
                     setBookDetails("");
-                    router.push('/my-stock');
+                    router.push('/my-library');
                 }else{
                     setSeverity('warning');
                     setShowAlert('Failed, try again!');

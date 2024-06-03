@@ -83,7 +83,7 @@ const DealsCard: FC<CardCategory3Props> = ({
 
           {userid == seller_customer_id ? (
             <>
-            {status === "BID_SELLER_INCOMPLETE_EXCHANGE" ? (
+            {status === "BID_SELLER_INCOMPLETE_EXCHANGE" || status === "BORROW_SELLER_INCOMPLETE_EXCHANGE" ? (
             <>
              <p className="text-xs ">{userid == seller_customer_id ? 'Have you given the book?' : 'Have you received the book?'}</p>
             <div className='mt-2 flex space-x-2 text-sm  font-semibold '>
@@ -117,7 +117,9 @@ const DealsCard: FC<CardCategory3Props> = ({
           </div>
           }
           </>
+          
           }
+
       </div>
      </>
   

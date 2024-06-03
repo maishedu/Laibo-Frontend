@@ -7,6 +7,7 @@ import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import mobileLogo from '../../images/logo4 copy.png';
 import { useSession,signOut } from "next-auth/react";
 import moneyImg from '@/images/money-bag-@2x.png'
+import bookshelf from '@/images/bookshelf web.png'
 import {  fetchUserData} from "@/lib/api-util";
 import { usePathname, useRouter } from "next/navigation";
 import nullUser from '@/images/user.png';
@@ -19,8 +20,8 @@ const AuthenticatedHeader = () => {
     const { data: session, status } = useSession();
     const userId = session?.user.id;
     const bearerToken = session?.accessToken;
-
     const [userDetails, setUserDetails] = useState([])
+   
 
     const pathname = usePathname();
     const router  = useRouter()
@@ -116,7 +117,7 @@ const AuthenticatedHeader = () => {
               <Link href="/deals" onClick={toggleMenu} className="block space-x-2 md:px-4 transition hover:text-yellow-700">
                 <span>Deals</span>
                 <span className="flex-grow text-right">
-                  {userDetails?.deals.length > 0 ? (
+                  {userDetails?.deals > 0 ? (
                     <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
                     <span className="p-1">
                         {userDetails?.deals}
@@ -131,7 +132,7 @@ const AuthenticatedHeader = () => {
               <Link href="/offers" onClick={toggleMenu} className="block space-x-2 md:px-4 transition hover:text-yellow-700">
                 <span>Offers</span>
                 <span className="flex-grow text-right">
-                  {userDetails?.offers.length > 0 ? (
+                  {userDetails?.offers > 0 ? (
                     <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
                     <span className="p-1">
                        {userDetails?.offers}
@@ -154,8 +155,8 @@ const AuthenticatedHeader = () => {
             </li>
            
             <li>
-              <Link href="/my-stock" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
-                <span>My stock</span>
+              <Link href="/my-library" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
+                <span>My library</span>
               </Link>
             </li>
             <li>
@@ -198,7 +199,7 @@ const AuthenticatedHeader = () => {
              
 
               <div className="flex space-x-2 justify-center items-center">
-              <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
+              <Image src={bookshelf} alt="money bag image" height={30} width={40} /> 
                 <p className="text-xl items-center text-center text-gray-200 font-semibold">
                     <span className={userDetails.stock_direction === "UP" ? 'default-green' : userDetails.stock_direction === "DOWN" ? 'text-red-600' : 'text-white'}>{userDetails?.total_stock_value?.toFixed(2)}
                         {userDetails.stock_direction === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : userDetails.stock_direction === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
@@ -217,7 +218,7 @@ const AuthenticatedHeader = () => {
            
          <div className=" lg:flex w-full space-x-3   lg:space-y-0 sm:w-max ">
              <div className="flex space-x-2 items-center ">
-             <Image src={moneyImg} alt="money bag image" height={30} width={40} /> 
+             <Image src={bookshelf} alt="money bag image" height={30} width={40} /> 
               <p className="text-lg text-center text-gray-200 font-semibold">
                 
                 <span className={userDetails.stock_direction === "UP" ? 'default-green' : userDetails.stock_direction === "DOWN" ? 'text-red-600' : 'text-white'}>{userDetails?.total_stock_value?.toFixed(2)}

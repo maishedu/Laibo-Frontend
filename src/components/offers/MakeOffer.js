@@ -40,22 +40,22 @@ const MakeOffer = () => {
 
     const handleMakeBidOffer = () => {
         const details = {quantity,amount,postId,customer_id}
-        if (details.quantity <=0){
-            setSeverity('warning')
-            setShowAlert('Quantity should be greater than 0');
-            return
-        }
-        if (quantity > postDetails.quantity){
-            setSeverity('warning')
-            setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
-            return
-        }
-        if (amount < postDetails.last_price){
-            setAmountError(true);
-            setSeverity('warning')
-            setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
-            return
-        }
+        // if (details.quantity <=0){
+        //     setSeverity('warning')
+        //     setShowAlert('Quantity should be greater than 0');
+        //     return
+        // }
+        // if (quantity > postDetails.quantity){
+        //     setSeverity('warning')
+        //     setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
+        //     return
+        // }
+        // if (amount < postDetails.last_price){
+        //     setAmountError(true);
+        //     setSeverity('warning')
+        //     setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
+        //     return
+        // }
         makeBidOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){
@@ -69,20 +69,23 @@ const MakeOffer = () => {
 
     const handleMakeBorrowOffer = () => {
         const details  = {quantity, postId, customer_id, returnDate}
-        if (details.quantity <=0){
-            setSeverity('warning')
-            setShowAlert('Quantity should be greater than 0');
-            return
-        }
+        // if (details.quantity <=0){
+        //     setSeverity('warning')
+        //     setShowAlert('Quantity should be greater than 0');
+        //     return
+        // }
         makeBorrowOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){
+            setSeverity('success')
             setShowAlert(data.message)
           }else{
             setSeverity('warning')
             setShowAlert(data.message)
           }
         })
+        setShowBorrow(false)
+        
     }
     const handleQuantity = (e) => {
         const newQuantity = e.target.value;
@@ -403,7 +406,7 @@ const MakeOffer = () => {
           </BorrowModal>
       </Popper>
 
-      <Popper size={"md"} title={'My stock'} open={addBookModal} setOpen={setShowAddBookModal}>
+      <Popper size={"md"} title={'My library'} open={addBookModal} setOpen={setShowAddBookModal}>
           
           
             <div setOpen={setShowAddBookModal} className="mx-auto bg-black px-4 py-4 rounded-md">

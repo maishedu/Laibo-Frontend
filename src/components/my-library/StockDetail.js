@@ -27,7 +27,7 @@ function  StockDetail ({details}) {
         .then((data)=>{
             if (data.status === 1){
                 setShowAlert(data.message)
-                router.push('/my-stock')
+                router.push('/my-library')
             }else{
                 setSeverity('error')
                 setShowAlert(data.message)
@@ -88,7 +88,7 @@ function  StockDetail ({details}) {
                <h2 className="text-white font-semibold ">Mkt: <span className="default-green">{details.market_price} <BiSolidUpArrow className="inline-block w-3 h-2.5"/></span> </h2>
                <h2 className="text-white font-semibold ">Ask: {details.selling_price}</h2>
                <div className='mb-3 text-center rounded-xl bg-white px-3 py-2'>
-                <Link href={`/my-stock/edit/${details.post_id}`}>
+                <Link href={`/my-library/edit/${details.post_id}`}>
                  <button 
                   className='rounded-lg text-center font-semibold text-sm'>EDIT</button>
                 </Link>
