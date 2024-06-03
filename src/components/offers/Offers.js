@@ -14,6 +14,8 @@ const Offers = () => {
   const [offers, setOffers] = useState([])
   const [loading, setLoading] = useState(1)
 
+  
+
   const getOffers = async ()=>{
     const offers = await fetchOffers(bearerToken);
     if(offers.status === 1){

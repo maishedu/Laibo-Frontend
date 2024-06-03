@@ -19,7 +19,7 @@ export interface DealsSliderProps {
   subHeading?: string;
   categories?: TaxonomyType[];
   categoryCardType?: "card3" | "card4" | "card5";
-  itemPerRow?: 4 | 5;
+  itemPerRow?: 3 | 4;
   sliderStyle?: "style1" | "style2";
   fetchDeals:(message:string | number) => void;
   
@@ -33,9 +33,6 @@ const DealsSlider: FC<DealsSliderProps> = ({
   id = "",
   deals = [],
   fetchDeals,
-  
-  
-  
   sliderStyle = "style1",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -50,7 +47,7 @@ const DealsSlider: FC<DealsSliderProps> = ({
       return setNumberOfitem(1);
     }
     if (windowWidth < 500) {
-      return setNumberOfitem(itemPerRow - 4);
+      return setNumberOfitem(itemPerRow - 3);
     }
     if (windowWidth < 1024) {
       return setNumberOfitem(itemPerRow - 2);
@@ -104,7 +101,7 @@ const DealsSlider: FC<DealsSliderProps> = ({
         }}
       >
         <div className={`relative flow-root`} {...handlers}>
-          <div className={`flow-root overflow-hidden rounded-xl`}>
+          <div className={`flow-root overflow-hidden rounded-xl `}>
             <motion.ul
               initial={false}
               className="relative whitespace-nowrap -mx-2 xl:-mx-4"
@@ -122,9 +119,12 @@ const DealsSlider: FC<DealsSliderProps> = ({
                     }}
                     variants={variants(200, 1)}
                     key={indx}
-                    style={{
-                      width: `calc(1/${numberOfItems} * 100%)`,
-                    }}
+                    // style={{
+                    //   width: `100%`,
+                    // }}
+                    // style={{
+                    //   width: `calc(1/${numberOfItems} * 100%)`,
+                    // }}
                   >
                     {renderCard(item)}
                   </motion.li>

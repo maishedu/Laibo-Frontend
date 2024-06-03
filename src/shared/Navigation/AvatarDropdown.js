@@ -54,7 +54,7 @@ const AvatarDropdown =  ({data }) => {
                       <div className="ml-4 space-x-1">
                         <span className="text-sm font-medium ">{"Deals"}</span>
                         <span className="flex-grow text-right">
-                          {data?.deals?.length > 0 ? (
+                          {data?.deals > 0 ? (
                               <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
                               <span className="p-1">
                                 
@@ -75,7 +75,7 @@ const AvatarDropdown =  ({data }) => {
                       <div className="ml-4 space-x-1">
                       <span className="text-sm font-medium ">{"Offers"}</span>
                       <span className="flex-grow text-right">
-                        {data?.offers?.length > 0 ? (
+                        {data?.offers > 0 ? (
                            <button type="button" className="w-4 h-4 text-xs  rounded-full text-white bg-red-500">
                            <span className="p-1">
                              

@@ -71,7 +71,6 @@ const MenuBar: React.FC<MenuBarProps> = ({
   return (
     <>
       <button
-      // onClick={() => console.log('BUTTON CLICKED!')}
         onClick={handleOpenMenu}
         className={`focus:outline-none flex items-center justify-center ${className}`}
       >
