@@ -16,6 +16,7 @@ export default function  Market ({post}) {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
+  
 
   const submitButtonRef = useRef(null); // Reference to the submit button
   const queryInput = useRef();
@@ -181,7 +182,7 @@ export default function  Market ({post}) {
                       </span>
                     </p>
                     <p className="text-lg text-gray-200 font-semibold mb-[-5px]">
-                      Last: {post.last_price.toFixed(2)}
+                      Ask: {post.selling_price.toFixed(2)}
                     </p>
                   </div>
                 </div>

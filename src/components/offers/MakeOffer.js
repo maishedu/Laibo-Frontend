@@ -34,6 +34,7 @@ const MakeOffer = () => {
     const [book3, setBook3] = useState()
     const[quantityError,setQuantityError]= useState(false);
     const[amountError,setAmountError]= useState(false);
+    const [lastPrice, setLastPrice] = useState([])
 
   
     const customer_id = parseFloat(userId);
@@ -50,12 +51,12 @@ const MakeOffer = () => {
         //     setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
         //     return
         // }
-        // if (amount < postDetails.last_price){
-        //     setAmountError(true);
-        //     setSeverity('warning')
-        //     setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
-        //     return
-        // }
+        if (amount < postDetails.last_price){
+            setAmountError(true);
+            setSeverity('warning')
+            setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
+            return
+        }
         makeBidOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){
@@ -353,7 +354,7 @@ const MakeOffer = () => {
               <div className='w-full'>
                 <p className="text-gray-900 text-start font-semibold ">Profit</p>  
                     <div className="mb-3 rounded-xl border border-black text-center px-3 py-2">
-                    <p className="default-green ">+ {amount}</p>
+                    <p className="default-green ">{(amount - lastPrice) * quantity}</p>
                     </div>
                 </div>
               
@@ -363,8 +364,8 @@ const MakeOffer = () => {
               <div className=" relative mb-1  sm:mb-2  w-full">
                 <input
                   placeholder="550.00"
-                  value={postDetails.market_price}
-                  // onChange={({ target }) => setAmount(target?.value)}
+                  value={amount}
+                  onChange={({ target }) => setAmount(target?.value)}
                   required
                   type="number"
                   className="flex-grow w-full border border-black text-center text-gray-700 h-10 px-4 mb-2 transition duration-200  rounded-lg shadow-sm"
@@ -382,8 +383,8 @@ const MakeOffer = () => {
               <div className=" relative mb-1  sm:mb-2  w-full">
                 <input
                   placeholder="550.00"
-                  value={amount}
-                  onChange={({ target }) => setAmount(target?.value)}
+                  value={lastPrice}
+                  onChange={({ target }) => setLastPrice(target?.value)}
                   required
                   type="number"
                   className="flex-grow w-full border border-black text-center text-gray-700 h-10 px-4 mb-2 transition duration-200  rounded-lg shadow-sm"

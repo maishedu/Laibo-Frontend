@@ -101,12 +101,12 @@ const Post = () => {
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType"
              value={bookDetails.bookType} onChange={handleValueChange} required
              >
-            <option value="Original">Original</option>
-            <option value="Generic">Generic</option>
+            <option value="Paper back">Paper Back</option>
+            <option value="Hardcover">Hardcover</option>
             </Select>
             </div>
 
-            <Label>Category</Label>
+            {/* <Label>Category</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="category"
              value={category} required
@@ -117,7 +117,7 @@ const Post = () => {
                     <option key={index} value={cat.id}>{cat.name}</option>
                 ))}
             </Select>
-            </div>
+            </div> */}
 
             <div>
                 <p className='default-yellow'>Add pictures</p>
