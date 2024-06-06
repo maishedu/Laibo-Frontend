@@ -6,7 +6,7 @@ import { useSession,signOut } from "next-auth/react";
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
 import Image from "next/image";
-import moneyImg from '@/images/money-bag-@2x.png'
+import moneyImg from '@/images/the rich list.png'
 import nullUser from '@/images/user.png';
 import { fetchUserPosts , fetchUserData} from "@/lib/api-util";
 import locationIcon from "../../images/location icon.svg";

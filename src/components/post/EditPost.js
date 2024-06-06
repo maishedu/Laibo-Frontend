@@ -23,6 +23,8 @@ const EditPost = () => {
     const [photos, setPhotos] = useState([])
     const [newPhotos, setNewPhotos] = useState([]);
     const [post, setPost] = useState([])
+    const [updatedPost, setUpdatedPost] = useState({})
+    
     
 
     const handleDelete = (index) => {
@@ -40,12 +42,17 @@ const EditPost = () => {
       setNewPhotos((prevPhotos) => [...prevPhotos, ...newFiles]);
     };
   
+      // const handleValueChange = (e) => {
+      //   setUpdatedPost({ ...updatedPost, [e.target.name]: e.target.value})
+      // }
+
       const handleValueChange = (e) => {
-        setPost({ ...post, [e.target.name]: e.target.value})
-      }
+        const { name, value } = e.target;
+        setUpdatedPost((prev) => ({ ...prev, [name]: value }));
+    };
 
       const handlePostsEdit = () => {
-        editPosts(userId,postId,post,newPhotos,deleted,bearerToken)
+        editPosts(userId,postId,updatedPost,newPhotos,deleted,bearerToken)
         .then((data)=>{
           if(data.status === 1){
             setShowAlert(data.message)
@@ -61,14 +68,16 @@ const EditPost = () => {
       }
 
       const getPost = async ()=>{
-        const post = await fetchPost(postId);
-        if(post.status === 1){
+        const response = await fetchPost(postId);
+       
+        if(response.status === 1){
          fetchPost(postId);
-         setPost(post.data)
-         setPhotos(post.data.photos)
+         setPost(response.data)
+         setUpdatedPost(response.data)
+         setPhotos(response.data.photos)
         
         }else{
-         console.error('Error:', error);
+         console.error('Error:', response.error);
         }
        }
  
@@ -99,14 +108,14 @@ const EditPost = () => {
             <Label>Book Type</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="type"
-             value={post.type} onChange={handleValueChange}
+             value={updatedPost.type} onChange={handleValueChange}
              >
-            <option value="Hardcover (Original)">Hardcover (Original)</option>
-            <option value="Hardcover (Generic)">Hardcover (Generic)</option>
+            <option value="Paper Back">Paper Back</option>
+            <option value="Hardcover">Hard Cover</option>
             </Select>
             </div>
 
-            <Label>Category</Label>
+            {/* <Label>Category</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" id='category' name="category_id"
              value={post.category_id} onChange={handleValueChange}
@@ -115,7 +124,7 @@ const EditPost = () => {
                     <option key={index} value={cat.id}>{cat.name}</option>
                 ))}
             </Select>
-            </div>
+            </div> */}
 
             <div>
                 <p className='default-yellow'>Add pictures</p>
@@ -166,7 +175,7 @@ const EditPost = () => {
             <Label>Title</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
                 <input placeholder="Title" name="title"
-                  defaultValue={post.title} onChange={handleValueChange}
+                  value={updatedPost.title} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
             </div>
@@ -174,7 +183,7 @@ const EditPost = () => {
             <Label>Author</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
                 <input placeholder="Author's name" name="author"
-                 defaultValue={post.author} onChange={handleValueChange}
+                 value={updatedPost.author} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
             </div>
@@ -182,9 +191,9 @@ const EditPost = () => {
             <Label>Condition</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 bg-neutral-800 px-3 py-3 text-white rounded-lg" name="book_condition" 
-            value={post.book_condition} onChange={handleValueChange}
+            value={updatedPost.book_condition} onChange={handleValueChange}
             >
-                <option value="Brand new">Brand new</option>
+                <option value="Mint">Mint</option>
                 <option value="New">New</option>
                 <option value="Good">Good</option>
                 <option value="Ok">Ok</option>
@@ -196,28 +205,37 @@ const EditPost = () => {
             <Label>Location</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
                 <input placeholder="Location" name="location"
-                 defaultValue={post.location} onChange={handleValueChange}
+                 value={updatedPost.location} onChange={handleValueChange}
                   className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
             
             </div>
-                <Label>Price</Label>
+                {/* <Label>Price</Label> */}
                 <div className="flex justify-center mb-3 space-x-3">
-                <input placeholder="Asking Price" name="askPrice"
-                 defaultValue={post.selling_price}
-                  className="bg-neutral-800 w-full rounded-lg text-white p-2"
+                  <div> 
+                  <Label>Asking Price</Label> 
+                  <input placeholder="Asking Price" name="selling_price"
+                   value={updatedPost.selling_price}
+                   className="bg-neutral-800 w-full rounded-lg text-white p-2"
                    onChange={handleValueChange}
                    />
-                <input placeholder="Last Price" name="lastPrice"
-                 defaultValue={post.last_price}
+                  </div>
+               
+                  <div>
+                  <Label>Last Price</Label> 
+                  <input placeholder="Last Price" name="last_price"
+                  value={updatedPost.last_price}
                   className="bg-neutral-800 w-full rounded-lg text-white p-2" 
                   onChange={handleValueChange}
                   />
+
+                  </div>
+                
                 </div>
 
                 <Label>Quantity</Label>
                 <div className="mb-3 rounded-lg bg-neutral-800 ">
                     <input placeholder="2" name="quantity"
-                     defaultValue={post.quantity} onChange={handleValueChange}
+                     value={updatedPost.quantity} onChange={handleValueChange}
                     className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
                 
                 </div>
@@ -225,8 +243,8 @@ const EditPost = () => {
                 <Label>Other details</Label>
                 <div className="mb-3 rounded-lg bg-neutral-800 ">
                     <textarea rows={2}  placeholder="Other details..." name="description"
-                     defaultValue={post.description} onChange={handleValueChange}
-                    className="text-white rounded-lg p-2 bg-neutral-800 w-full"  />
+                     value={updatedPost.description} onChange={handleValueChange}
+                    className="text-white rounded-lg p-2 bg-neutral-800 w-full"  ></textarea>
                 
                 </div>
             
