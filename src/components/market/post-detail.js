@@ -60,7 +60,7 @@ function  Post ({details}) {
                <p className="text-white font-semibold ">Mkt: <span className={details.market_change === "UP" ? 'default-green' : details.market_change === "DOWN" ? 'text-red-600' : 'text-white'}>
                    {details.market_price.toFixed(2)} {details.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : details.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''}
                </span> </p>
-               <p className="text-white font-semibold ">Last: {details.last_price.toFixed(2)}</p>
+               <p className="text-white font-semibold ">Last: {details.selling_price.toFixed(2)}</p>
                
                     <div className='hover:bg-sky-900 mb-3 text-center rounded-xl default-yellow-bg px-3 py-2'>
                     <Link href={`/make-an-offer?id=${details.post_id}`}>

@@ -6,12 +6,12 @@ import Link from 'next/link'
 const Filter = ({searchDetails,clear, handleValueChange,classes,enterButton}) => {
     return (
       <div className={`${classes} px-5 pt-6 lg:mt-12 pb-5 rounded sticky`}>
-        <Label>Book Type</Label>
+        <Label>Book Cover</Label>
      <div className="mb-3 rounded-xl bg-neutral-800 ">
      <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType" value={searchDetails.bookType} onChange={handleValueChange}>
        <option value="">Select Type</option>
-       <option value="Original">Original</option>
-       <option value="Generic">Generic</option>
+       <option value="Paperback">Paperback</option>
+       <option value="Hardcover">Hardcover</option>
      </Select>
      </div>
 

@@ -3,8 +3,10 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import nullUser from '../../images/user.png';
+import { FaExclamationCircle } from "react-icons/fa";
 
 const AvatarDropdown =  ({data }) => {
+  const isFieldMissing = !data?.first_name || !data?.last_name || !data?.location || !data?.imageUrl;
 
   const handleImageError = (e) => {
     e.target.onerror = null; 
@@ -134,30 +136,16 @@ const AvatarDropdown =  ({data }) => {
                       </div>
                     </Link>
 
-                    
-
-                    {/* <Link
-                      href={"/account-savelists"}
-                      className="flex items-center  transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                      onClick={() => close()}
-                    >
-                     
-                      <div className="ml-4">
-                        <p className="text-sm font-medium ">{"Publisher"}</p>
-                      </div>
-                    </Link> */}
-
-                    
-
-                    
-
                     <Link
                       href={"/settings"}
-                      className="flex items-center   transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      className="flex items-center transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                       onClick={() => close()}
                     >
-                      <div className="ml-4">
-                      <p className="text-sm font-medium ">{"Settings"}</p>
+                      <div className="ml-4 flex space-x-2">
+                     
+                       <p className="text-sm font-medium ">{"Settings"}</p>
+                      {isFieldMissing && <FaExclamationCircle className="text-red-500" />}
+                     
 
                       </div>
                       

@@ -96,12 +96,12 @@ const Post = () => {
       <div className="px-4 py-8 mx-auto flex justify-center  md:px-24 lg:px-8 lg:py-10">
       <div className="mx-auto  text-center items-center w-full lg:w-5/12 ">
       <div className={`px-5 pt-2 lg:mt-12 pb-5 text-start rounded sticky`}>
-            <Label>Book Type</Label>
+            <Label>Book Cover</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="bookType"
              value={bookDetails.bookType} onChange={handleValueChange} required
              >
-            <option value="Paper back">Paper Back</option>
+            <option value="Paperback">Paperback</option>
             <option value="Hardcover">Hardcover</option>
             </Select>
             </div>
@@ -190,7 +190,7 @@ const Post = () => {
             value={bookDetails.condition} onChange={handleValueChange} required
             >
                 <option value="Mint"  >Mint</option>
-                <option value="New">New</option>
+                {/* <option value="New">New</option> */}
                 <option value="Good">Good</option>
                 <option value="Ok">Ok</option>
                 <option value="Bad">Bad</option>

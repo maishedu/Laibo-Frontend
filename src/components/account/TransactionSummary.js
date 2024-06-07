@@ -74,8 +74,8 @@ const TransactionSummary = () => {
                     <p>{item.held.toFixed(2)}</p>
                 </div>
 
-                <div className="flex mb-2 default-green justify-between">
-                    <p>Profit</p>
+                <div className={`flex mb-2 justify-between`}>
+                    <p className={item.revenue- item.spend > 0 ? 'default-green' : 'text-red-600'}>Profit</p>
                     <p className={item.revenue- item.spend > 0 ? 'default-green' : 'text-red-600'}>{(item.revenue- item.spend).toFixed(2)}</p>
                 </div>
                 <div className="flex text-white justify-between">

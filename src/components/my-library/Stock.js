@@ -43,7 +43,7 @@ const Stock = () => {
                  <Link href={`/my-library/${post.post_id}`}>
                    <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
                    <img
-                     className="absolute object-cover w-full h-full rounded"
+                     className="absolute object-cover w-64 h-full rounded"
                      src={post.photos[0]}
                      alt="book background image"
                    />
@@ -59,7 +59,7 @@ const Stock = () => {
                       {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
                   </p>
                   <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                    Ask: {post.last_price.toFixed(2)}
+                    Ask: {post.selling_price.toFixed(2)}
                   </p>
                   
                 </div>

@@ -100,17 +100,17 @@ const EditPost = () => {
 
 
   return (
-    <div className="overflow-hidden py-5 bg-black min-h-screen relative h-2/4">
+    <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-5 mx-auto flex justify-center  md:px-16 lg:px-8 lg:py-10">
       {showAlert && <SnackBar  showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
       <div className="mx-auto  text-center items-center w-full lg:w-5/12 ">
       <div className={` px-5 pt-2 lg:mt-12 pb-5 text-start rounded sticky`}>
-            <Label>Book Type</Label>
+            <Label>Book Cover</Label>
             <div className="mb-3 rounded-xl bg-neutral-800 ">
             <Select className="mt-1.5 w-full bg-neutral-800 px-3 py-3 text-white rounded-lg" name="type"
              value={updatedPost.type} onChange={handleValueChange}
              >
-            <option value="Paper Back">Paper Back</option>
+            <option value="Paperback">Paperback</option>
             <option value="Hardcover">Hard Cover</option>
             </Select>
             </div>
