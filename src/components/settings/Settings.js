@@ -8,6 +8,7 @@ import SettingsModal from './SettingsModal'
 import SnackBar from '../snackBar';
 import Swal from 'sweetalert2'
 import { FaEye, FaEyeSlash,FaExclamationCircle } from "react-icons/fa";
+import CustomIcon from '@/shared/CustomIcon/CustomIcon'
 
 const Settings = () => {
     const { data: session, status } = useSession();
@@ -318,7 +319,7 @@ const Settings = () => {
                             <p className="text-gray-400 flex-grow">
                             {nameExists ? `${firstName || ''} ${lastName || ''}`.trim() : "Name not provided"}
                             </p>
-                            {!nameExists && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
+                            {!nameExists && <CustomIcon   /> }
                         </div>
                     
                     </div>
@@ -333,7 +334,7 @@ const Settings = () => {
                     className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
                 >
                     <p className="text-gray-400 flex-grow text-center">{userDetails.username || "Username not updated"}</p>
-                    {!userDetails.username && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
+                    {!userDetails.username && <CustomIcon   /> }
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Email</h2>  
@@ -343,7 +344,7 @@ const Settings = () => {
                     className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
                 >
                     <p className="text-gray-400 flex-grow text-center">{userDetails.email || "Email not updated"}</p>
-                    {!userDetails.email && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
+                    {!userDetails.email && <CustomIcon   /> }
                 </div>
 
                 <h2 className="text-gray-400 text-start text-sm ">Phone number</h2>  
@@ -353,7 +354,7 @@ const Settings = () => {
                     className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 flex items-center justify-between"
                 >
                     <p className="text-gray-400 flex-grow text-center">{userDetails.msisdn || "Phone number not updated"}</p>
-                    {!userDetails?.msisdn && <FaExclamationCircle className=" absolute inset-y-0 right-0 text-red-500 ml-2 h-10 w-10 " />}
+                    {!userDetails?.msisdn && <CustomIcon  /> }
                 </div> 
 
                 <h2 className="text-gray-400 text-start text-sm ">Location</h2> 
@@ -362,7 +363,9 @@ const Settings = () => {
                     className="relative mb-3 rounded-xl cursor-pointer bg-neutral-800 px-3 py-2 "
                 >
                     <p className="text-gray-400 flex-grow text-center">{userDetails?.location || "Location not updated"}</p>
-                    {!userDetails?.location && <FaExclamationCircle className="absolute inset-y-0 right-0 text-red-500 py-2 h-10 w-10" />}
+                    {!userDetails?.location && 
+                    <CustomIcon   /> 
+                    }
                 </div> 
                  
 
