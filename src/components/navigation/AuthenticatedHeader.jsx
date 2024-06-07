@@ -12,6 +12,7 @@ import {  fetchUserData} from "@/lib/api-util";
 import { usePathname, useRouter } from "next/navigation";
 import nullUser from '@/images/user.png';
 import { FaExclamationCircle } from "react-icons/fa";
+import CustomIcon from '@/shared/CustomIcon/CustomIcon'
 
 
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
@@ -171,7 +172,10 @@ const AuthenticatedHeader = () => {
             <li>
               <Link href="/settings" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
               <p>Settings
-                <span> {isFieldMissing && <FaExclamationCircle className="text-red-500 inline-flex" />}</span>
+                <span className="ml-1" >
+                   {isFieldMissing && 
+                   <FaExclamationCircle className="text-red-500 inline-flex" />
+                   }</span>
                </p>
               </Link>
             </li>

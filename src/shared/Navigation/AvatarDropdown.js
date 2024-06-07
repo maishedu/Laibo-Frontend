@@ -5,6 +5,7 @@ import { signOut } from "next-auth/react";
 import nullUser from '../../images/user.png';
 import { FaExclamationCircle } from "react-icons/fa";
 
+
 const AvatarDropdown =  ({data }) => {
   const isFieldMissing = !data?.first_name || !data?.last_name || !data?.location || !data?.imageUrl;
 

@@ -41,9 +41,9 @@ const Stock = () => {
              {posts?.map((post,index) =>(
                 <div key={index} >
                  <Link href={`/my-library/${post.post_id}`}>
-                   <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
+                   <div className="relative pb-56 mb-4 w-64 rounded shadow lg:pb-64">
                    <img
-                     className="absolute object-cover w-64 h-full rounded"
+                     className="absolute object-cover  h-full rounded"
                      src={post.photos[0]}
                      alt="book background image"
                    />
