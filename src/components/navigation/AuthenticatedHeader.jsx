@@ -7,10 +7,11 @@ import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import mobileLogo from '../../images/logo4 copy.png';
 import { useSession,signOut } from "next-auth/react";
 import moneyImg from '@/images/money-bag-@2x.png'
-import bookshelf from '@/images/bookshelf web.png'
+import bookshelf from '@/images/bookshelf2.png'
 import {  fetchUserData} from "@/lib/api-util";
 import { usePathname, useRouter } from "next/navigation";
 import nullUser from '@/images/user.png';
+import { FaExclamationCircle } from "react-icons/fa";
 
 
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
@@ -21,6 +22,7 @@ const AuthenticatedHeader = () => {
     const userId = session?.user.id;
     const bearerToken = session?.accessToken;
     const [userDetails, setUserDetails] = useState([])
+    const isFieldMissing = !userDetails?.first_name || !userDetails?.last_name || !userDetails?.location || !userDetails?.imageUrl;
    
 
     const pathname = usePathname();
@@ -166,17 +168,11 @@ const AuthenticatedHeader = () => {
             </li>
            
             
-           
-            
-              {/* <Link href="/publisher" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
-                <span>Publisher</span>
-              </Link> */}
-          
-            
-            
             <li>
               <Link href="/settings" onClick={toggleMenu} className="block md:px-4 transition hover:text-yellow-700">
-                <span>Settings</span>
+              <p>Settings
+                <span> {isFieldMissing && <FaExclamationCircle className="text-red-500 inline-flex" />}</span>
+               </p>
               </Link>
             </li>
             <li>

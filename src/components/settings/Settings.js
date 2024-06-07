@@ -34,6 +34,7 @@ const Settings = () => {
     const lastName = userDetails?.last_name;
     const nameExists = firstName || lastName;
 
+
     
 
     //refs

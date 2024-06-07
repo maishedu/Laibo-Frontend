@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 
 
 function  StockDetail ({details}) {
+ 
     const router   = useRouter()
     const { data: session, status } = useSession();
     const userId = session?.user.id;
