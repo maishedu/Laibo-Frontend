@@ -22,6 +22,7 @@ const  Profile = () => {
  
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1);
+    console.log(posts)
 
     const [userDetails, setUserDetails] = useState([])
      
@@ -123,7 +124,7 @@ const  Profile = () => {
                                {post.market_change === "UP" ? <BiSolidUpArrow className="inline-block w-3 h-2.5"/> : post.market_change === "DOWN" ? < BiSolidDownArrow className="text-red-600 inline-block w-3 h-2.5"/> : ''} </span>
                            </p>
                            <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">
-                               Ask: {post.last_price.toFixed(2)}
+                               Ask: {post.selling_price.toFixed(2)}
                            </p>
 
                        </div>
