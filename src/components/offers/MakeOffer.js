@@ -11,6 +11,8 @@ import { useSession} from "next-auth/react";
 import Popper from "../popper/Popper";
 import BorrowModal from './BorrowModal'
 import SnackBar from "../snackBar";
+import { useRouter } from 'next/navigation';
+
 
 
 const MakeOffer = () => {
@@ -35,6 +37,7 @@ const MakeOffer = () => {
     const[quantityError,setQuantityError]= useState(false);
     const[amountError,setAmountError]= useState(false);
     const [lastPrice, setLastPrice] = useState([])
+    const router = useRouter()
 
   
     const customer_id = parseFloat(userId);
@@ -51,10 +54,10 @@ const MakeOffer = () => {
         //     setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
         //     return
         // }
-        if (amount < postDetails.last_price){
+        if (amount < postDetails.last_price*quantity){
             setAmountError(true);
             setSeverity('warning')
-            setShowAlert(`Amount should be greater than ${postDetails.last_price}`);
+            setShowAlert(`Amount should be greater than ${postDetails.last_price*quantity}`);
             return
         }
         makeBidOffer(bearerToken,details)
@@ -75,6 +78,12 @@ const MakeOffer = () => {
         //     setShowAlert('Quantity should be greater than 0');
         //     return
         // }
+        if (amount < postDetails.last_price*quantity){
+            setAmountError(true);
+            setSeverity('warning')
+            setShowAlert(`Amount should be greater than ${postDetails.last_price*quantity}`);
+            return
+        }
         makeBorrowOffer(bearerToken,details)
         .then((data)=>{
           if(data.status === 1){
@@ -101,12 +110,14 @@ const MakeOffer = () => {
 
 
     const handleMakeExchangeOffer = () => {
-      const details = {quantity,postId,customer_id}
+      const details = {quantity,postId,customer_id};
+      console.log(details);
       const books_exchanged = [book1?.id,book2?.id,book3?.id].filter(Boolean)
       const booksExchangedString = books_exchanged.join(',');
       makeExchangeOffer(bearerToken,details,booksExchangedString)
       .then((data)=>{
         if(data.status === 1){
+            setSeverity('success');
           setShowAlert(data.message)
         }else {
           setSeverity('warning')
@@ -144,6 +155,10 @@ const MakeOffer = () => {
     useEffect(() => {
     fetchPost(postId)
       .then((data)=> {
+      //prevent book owner from making offer on own book
+          if (data.data.customer_id == userId){
+             router.push(`/my-library/${postId}`);
+          }
         setPostDetails(data.data)
       })
       .catch((error) =>{
@@ -219,7 +234,7 @@ const MakeOffer = () => {
                 <p className="absolute inset-y-0 right-0 px-4 py-2 text-white">
                   {"/="}
                 </p>
-                  {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price}</p>}
+                  {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price*quantity}</p>}
               </div>
 
               <div className="flex space-x-2 w-full">
@@ -334,11 +349,11 @@ const MakeOffer = () => {
       </div>
       <Popper size={"sm"}  open={borrow} setOpen={setShowBorrow}>
           <BorrowModal setOpen={setShowBorrow} >
-            <p> <span className="default-green font-semibold">Kes {amount}</span> will be held as security until the book is returned. if the book is not returned
+            <p> <span className="default-green font-semibold">Kes {lastPrice}</span> will be held as security until the book is returned. if the book is not returned
             on time, the money will be released to the owner.
             </p>
             <div className="px-4 ml-6">
-            <p className="mt-4 mb-2 text-gray-900 font-semibold">Sell Date</p>
+            <p className="mt-4 mb-2 text-gray-900 font-semibold">Return Date</p>
             <input
                 placeholder="Birthday"
                 value={returnDate}
@@ -375,7 +390,7 @@ const MakeOffer = () => {
                 <p className="absolute inset-y-0 right-0 px-4 py-2 text-white">
                   {"/="}
                 </p>
-                  {amountError && <p className="text-yellow"> The last price  is {postDetails.last_price}</p>}
+                  {amountError && <p className="text-green"> The minimum last price  is {postDetails.last_price * quantity}</p>}
               </div>
                 </div>
                 <div>

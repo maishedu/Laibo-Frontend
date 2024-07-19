@@ -194,7 +194,7 @@ const Post = () => {
                 <option value="Good">Good</option>
                 <option value="Ok">Ok</option>
                 <option value="Bad">Bad</option>
-                <option value="very-bad">Very bad</option>
+                <option value="very-bad">Terrible</option>
             </Select>
             </div>
 

@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect,useRef} from 'react'
 import nullUser from '../../images/user.png';
-import { fetchUserData, updateProfilePicture, requestWithdrawal,updateName,updateUsername, updateUserEmail, updateUserPassword, updateUserPhone } from '@/lib/api-util';
+import { fetchUserData, updateProfilePicture, requestWithdrawal,updateName,updateUsername, updateUserEmail, updateUserPassword, updateUserPhone,updateUserLocation } from '@/lib/api-util';
 import { useSession} from "next-auth/react";
 import Popper from '@/components/popper/Popper'
 import SettingsModal from './SettingsModal'

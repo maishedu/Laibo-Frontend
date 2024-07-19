@@ -320,6 +320,19 @@ export async function updateUserPhone(bearerToken, phone) {
 
   return customFetch(apiUrl, { method: 'POST', headers, body: params });
 }
+export async function updateUserLocation(bearerToken, location) {
+  const params = JSON.stringify({
+    location: location,
+  });
+
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/customer/update-location`;
+  const headers = {
+    'Authorization': `Bearer ${bearerToken}`,
+    'Content-Type': 'application/json',
+  };
+
+  return customFetch(apiUrl, { method: 'POST', headers, body: params });
+}
 
 export async function updateUserPassword(bearerToken, details) {
   const params = JSON.stringify({
@@ -406,7 +419,6 @@ export async function uploadPosts(newPhotos, userId, bookDetails, category, bear
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
   formData.append("description", bookDetails.description);
-  formData.append("location", bookDetails.location);
   formData.append("selling_price", bookDetails.askPrice);
   formData.append("last_price", bookDetails.lastPrice);
   formData.append("condition", bookDetails.condition);
@@ -446,7 +458,6 @@ export async function editPosts(userId, postId, bookDetails, newPhotos, deleted,
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
   formData.append("description", bookDetails.description);
-  formData.append("location", bookDetails.location);
   formData.append("selling_price", bookDetails.selling_price);
   formData.append("last_price", bookDetails.last_price);
   formData.append("condition", bookDetails.book_condition);
@@ -520,7 +531,7 @@ export async function makeExchangeOffer(bearerToken, details, books_exchanged) {
   const params = JSON.stringify({
     quantity: newQuantity,
     books_exchanged: books_exchanged,
-    post_id: details.post_id,
+    post_id: parseFloat(details.postId),
     deal_type: 7,
     deal_from: details.customer_id,
   });

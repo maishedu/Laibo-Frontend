@@ -20,6 +20,7 @@ const Offers = () => {
     const offers = await fetchOffers(bearerToken);
     if(offers.status === 1){
      fetchOffers(bearerToken);
+     console.log(offers)
      setOffers(offers.data)
      setLoading(0)
     }else{
