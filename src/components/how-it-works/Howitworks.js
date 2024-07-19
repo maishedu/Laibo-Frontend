@@ -4,10 +4,10 @@ import Img1 from '@/images/bid phone.png'
 import Img2 from '@/images/The market phone .png'
 import Img3 from '@/images/Purchase offer page.png'
 import Img4 from '@/images/Deals phone.png'
-import Img5 from '@/images/Account phone.png'
+import Img5 from '@/images/Account.png'
 import Img6 from '@/images/Transactions phone.png'
-import Img7 from '@/images/Stock value.png'
-import Img8 from '@/images/share link.png'
+import Img7 from '@/images/Library screen.png'
+import Img8 from '@/images/links screen.png'
 
 function Howitworks() {
   return (
@@ -20,10 +20,10 @@ function Howitworks() {
               <div className="flex">
                 <div>
                   <p className="mb-4 text-4xl font-semibold default-yellow ">
-                    RAHISISHA BIZ. <br /> TUMIA LAIBO <br /> KUUZA VITABU!
+                    MAKE MONEY<br /> TRADING BOOKS<br />
                   </p>
                   <p className="text-md font-semibold text-white">
-                    Buy, sell, borrow and exchange books <br/> with other  users on Laibo.
+                    Buy, sell & exchange books on laibo.
                   </p>
                 </div>
               </div>
@@ -45,12 +45,11 @@ function Howitworks() {
               <div className="flex">
                 <div>
                   <p className="mb-4 text-4xl font-semibold default-yellow ">
-                    DEALS ZAKO <br /> HAZITAWAI FAIL <br /> KU GO-THRU
+                    CLOSE DEALS AND <br /> TRADE SECURELY<br />
                   </p>
                   <p className="text-md font-semibold text-white">
-                    Once umesha kubali offer ya customer, tunahold <br/> pesa yake ndio akujie kitabu. Lazima niconfirm <br/>
-                    kama hio trade imetake place ndio turelease funds <br/> kwa account yako.
-                    
+                    Once deals have been closed, Laibo holds the money and uses 2-way confirmations from the buyer and seller to ensure that trades are completed before
+                    reimbursing or paying out funds.
                   </p>
                 </div>
               </div>
@@ -68,8 +67,7 @@ function Howitworks() {
                     HAPO KWA<br /> ACCOUNTS, <br /> USIWORRY...
                   </p>
                   <p className="text-md font-semibold text-white">
-                    We keep track of all your key accounting <br/> information na tunakuwekea marisiti. <br/>
-                    Pia tunakupatia loan.
+                    Laibo generates receipts after every completed trade and keeps account of your transactions . You also get an overdraft if you trade consistently with laibo.
                     
                   </p>
                 </div>
@@ -91,13 +89,10 @@ function Howitworks() {
               <div className="flex ">
                 <div>
                   <p className="mb-4 text-4xl font-semibold default-yellow ">
-                    JUA VALUE<br /> YA STOCK<br /> YAKO.
+                    CURATE & BUILD<br /> YOUR LIBRARY.
                   </p>
                   <p className="text-md font-semibold text-white">
-                    Post your books on Laibo to find out the total <br/> 
-                    value of your stock and live market prices <br/>
-                    of each of your books.
-                    
+                    Laibo keeps track of the live market prices and the total market value of the books in your library
                   </p>
                 </div>
               </div>
@@ -112,11 +107,10 @@ function Howitworks() {
               <div className="flex justify-center">
                 <div>
                   <p className="mb-4 text-4xl font-semibold default-yellow ">
-                   UZIA WATU<br /> WENGI ZAIDI!
+                 SHARE YOUR BOOKS<br /> WITH OTHERS
                   </p>
                   <p className="text-md font-semibold text-white">
-                    Sambaza malinks kila mahali kwa internet <br/> ndio kila mtu acheki vitabu zako.
-                    
+                    Share links so others can view your books and trade with you.
                   </p>
                 </div>
               </div>
