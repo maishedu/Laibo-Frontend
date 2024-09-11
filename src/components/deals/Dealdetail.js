@@ -21,7 +21,7 @@ function  Post ({details}) {
                 <div className="grid w-full max-w-screen-lg gap-8 lg:grid-cols-2">
                     <div className=" h-96 lg:h-full relative ">
                         <div className="flex items-center mb-2">
-                            <Link href={`/user-profile/?id=${details?.customer_id}`}>
+                            <Link href={`/user-profile/?username=${details?.seller_username}`}>
                                 <p   className="mr-3">
                                     <img
                                         src={details.seller_image_url}
@@ -32,7 +32,7 @@ function  Post ({details}) {
                                 </p>
                             </Link>
                             <div>
-                                <Link href={`/user-profile/?id=${details?.customer_id}`}>
+                                <Link href={`/user-profile/?username=${details?.seller_username}`}>
                                     <p
                                         aria-label="Author"
                                         className="font-semibold text-white"

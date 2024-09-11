@@ -68,7 +68,6 @@ function Howitworks() {
                   </p>
                   <p className="text-md font-semibold text-white">
                     Laibo generates receipts after every completed trade and keeps account of your transactions . You also get an overdraft if you trade consistently with laibo.
-                    
                   </p>
                 </div>
               </div>

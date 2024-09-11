@@ -3,11 +3,11 @@ import React from 'react'
 function Notfound() {
   return (
     <div
-      class="flex justify-center mx-auto w-80 bg-blue-500 text-white text-sm font-bold px-4  py-3"
+      className="flex justify-center mx-auto w-80 bg-blue-500 text-white text-sm font-bold px-4  py-3"
       role="alert"
     >
       <svg
-        class="fill-current w-4 h-4 mr-2"
+        className="fill-current w-4 h-4 mr-2"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
       >

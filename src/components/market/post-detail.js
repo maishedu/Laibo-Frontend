@@ -33,7 +33,7 @@ function  Post ({details}) {
             </p>
             </Link>
             <div>
-                <Link href={`/user-profile/?id=${details?.customer_id}`}>
+                <Link href={`/user-profile/?username=${details?.seller_username}`}>
               <p
                 aria-label="Author"
                 className="font-semibold text-white"

@@ -8,66 +8,85 @@ import Link from "next/link";
 import Image from "next/image";
 import moneyImg from '@/images/the rich list.png'
 import nullUser from '@/images/user.png';
-import { fetchUserPosts , fetchUserData} from "@/lib/api-util";
+import { fetchUserPosts , fetchUserData,searchUsername} from "@/lib/api-util";
 import locationIcon from "../../images/location icon.svg";
+import {data} from "autoprefixer";
 
 
 const  Profile = () => {
     const searchParams = useSearchParams();
-    const userId = searchParams.get('id')
-    const username = searchParams.get('username')
-
+    const userId = searchParams.get('id');
+    const username = searchParams.get('username');
     const { data: session, status } = useSession();
     const bearerToken = session?.accessToken;
- 
-    const [posts, setPosts] = useState([])
+
+    const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
-    console.log(posts)
-
-    const [userDetails, setUserDetails] = useState([])
-     
-
+    const [userDetails, setUserDetails] = useState({});
+    const [id, setID] = useState(userId || ""); // Initialize with userId or empty string
 
     const handleLoadMore = async () => {
-      try{
-        const nextPage = page + 1;
-        const newData = await fetchUserPosts(nextPage);
-        setPage(nextPage);
-      } catch (error) {
-        console.error('Error loading more posts:', error);
-      }
+        try {
+            const nextPage = page + 1;
+            const newPosts = await fetchUserPosts(nextPage, id);
+            setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+            setPage(nextPage);
+        } catch (error) {
+            console.error('Error loading more posts:', error);
+        }
     };
-
-  
 
     const handleImageError = (e) => {
-      e.target.onerror = null; 
-      e.target.src = nullUser.src; 
+        e.target.onerror = null;
+        e.target.src = nullUser.src;
     };
- 
-  useEffect(() => {
-    
-    fetchUserData(userId, bearerToken)
-      .then((data)=> {
-        setUserDetails(data)
-      })
-      .catch((error) =>{
-        console.error('Error:', error);
-      })
 
-     fetchUserPosts( page, userId)
-      .then((data)=> {
-        setPosts((prevPosts) => [...prevPosts, ...data])
-      })
-      .catch((error) =>{
-        console.error('Error:', error);
-      })
+// Fetch user data either by username or id
+    const fetchUserDetails = async () => {
+        try {
+            if (username) {
+                const data = await searchUsername(username);
+                const responseId = data?.data[0]?.id || null;
+                if (responseId) {
+                    setID(responseId); // Set ID from username search
+                } else {
+                    console.error('Username not found');
+                }
+            } else if (userId) {
+                setID(userId); // Set ID from URL parameter
+            }
+        } catch (error) {
+            console.error('Error fetching user details:', error);
+        }
+    };
 
-  }, [page, userId, bearerToken]);
-  
-  
+// Fetch posts and user data once ID is available
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                await fetchUserDetails(); // Wait for ID to be set
 
-  return (
+                if (id) {
+                    // Fetch user details
+                    const userData = await fetchUserData(id, bearerToken);
+                    setUserDetails(userData);
+
+                    // Fetch initial posts
+                    const initialPosts = await fetchUserPosts(page, id);
+                    setPosts(initialPosts);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [id, page, bearerToken]);
+
+
+
+
+    return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-between lg:flex-row">

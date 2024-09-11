@@ -16,6 +16,7 @@ export default function  Search() {
   const [posts, setPosts] = useState([]);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [users, setUsers] = useState([]);
+  const [page,setPage] = useState(1);
 
   const submitButtonRef = useRef(null); // Reference to the submit button
   const queryInput = useRef();
@@ -67,26 +68,32 @@ export default function  Search() {
     router.push('/market');
   }
 
-  
-  
-    async function searchPosts() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/search?query=${searchDetails.query}&customer_id=${searchDetails.customer_id}&bookType=${searchDetails.bookType}&maxPrice=${searchDetails.maxPrice}&condition=${searchDetails.condition}&location=${searchDetails.location}&minPrice=${searchDetails.minPrice}&page=1&limit=10`);
-      try {
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-    
-        const data = await response.json();
-        setPosts(data.data)
-        return data;
-      
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-        throw new Error('Failed to fetch posts');
+
+
+  async function searchPosts(page) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/search?query=${searchDetails.query}&customer_id=${searchDetails.customer_id}&bookType=${searchDetails.bookType}&maxPrice=${searchDetails.maxPrice}&condition=${searchDetails.condition}&location=${searchDetails.location}&minPrice=${searchDetails.minPrice}&page=${page}&limit=10`
+    );
+
+    try {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+
+      const data = await response.json();
+      if (page === 1) {
+        setPosts(data.data); // Set the initial posts when loading for the first page
+      } else {
+        setPosts((prevPosts) => [...prevPosts, ...data.data]); // Append new posts for subsequent pages
+      }
+      return data;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      throw new Error('Failed to fetch posts');
     }
- 
+  }
+
+
   useEffect(() => {
     if (condition) {
       setSeachDetails((prevSearchDetails) => ({
@@ -127,7 +134,7 @@ export default function  Search() {
       }));
     }
    
-    searchPosts();
+    searchPosts(1);
     
   }, [condition,location, minPrice, maxPrice,customer_id,query]);
 
@@ -162,6 +169,17 @@ export default function  Search() {
     // Sets users to null when the input or container loses focus
     setUsers([]);
   };
+  const handleLoadMore = async () => {
+    try {
+      const nextPage = page + 1; // Calculate the next page number
+      await searchPosts(nextPage); // Call searchPosts with the next page number
+      setPage(nextPage); // Update the page state after successfully fetching the posts
+    } catch (error) {
+      console.error('Error loading more posts:', error);
+    }
+  };
+
+
 
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4" onKeyDown={handleKeyPress}>
@@ -234,7 +252,9 @@ export default function  Search() {
 
               </div>
               ): <Notfound  /> }
-
+              <div className="mt-4 flex justify-center">
+                <button onClick={handleLoadMore} className="text-gray-900 font-semibold p-2 default-yellow-bg rounded-lg w-36">Load more</button>
+              </div>
             </div>
           </div>
 

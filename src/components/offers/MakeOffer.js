@@ -349,7 +349,7 @@ const MakeOffer = () => {
       </div>
       <Popper size={"sm"}  open={borrow} setOpen={setShowBorrow}>
           <BorrowModal setOpen={setShowBorrow} >
-            <p> <span className="default-green font-semibold">Kes {lastPrice}</span> will be held as security until the book is returned. if the book is not returned
+            <p> <span className="default-green font-semibold">Kes {lastPrice * quantity}</span> will be held as security until the book is returned. if the book is not returned
             on time, the money will be released to the owner.
             </p>
             <div className="px-4 ml-6">
@@ -375,7 +375,7 @@ const MakeOffer = () => {
               
               <div className="flex space-x-2">
                 <div>
-                <p className="text-start font-semibold mt-4 text-gray-900">Asking price</p>
+                <p className="text-start font-semibold mt-4 text-gray-900">Selling price</p>
               <div className=" relative mb-1  sm:mb-2  w-full">
                 <input
                   placeholder="550.00"
@@ -394,7 +394,7 @@ const MakeOffer = () => {
               </div>
                 </div>
                 <div>
-                <p className="text-start font-semibold mt-4 text-gray-900">Last price</p>
+                <p className="text-start font-semibold mt-4 text-gray-900">Buying price</p>
               <div className=" relative mb-1  sm:mb-2  w-full">
                 <input
                   placeholder="550.00"
