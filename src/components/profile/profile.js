@@ -46,11 +46,14 @@ const  Profile = () => {
         try {
             if (username) {
                 const data = await searchUsername(username);
-                const responseId = data?.data[0]?.id || null;
-                if (responseId) {
-                    setID(responseId); // Set ID from username search
+
+                // Find the exact match for the username in the data array
+                const user = data?.data?.find(user => user.username.toLowerCase() === username.toLowerCase());
+
+                if (user && user.id) {
+                    setID(user.id); // Set ID from the exact username match
                 } else {
-                    console.error('Username not found');
+                    console.error('Exact username not found');
                 }
             } else if (userId) {
                 setID(userId); // Set ID from URL parameter
@@ -59,6 +62,7 @@ const  Profile = () => {
             console.error('Error fetching user details:', error);
         }
     };
+
 
 // Fetch posts and user data once ID is available
     useEffect(() => {
