@@ -78,7 +78,7 @@ const RichList = () => {
        <tbody>
             <tr class="flex justify-between ">
                 <td class="px-2 py-2">
-                    <Link href={`/user-profile/?id=${post.id}`}>
+                    <Link href={`/profile/${post.id}`}>
                 <span className='text-white font-semibold  text-lg'>{post?.rank}
                     <p className='text-neutral-600 font-normal inline-block ml-4'>{post?.first_name} {post?.last_name}</p>
                     </span>

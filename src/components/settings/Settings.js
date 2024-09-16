@@ -475,7 +475,7 @@ const Settings = () => {
                 {/* user Location modal */}
         <Popper size={"sm"} title={"Update Location"} open={showUserLocation} setOpen={setShowUserLocation}>
             <SettingsModal setOpen={setShowUserLocation} >
-                <input type="text" className="m-2 rounded-lg focus:border-black border px-2 border-black" defaultValue={userDetails.location} name="phone" ref={location}/>
+                <input type="text" className="m-2 rounded-lg focus:border-black border px-2 border-black" defaultValue={userDetails.location} name="location" ref={location}/>
                 <button onClick={updateUser_Location} className="m-2 bg-black hover:bg-yellow hover:text-black text-white text-sm font-bold py-2 px-4 rounded">Update</button>
             </SettingsModal>
         </Popper>

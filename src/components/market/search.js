@@ -163,7 +163,7 @@ export default function  Search() {
     // }));
     // setUsers([]);
     // queryInput.current.value = `@${username}`
-    router.push(`/user-profile/?id=${id}&username=${username}`);
+    router.push(`/profile/?id=${id}&username=${username}`);
   }
   const handleBlur = () => {
     // Sets users to null when the input or container loses focus

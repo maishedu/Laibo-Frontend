@@ -17,9 +17,9 @@ const Deals = () => {
   const [loading, setLoading] = useState(1);
 
   const getDeals = async ()=>{
-   const deals = await fetchDeals(1,userId,bearerToken);
+   const deals = await fetchDeals(page,userId,bearerToken);
    if(deals.status === 1){
-    fetchDeals(1,userId,bearerToken);
+    fetchDeals(page,userId,bearerToken);
     setDeals(deals.data)
     setLoading(0)
    }else{
@@ -37,8 +37,8 @@ const Deals = () => {
        <div className="mx-auto  text-center items-center">
         {deals?.length > 0 ? (
           <>
-          <DealsSlider id={userId} deals={deals} fetchDeals={getDeals} className='hidden lg:flex' />
-           <DealsCardMobile  deals={deals} fetchDeals={getDeals} className='flex md:hidden lg:hidden'/>
+          {/* <DealsSlider id={userId} deals={deals} fetchDeals={getDeals} className='hidden lg:flex' /> */}
+           <DealsCardMobile  deals={deals} fetchDeals={getDeals} className='flex'/>
           </>
            
 
