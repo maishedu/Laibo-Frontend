@@ -216,8 +216,8 @@ export async function dealResponses(deal_id, deal_status, status, bearerToken) {
   return customFetch(apiUrl, { method: 'POST', headers, body: params });
 }
 
-export async function fetchOffers(bearerToken) {
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/offers/customer`;
+export async function fetchOffers(page,bearerToken) {
+  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/offers/customer?page=${page}&limit=10`;
   const headers = {
     'Authorization': `Bearer ${bearerToken}`,
     'Content-Type': 'application/json',

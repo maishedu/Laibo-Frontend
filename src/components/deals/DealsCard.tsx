@@ -18,7 +18,7 @@ const DealsCard: FC<CardCategory3Props> = ({
   userid,
   fetchDeals,
 }) => {
-  const { id, post_id, buyer_first_name, buyer_last_name, selling_price,seller_customer_id, seller_first_name,seller_last_name, photos, status, title } = taxonomy;
+  const { id, post_id, buyer_first_name, buyer_last_name,buyer_image_url, selling_price,seller_customer_id, seller_first_name,seller_last_name, photos, status, title } = taxonomy;
 
   const { data: session } = useSession();
   const bearerToken = session?.accessToken;
@@ -61,6 +61,30 @@ const DealsCard: FC<CardCategory3Props> = ({
     <>
      {showAlert && <SnackBar message={message} showAlert={showAlert} alertSeverity={alertSeverity}  setShowAlert={setShowAlert}/>   }
      <Link href={`/deals/${post_id}`} className={`flex flex-col  ${className}`} data-nc-id="CardCategory5" >
+     <div className="flex items-center mb-2">
+           <Link href={`/profile/${buyer_first_name}`}>
+            <p className="mr-3">
+              <img
+                src={buyer_image_url}
+                // onError={handleImageError}
+                alt="avatar"
+                className="object-cover w-10 h-10 rounded-2xl shadow-sm"
+              />
+            </p>
+            </Link>
+            <div>
+                <Link href={`/profile/${buyer_first_name}`}>
+              <p
+                aria-label="Author"
+                className="font-semibold text-white"
+              >
+                @{buyer_first_name}
+              </p>
+                </Link>
+            </div>
+
+          </div>
+
 
      <div
         className={`flex-shrink-0 relative w-full rounded-2xl`}
@@ -76,8 +100,8 @@ const DealsCard: FC<CardCategory3Props> = ({
      </Link>
 
       <div className={`bg-neutral-800 mt-2 p-2 text-xs text-center rounded-lg text-white font-semibold `}>
-         <p className="text-sm">{title}</p>
-          <p>{userid == seller_customer_id ? 'Buyer' : "Seller"} : {userid == seller_customer_id ? buyer_first_name  : seller_first_name } {userid == seller_customer_id ? buyer_last_name  : seller_last_name  } </p>
+         {/* <p className="text-sm">{title}</p> */}
+          {/* <p>{userid == seller_customer_id ? 'Buyer' : "Seller"} : {userid == seller_customer_id ? buyer_first_name  : seller_first_name } {userid == seller_customer_id ? buyer_last_name  : seller_last_name  } </p> */}
           <p className="text-neutral-400">{userid == seller_customer_id ? 'Sold' : "Bought"} : <span className="default-green">{selling_price}</span></p>
          
 

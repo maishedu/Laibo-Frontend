@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useParams } from 'next/navigation'
 import { useSession,signOut } from "next-auth/react";
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import Link from "next/link";
@@ -15,8 +15,10 @@ import {data} from "autoprefixer";
 
 const  Profile = () => {
     const searchParams = useSearchParams();
+    const params = useParams()
     const userId = searchParams.get('id');
-    const username = searchParams.get('username');
+    const username = params.username;
+    // const username = searchParams.get('username');
     const { data: session, status } = useSession();
     const bearerToken = session?.accessToken;
 

@@ -43,7 +43,7 @@ const Stock = () => {
                  <Link href={`/my-library/${post.post_id}`}>
                    <div className="relative pb-56 mb-4 w-64 rounded shadow lg:pb-64">
                    <img
-                     className="absolute object-cover  h-full rounded"
+                     className="absolute object-cover  w-40 h-56 rounded"
                      src={post.photos[0]}
                      alt="book background image"
                    />

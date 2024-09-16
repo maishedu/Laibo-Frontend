@@ -84,19 +84,16 @@ const Footer: React.FC = () => {
           
 
         <div className="m-auto mt-4  text-white flex w-max items-center justify-between space-x-4">
-        <a href="https://www.instagram.com/laibo.inc/" aria-label="instagram">
+        <a href="https://www.instagram.com/iqsolutions_?igsh=bXAzbHM4ZzlhNjJo" aria-label="instagram">
           <BsInstagram className='w-5 h-5'  />
           
         </a>
-        <a href="mailto:hello@mail.com" aria-label="facebook">
-          <BiLogoFacebook className='w-6 h-6'/>
-         
-        </a>
-        <a href="https://twitter.com/_laibo" title="twitter" target="blank" aria-label="twitter">
+        
+        <a href="https://x.com/IQsolutions_?t=oun-JiyUjPtfXseDLhAFpg&s=08" title="twitter" target="blank" aria-label="twitter">
           <BsTwitter className='w-5 h-5'/>
           
         </a>
-        <a href="#" title="linkedin" target="blank" aria-label="linkedin">
+        <a href="https://www.linkedin.com/company/iqltd" title="linkedin" target="blank" aria-label="linkedin">
           <BiLogoLinkedin className='w-6 h-6'/>
           
         </a>

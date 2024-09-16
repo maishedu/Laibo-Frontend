@@ -13,14 +13,14 @@ const Offers = () => {
   const bearerToken = session?.accessToken;
   const [offers, setOffers] = useState([])
   const [loading, setLoading] = useState(1)
+  const [page,setPage] = useState(1);
 
   
 
   const getOffers = async ()=>{
-    const offers = await fetchOffers(bearerToken);
+    const offers = await fetchOffers(page, bearerToken);
     if(offers.status === 1){
-     fetchOffers(bearerToken);
-     console.log(offers)
+     fetchOffers(page,bearerToken);
      setOffers(offers.data)
      setLoading(0)
     }else{
@@ -40,7 +40,7 @@ const Offers = () => {
        <div className="mx-auto  text-center items-center">
         {offers?.length > 0 ? (
           <>
-            <OffersSlider offers={offers} fetchOffers={getOffers} className='hidden lg:flex'/>
+            {/* <OffersSlider offers={offers} fetchOffers={getOffers} className='hidden lg:flex'/> */}
             <OffersCardMobile offers={offers} fetchOffers={getOffers} />
           </>
            
