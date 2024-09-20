@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
-  
+  console.log(deals)
   const { data: session, status } = useSession();
   
   const bearerToken = session?.accessToken;
@@ -96,7 +96,7 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                 <Link href={`/profile/${deal.seller_username}`}>
                   <p className="mr-3">
                     <img
-                      src={deal.seller_image_url}
+                      src={deal.seller_seller_image_url}
                       // onError={handleImageError}
                       alt="avatar"
                       className="object-cover w-10 h-10 rounded-2xl shadow-sm"
