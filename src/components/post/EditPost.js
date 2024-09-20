@@ -41,16 +41,18 @@ const EditPost = () => {
     setNewPhotos((prevPhotos) => [...prevPhotos, ...newFiles]);
   };
 
-  // const handleValueChange = (e) => {
-  //   setUpdatedPost({ ...updatedPost, [e.target.name]: e.target.value})
-  // }
-
   const handleValueChange = (e) => {
     const { name, value } = e.target;
     setUpdatedPost((prev) => ({ ...prev, [name]: value }));
   };
 
   const handlePostsEdit = () => {
+    const { selling_price, last_price } = updatedPost;
+  if (selling_price <= 0 || last_price <= 0) {
+    setSeverity("error");
+    setShowAlert("Prices must be greater than 0!");
+    return; 
+  }
     editPosts(
       userId,
       postId,
@@ -210,7 +212,7 @@ const EditPost = () => {
               </Select>
             </div>
 
-            <Label>Location</Label>
+            {/* <Label>Location</Label>
             <div className="mb-3 rounded-lg bg-neutral-800 ">
               <input
                 placeholder="Location"
@@ -219,7 +221,7 @@ const EditPost = () => {
                 onChange={handleValueChange}
                 className="text-white rounded-lg p-2 bg-neutral-800 w-full"
               />
-            </div>
+            </div> */}
             {/* <Label>Price</Label> */}
             <div className="flex justify-center mb-3 space-x-3">
               <div>
