@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 
-const OffersCardMobile = ({ offers, fetchOffers }) => {
+const OffersCardMobile = ({ offers,fetchOffers }) => {
   const { data: session, status } = useSession();
   const bearerToken = session?.accessToken;
   const [showAlert, setShowAlert] = useState(false);

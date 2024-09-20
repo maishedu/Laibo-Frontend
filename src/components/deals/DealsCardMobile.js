@@ -5,9 +5,12 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
+  console.log(deals);
   const { data: session, status } = useSession();
+  console.log(status)
   const bearerToken = session?.accessToken;
   const userId = session?.user.id;
+  console.log(typeof(userId))
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setSeverity] = useState("success");
   const [page,setPage] = useState(1);
@@ -41,7 +44,7 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
   const handleLoadMore = async () => {
     try {
       const nextPage = page + 1; 
-      await fetchOffers(nextPage,bearerToken); 
+      await fetchDeals(nextPage,bearerToken); 
       setPage(nextPage); 
     } catch (error) {
       console.error('Error loading more posts:', error);
@@ -107,8 +110,8 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
 
               {userId == deal.seller_customer_id ? (
                 <>
-                  {status === "BID_SELLER_INCOMPLETE_EXCHANGE" ||
-                  status === "BORROW_SELLER_INCOMPLETE_EXCHANGE" ? (
+                  {deal.status === "BID_SELLER_INCOMPLETE_EXCHANGE" ||
+                  deal.status === "BORROW_SELLER_INCOMPLETE_EXCHANGE" ? (
                     <>
                       <p className="text-xs ">
                         {userId == deal.seller_customer_id
@@ -138,22 +141,22 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                 </>
               ) : (
                 <>
-                  {status === "BID_BUYER_INCOMPLETE_EXCHANGE" ? (
+                  {deal.status === "BID_BUYER_INCOMPLETE_EXCHANGE" ? (
                     <>
                       <p className="text-xs ">
-                        {userId == deal.seller_customer_id
-                          ? "Have you given the book?"
-                          : "Have you received the book?"}
+                        {userId == deal.buyer_customer_id
+                          ? "Have you received the book?"
+                          : "Have you given the book?"}
                       </p>
                       <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
                         <button
-                          onClick={handleSubmitAccept(id)}
+                          onClick={handleSubmitAccept(deal.id)}
                           className="default-green-bg text-white p-1 rounded-lg w-full  "
                         >
                           YES
                         </button>
                         <button
-                          onClick={handleSubmitDeny(id)}
+                          onClick={handleSubmitDeny(deal.id)}
                           className="bg-red-600 text-white p-1 rounded-lg w-full "
                         >
                           NO

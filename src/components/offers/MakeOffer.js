@@ -111,7 +111,6 @@ const MakeOffer = () => {
 
     const handleMakeExchangeOffer = () => {
       const details = {quantity,postId,customer_id};
-      console.log(details);
       const books_exchanged = [book1?.id,book2?.id,book3?.id].filter(Boolean)
       const booksExchangedString = books_exchanged.join(',');
       makeExchangeOffer(bearerToken,details,booksExchangedString)
