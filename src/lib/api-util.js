@@ -457,7 +457,6 @@ export async function editPosts(userId, postId, bookDetails, newPhotos, deleted,
   formData.append("category_id", bookDetails.category_id);
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
-  formData.append("location",bookDetails.location);
   formData.append("description", bookDetails.description);
   formData.append("selling_price", bookDetails.selling_price);
   formData.append("last_price", bookDetails.last_price);

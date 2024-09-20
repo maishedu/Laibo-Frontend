@@ -5,12 +5,12 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
-  console.log(deals);
+  
   const { data: session, status } = useSession();
-  console.log(status)
+  
   const bearerToken = session?.accessToken;
   const userId = session?.user.id;
-  console.log(typeof(userId))
+  
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setSeverity] = useState("success");
   const [page,setPage] = useState(1);
@@ -20,7 +20,7 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
     dealResponses(deal_id, deal_status, status, bearerToken)
       .then((data) => {
         setShowAlert(data.message);
-        fetchDeals(1, userId, bearerToken);
+        fetchDeals(page, userId, bearerToken);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -34,7 +34,7 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
       .then((data) => {
         setSeverity("warning");
         setShowAlert(data.message);
-        fetchDeals(1, userId, bearerToken);
+        fetchDeals(page, userId, bearerToken);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -68,8 +68,10 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
               className={`flex flex-col  `}
               data-nc-id="CardCategory5"
             >
-              <div className="flex items-center mb-2">
-                <Link href={`/profile/${deal.buyer_first_name}`}>
+               {userId == deal.seller_customer_id ? (
+                <div className="flex items-center mb-2">
+          
+                <Link href={`/profile/${deal.buyer_username}`}>
                   <p className="mr-3">
                     <img
                       src={deal.buyer_image_url}
@@ -79,14 +81,39 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                     />
                   </p>
                 </Link>
+
                 <div>
-                  <Link href={`/profile/${deal.buyer_first_name}`}>
+                  <Link href={`/profile/${deal.buyer_username}`}>
                     <p aria-label="Author" className="font-semibold text-white">
-                      @{deal.buyer_first_name}
+                      @{deal.buyer_username}
                     </p>
                   </Link>
                 </div>
               </div>
+               ):
+               <div className="flex items-center mb-2">
+          
+                <Link href={`/profile/${deal.seller_username}`}>
+                  <p className="mr-3">
+                    <img
+                      src={deal.seller_image_url}
+                      // onError={handleImageError}
+                      alt="avatar"
+                      className="object-cover w-10 h-10 rounded-2xl shadow-sm"
+                    />
+                  </p>
+                </Link>
+
+                <div>
+                  <Link href={`/profile/${deal.seller_username}`}>
+                    <p aria-label="Author" className="font-semibold text-white">
+                      @{deal.seller_username}
+                    </p>
+                  </Link>
+                </div>
+              </div>
+               }
+              
 
               <div className={`flex-shrink-0 relative w-full rounded-2xl`}>
                 <img
@@ -150,13 +177,13 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                       </p>
                       <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
                         <button
-                          onClick={handleSubmitAccept(deal.id)}
+                          onClick={handleSubmitAccept(deal.id,deal.status)}
                           className="default-green-bg text-white p-1 rounded-lg w-full  "
                         >
                           YES
                         </button>
                         <button
-                          onClick={handleSubmitDeny(deal.id)}
+                          onClick={handleSubmitDeny(deal.id,deal.status)}
                           className="bg-red-600 text-white p-1 rounded-lg w-full "
                         >
                           NO

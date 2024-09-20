@@ -124,10 +124,10 @@ function StockDetail({ details }) {
                 <p className="text-gray-400  ">{details.author}</p>
               </div>
 
-              <h2 className="default-yellow font-semibold ">Location</h2>
+              {/* <h2 className="default-yellow font-semibold ">Location</h2>
               <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
                 <p className="text-gray-400 ">{details.location}</p>
-              </div>
+              </div> */}
 
               <h2 className="default-yellow font-semibold ">Condition</h2>
               <div className="mb-3 rounded-xl bg-neutral-800 px-5 py-3">
