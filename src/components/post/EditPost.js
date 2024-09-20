@@ -48,11 +48,11 @@ const EditPost = () => {
 
   const handlePostsEdit = () => {
     const { selling_price, last_price } = updatedPost;
-  if (selling_price <= 0 || last_price <= 0) {
-    setSeverity("error");
-    setShowAlert("Prices must be greater than 0!");
-    return; 
-  }
+    if (selling_price <= 0 || last_price <= 0) {
+      setSeverity("error");
+      setShowAlert("Prices must be greater than 0!");
+      return; 
+    }
     editPosts(
       userId,
       postId,
