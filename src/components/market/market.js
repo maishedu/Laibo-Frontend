@@ -105,7 +105,7 @@ export default function  Market ({post}) {
     setUsers([]);
     setSeachDetails({ ...searchDetails, [e.target.name]: e.target.value})
   }
-  const handleUsername = (id,username)=>{
+  const handleUsername = (username)=>{
     // setSeachDetails(prevSearchDetails => ({
     //   ...prevSearchDetails,
     //   customer_id: id,
@@ -114,7 +114,7 @@ export default function  Market ({post}) {
     //
     // setUsers([]);
     // queryInput.current.value = `@${username}`
-    router.push(`/user-profile/?id=${id}&username=${username}`);
+    router.push(`/profile/${username}`);
   }
   const handleBlur = () => {
     // Sets users to null when the input or container loses focus
@@ -146,7 +146,7 @@ export default function  Market ({post}) {
                   { users.length > 0 && (
                       <ul tabIndex="-1">
                         {users.map((user, index) => (
-                            <li key={index} className="text-yellow border-b p-2" onClick={()=>handleUsername(user.id,user.username)} onBlur={handleBlur}>{user.username}</li>
+                            <li key={index} className="text-yellow border-b p-2" onClick={()=>handleUsername(user.username)} onBlur={handleBlur}>{user.username}</li>
                         ))}
                       </ul>
                   )}
