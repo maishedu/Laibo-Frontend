@@ -13,8 +13,6 @@ import { usePathname, useRouter } from "next/navigation";
 import nullUser from '@/images/user.png';
 import { FaExclamationCircle } from "react-icons/fa";
 import CustomIcon from '@/shared/CustomIcon/CustomIcon'
-
-
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
 
 const AuthenticatedHeader = () => {
@@ -25,7 +23,6 @@ const AuthenticatedHeader = () => {
     const [userDetails, setUserDetails] = useState([])
     const isFieldMissing = !userDetails?.first_name || !userDetails?.last_name || !userDetails?.location || !userDetails?.imageUrl;
    
-
     const pathname = usePathname();
     const router  = useRouter()
 
@@ -41,12 +38,12 @@ const AuthenticatedHeader = () => {
     e.target.src = nullUser.src; 
   };
 
- 
 
   useEffect(() => {
     fetchUserData(userId, bearerToken)
       .then((data)=> {
         setUserDetails(data)
+        localStorage.setItem("userData",data);
       })
       .catch((error) =>{
         console.error('Error:', error);
@@ -85,13 +82,8 @@ const AuthenticatedHeader = () => {
               </div>
 
             {/* )} */}
-            
-            
-
            </div>
          
-
-
             <div onClick={toggleMenu} className="flex  items-center lg:hidden max-h-10">
             <p  className="relative ml-3 lg:ml-16 ">
               <img
