@@ -173,9 +173,36 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                       </div>
                     </>
                   ) : (
-                    <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
+                    
+                    deal.status === "BORROW_SELLER_UNRETURNED_BOOK" ? (
+                      <>
+                      <p className="text-xs ">
+                        {userId == deal.buyer_customer_id
+                          ? "Have you returned this book?"
+                          : "Has your book been returned?"}
+                      </p>
+                      <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
+                        <button
+                          onClick={handleSubmitAccept(deal.id, deal.status)}
+                          className="default-green-bg text-white p-1 rounded-lg w-full  "
+                        >
+                          YES
+                        </button>
+                        <button
+                          onClick={handleSubmitDeny(deal.id, deal.status)}
+                          className="bg-red-600 text-white p-1 rounded-lg w-full "
+                        >
+                          NO
+                        </button>
+                      </div>
+                    </>
+                      ):
+                      <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
                       <p>Pending confirmation from buyer</p>
                     </div>
+
+                    
+                    
                   )}
                 </>
               ) : (
@@ -204,9 +231,35 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                       </div>
                     </>
                   ) : (
+                    deal.status === "BORROW_BUYER_UNRETURNED_BOOK" ? (
+                      <>
+                      <p className="text-xs ">
+                        {userId == deal.buyer_customer_id
+                          ? "Have you returned this book?"
+                          : "Has your book been returned?"}
+                      </p>
+                      <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
+                        <button
+                          onClick={handleSubmitAccept(deal.id, deal.status)}
+                          className="default-green-bg text-white p-1 rounded-lg w-full  "
+                        >
+                          YES
+                        </button>
+                        <button
+                          onClick={handleSubmitDeny(deal.id, deal.status)}
+                          className="bg-red-600 text-white p-1 rounded-lg w-full "
+                        >
+                          NO
+                        </button>
+                      </div>
+                    </>
+                      
+                    ):
                     <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
                       <p>Pending confirmation from seller</p>
                     </div>
+
+                    
                   )}
                 </>
               )}
