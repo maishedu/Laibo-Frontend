@@ -442,7 +442,7 @@ export async function uploadPosts(newPhotos, userId, bookDetails, category, bear
   }
 }
 
-export async function editPosts(userId, postId, bookDetails, newPhotos, deleted, bearerToken) {
+export async function editPosts(userId, postId,location, bookDetails, newPhotos, deleted, bearerToken) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/edit`;
 
   const formData = new FormData();
@@ -454,6 +454,7 @@ export async function editPosts(userId, postId, bookDetails, newPhotos, deleted,
 
   formData.append("user_id", userId);
   formData.append("post_id", postId);
+  formData.append("location", location);
   formData.append("category_id", bookDetails.category_id);
   formData.append("title", bookDetails.title);
   formData.append("author", bookDetails.author);
