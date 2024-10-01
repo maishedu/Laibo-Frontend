@@ -5,12 +5,10 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
-  console.log(deals)
   const { data: session, status } = useSession();
-  
   const bearerToken = session?.accessToken;
   const userId = session?.user.id;
-  console.log(userId)
+  
   
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setSeverity] = useState("success");
