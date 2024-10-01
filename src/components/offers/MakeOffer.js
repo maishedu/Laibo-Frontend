@@ -116,12 +116,7 @@ const MakeOffer = () => {
         setShowAlert('Quantity should be greater than 0');
         return
     }
-    if (amount < postDetails.last_price*quantity){
-        setAmountError(true);
-        setSeverity('warning')
-        setShowAlert(`Amount should be greater than ${postDetails.last_price*quantity}`);
-        return
-    }
+  
       const books_exchanged = [book1?.id,book2?.id,book3?.id].filter(Boolean)
       const booksExchangedString = books_exchanged.join(',');
       makeExchangeOffer(bearerToken,details,booksExchangedString)
