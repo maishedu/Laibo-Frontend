@@ -10,7 +10,6 @@ import moneyImg from "@/images/the rich list.png";
 import nullUser from "@/images/user.png";
 import { fetchUserPosts, fetchUserData, searchUsername } from "@/lib/api-util";
 import locationIcon from "../../images/location icon.svg";
-import { data } from "autoprefixer";
 
 const Profile = () => {
   const searchParams = useSearchParams();
@@ -87,7 +86,7 @@ const Profile = () => {
     };
 
     fetchData();
-  }, [id, page, bearerToken]);
+  }, [id, bearerToken]);
 
   return (
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
