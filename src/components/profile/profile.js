@@ -59,7 +59,7 @@ const Profile = () => {
           console.error("Exact username not found");
         }
       } else if (userId) {
-        setID(userId); // Set ID from URL parameter 
+        setID(userId); // Set ID from URL parameter
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
