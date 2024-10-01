@@ -13,8 +13,11 @@ const EditPost = () => {
   const postId = params.id;
   const { data: session, status } = useSession();
   const userId = session?.user.id;
-  const userData = localStorage.getItem("userData") || "";
-  console.log("userdata:",userData)
+  let userData;
+  if (typeof window !== "undefined") {
+    userData = JSON.parse(localStorage.getItem("userData"));
+  }
+  const location = userData?.location
   const bearerToken = session?.accessToken;
   const [categories, setCategories] = useState([]);
   const [upload, setUpload] = useState(false);
@@ -58,6 +61,7 @@ const EditPost = () => {
     editPosts(
       userId,
       postId,
+      location,
       updatedPost,
       newPhotos,
       deleted,

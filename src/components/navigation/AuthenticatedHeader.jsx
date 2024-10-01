@@ -43,13 +43,11 @@ const AuthenticatedHeader = () => {
     fetchUserData(userId, bearerToken)
       .then((data)=> {
         setUserDetails(data)
-        localStorage.setItem("userData",data);
+        localStorage.setItem("userData", JSON.stringify(data));
       })
       .catch((error) =>{
         console.error('Error:', error);
       })
-
-     
   }, []);
 
 
