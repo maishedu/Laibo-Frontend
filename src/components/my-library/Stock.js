@@ -15,6 +15,16 @@ const Stock = () => {
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(1);
+
+    const handleLoadMore = async () => {
+      try{
+        const nextPage = page + 1;
+        const newData = await fetchUserPosts(nextPage, userId);
+        setPage(nextPage);
+      } catch (error) {
+        console.error('Error loading more posts:', error);
+      }
+    };
     
 
     useEffect(() => {
@@ -26,7 +36,7 @@ const Stock = () => {
       .catch((error) =>{
         console.error('Error:', error);
       })
-    }, [page, userId]);
+    }, [ userId]);
 
 
 
@@ -34,8 +44,9 @@ const Stock = () => {
     <div className="overflow-hidden py-16 bg-black min-h-screen relative h-2/4">
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div className="flex flex-col justify-between lg:flex-row">
-
+          
           {posts?.length > 0 ? (
+            <div>
             <div
             className="grid grid-cols-2 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:max-w-screen-lg">
              {posts?.map((post,index) =>(
@@ -66,8 +77,12 @@ const Stock = () => {
               </div>
 
              ))}
+        </div>
+        <div className="mt-4 flex justify-center">
+        <button onClick={handleLoadMore} className="text-gray-900 font-semibold p-2 default-yellow-bg rounded-lg w-36">Load more</button>
+      </div>
+      </div>
 
-     </div>
 
           ): loading  === 1 ? <Loader/> :
           <div className='mx-auto items-center py-16'>
