@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
+  
   const { data: session, status } = useSession();
   const bearerToken = session?.accessToken;
   const userId = session?.user.id;
@@ -136,6 +137,15 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                    </span>
                </p>
               ):
+              deal.status === "EXCHANGE_SELLER_INCOMPLETE_EXCHANGE" ||
+              deal.status === "EXCHANGE_BUYER_INCOMPLETE_EXCHANGE"? (
+                <p className="text-neutral-400">
+                {userId == deal.seller_customer_id ? "Exchanged" : "Exchanged"} :{" "}
+                <span className="default-green">
+                  {deal?.books_exchanged?.length}
+                  </span>
+              </p> 
+              ):
               <p className="text-neutral-400">
               {userId == deal.seller_customer_id ? "Sold" : "Bought"} :{" "}
               <span className="default-green">
@@ -195,6 +205,30 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                       </div>
                     </>
                       ):
+                      deal.status === "EXCHANGE_SELLER_INCOMPLETE_EXCHANGE" ? (
+                        <>
+                      <p className="text-xs ">
+                        {userId == deal.buyer_customer_id
+                          ? "Have you completed your exchange?"
+                          : "Have you completed your exchange?"}
+                      </p>
+                      <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
+                        <button
+                          onClick={handleSubmitAccept(deal.id, deal.status)}
+                          className="default-green-bg text-white p-1 rounded-lg w-full  "
+                        >
+                          YES
+                        </button>
+                        <button
+                          onClick={handleSubmitDeny(deal.id, deal.status)}
+                          className="bg-red-600 text-white p-1 rounded-lg w-full "
+                        >
+                          NO
+                        </button>
+                      </div>
+                    </>
+                      ):
+
                       <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
                       <p>Pending confirmation from buyer</p>
                     </div>
@@ -252,6 +286,29 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                       </div>
                     </>
                       
+                    ):
+                    deal.status === "EXCHANGE_BUYER_INCOMPLETE_EXCHANGE" ? (
+                      <>
+                    <p className="text-xs ">
+                      {userId == deal.buyer_customer_id
+                        ? "Have you completed your exchange?"
+                        : "Have you completed your exchange?"}
+                    </p>
+                    <div className="mt-2 flex space-x-2 text-sm  font-semibold ">
+                      <button
+                        onClick={handleSubmitAccept(deal.id, deal.status)}
+                        className="default-green-bg text-white p-1 rounded-lg w-full  "
+                      >
+                        YES
+                      </button>
+                      <button
+                        onClick={handleSubmitDeny(deal.id, deal.status)}
+                        className="bg-red-600 text-white p-1 rounded-lg w-full "
+                      >
+                        NO
+                      </button>
+                    </div>
+                  </>
                     ):
                     <div className="mt-6 flex mb-2 text-sm justify-center text-neutral-400  ">
                       <p>Pending confirmation from seller</p>
