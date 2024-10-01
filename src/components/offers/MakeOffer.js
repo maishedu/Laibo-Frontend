@@ -44,16 +44,16 @@ const MakeOffer = () => {
 
     const handleMakeBidOffer = () => {
         const details = {quantity,amount,postId,customer_id}
-        // if (details.quantity <=0){
-        //     setSeverity('warning')
-        //     setShowAlert('Quantity should be greater than 0');
-        //     return
-        // }
-        // if (quantity > postDetails.quantity){
-        //     setSeverity('warning')
-        //     setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
-        //     return
-        // }
+        if (details.quantity <=0){
+            setSeverity('warning')
+            setShowAlert('Quantity should be greater than 0');
+            return
+        }
+        if (quantity > postDetails.quantity){
+            setSeverity('warning')
+            setShowAlert(`Quantity should be greater than ${postDetails.quantity}`);
+            return
+        }
         if (amount < postDetails.last_price*quantity){
             setAmountError(true);
             setSeverity('warning')
@@ -73,11 +73,11 @@ const MakeOffer = () => {
 
     const handleMakeBorrowOffer = () => {
         const details  = {quantity, postId, customer_id, returnDate}
-        // if (details.quantity <=0){
-        //     setSeverity('warning')
-        //     setShowAlert('Quantity should be greater than 0');
-        //     return
-        // }
+        if (details.quantity <=0){
+            setSeverity('warning')
+            setShowAlert('Quantity should be greater than 0');
+            return
+        }
         if (amount < postDetails.last_price*quantity){
             setAmountError(true);
             setSeverity('warning')

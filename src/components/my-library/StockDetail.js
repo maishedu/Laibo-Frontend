@@ -12,8 +12,10 @@ import SnackBar from "../snackBar";
 import { useRouter } from "next/navigation";
 
 function StockDetail({ details }) {
+  console.log(details)
   const router = useRouter();
   const { data: session, status } = useSession();
+  
   const userId = session?.user.id;
   const bearerToken = session?.accessToken;
   const [showAlert, setShowAlert] = useState(false);

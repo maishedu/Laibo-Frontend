@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
-  console.log(deals)
+ 
   const { data: session, status } = useSession();
   
   const bearerToken = session?.accessToken;

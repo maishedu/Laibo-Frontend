@@ -13,6 +13,8 @@ const EditPost = () => {
   const postId = params.id;
   const { data: session, status } = useSession();
   const userId = session?.user.id;
+  const userData = localStorage.getItem("userData") || "";
+  console.log("userdata:",userData)
   const bearerToken = session?.accessToken;
   const [categories, setCategories] = useState([]);
   const [upload, setUpload] = useState(false);
@@ -48,9 +50,9 @@ const EditPost = () => {
 
   const handlePostsEdit = () => {
     const { selling_price, last_price } = updatedPost;
-    if (selling_price <= 0 || last_price <= 0) {
+    if (selling_price < 0 || last_price < 0) {
       setSeverity("error");
-      setShowAlert("Prices must be greater than 0!");
+      setShowAlert("Prices cannot be less than 0!");
       return; 
     }
     editPosts(
@@ -204,11 +206,10 @@ const EditPost = () => {
                 onChange={handleValueChange}
               >
                 <option value="Mint">Mint</option>
-                <option value="New">New</option>
                 <option value="Good">Good</option>
                 <option value="Ok">Ok</option>
                 <option value="Bad">Bad</option>
-                <option value="very-bad">Very bad</option>
+                <option value="terrible">Terrible</option>
               </Select>
             </div>
 
