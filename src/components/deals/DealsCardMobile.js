@@ -5,11 +5,12 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
- 
+  console.log(deals)
   const { data: session, status } = useSession();
   
   const bearerToken = session?.accessToken;
   const userId = session?.user.id;
+  console.log(userId)
   
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setSeverity] = useState("success");
@@ -129,11 +130,22 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
             <div
               className={`bg-neutral-800 mt-2 p-2 text-xs text-center rounded-lg text-white font-semibold `}
             >
-              
+              {deal.return_date ? (
+                 <p className="text-neutral-400">
+                 {userId == deal.seller_customer_id ? "Lent until" : "Borrowed until"} :{" "}
+                 <span className="text-white">
+                 {new Date(deal?.return_date).toLocaleDateString()}
+                   </span>
+               </p>
+              ):
               <p className="text-neutral-400">
-                {userId == deal.seller_customer_id ? "Sold" : "Bought"} :{" "}
-                <span className="default-green">{deal?.selling_price}</span>
-              </p>
+              {userId == deal.seller_customer_id ? "Sold" : "Bought"} :{" "}
+              <span className="default-green">
+                {deal?.selling_price}
+                </span>
+            </p>
+              }
+             
 
               {userId == deal.seller_customer_id ? (
                 <>
@@ -168,7 +180,8 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
                 </>
               ) : (
                 <>
-                  {deal.status === "BID_BUYER_INCOMPLETE_EXCHANGE" ? (
+                  {deal.status === "BID_BUYER_INCOMPLETE_EXCHANGE" ||
+                  deal.status === "BORROW_BUYER_INCOMPLETE_EXCHANGE" ? (
                     <>
                       <p className="text-xs ">
                         {userId == deal.buyer_customer_id

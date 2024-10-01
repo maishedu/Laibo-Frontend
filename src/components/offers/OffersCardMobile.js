@@ -111,8 +111,26 @@ const OffersCardMobile = ({ offers,fetchOffers }) => {
                   )}{" "}
                 </span>
               </p>
+              {offer?.return_date ? (
+                <p>Return by : 
+                  {new Date(offer?.return_date).toLocaleDateString()}
+                  
+                  </p>
+              ):
+              <>
               <p>Ask : {parseFloat(offer.amount).toFixed(2)}</p>
-              <p>Offer : {parseFloat(offer.selling_price).toFixed(2)}</p>
+                  {offer?.books_exchanged?.length > 0 ? (
+                    <p className="">Offer : 
+                    <span className="underline text-blue-400 ml-1">{offer?.books_exchanged?.length} books</span>
+                  </p>
+                  ):
+                  <p>Offer : {parseFloat(offer?.selling_price).toFixed(2)}</p>
+                  }
+              </>
+              }
+              
+              
+
               <p>Quantity : {offer.quantity}</p>
             </div>
             <div className="mt-4 flex space-x-5 justify-between text-xs font-semibold ">
