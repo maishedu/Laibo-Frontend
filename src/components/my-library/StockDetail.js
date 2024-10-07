@@ -10,6 +10,7 @@ import { deletePost } from "@/lib/api-util";
 import { CiWarning } from "react-icons/ci";
 import SnackBar from "../snackBar";
 import { useRouter } from "next/navigation";
+import Image from 'next/image'
 
 function StockDetail({ details }) {
   console.log(details)
@@ -55,7 +56,9 @@ function StockDetail({ details }) {
             <div className="flex items-center mb-2">
               <Link href={`/profile/${details?.seller_username}`}>
                 <p className="mr-3">
-                  <img
+                  <Image
+                      width="200"
+                      height="200"
                     src={details.seller_image_url}
                     onError={handleImageError}
                     alt="avatar"

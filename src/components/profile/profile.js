@@ -147,7 +147,9 @@ const Profile = () => {
                   <div key={index}>
                     <Link href={`/market/${post.post_id}`}>
                       <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
-                        <img
+                        <Image
+                            height="100"
+                            width="100"
                           className="absolute object-cover w-full h-full rounded"
                           src={post.photos[0]}
                           alt="book background image"
@@ -160,11 +162,12 @@ const Profile = () => {
                       </p>
                       <p className=" text-lg text-gray-500 mb-[-5px]">
                         {post.location}{" "}
-                        <img
+                        <Image
                           className="inline"
                           src={locationIcon.src}
                           alt="location icon"
                           width="10"
+                          height="10"
                         />
                       </p>
                       <p className=" text-lg text-gray-200 font-semibold mb-[-5px]">

@@ -7,6 +7,7 @@ import locationIcon from "../../images/location icon.svg";
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi';
 import {BsEmojiFrown} from 'react-icons/bs';
 import Loader from '../Loader';
+import Image from 'next/image'
 
 const Stock = () => {
     const { data: session, status } = useSession();
@@ -53,7 +54,9 @@ const Stock = () => {
                 <div key={index} >
                  <Link href={`/my-library/${post.post_id}`}>
                    <div className="relative pb-56 mb-4 w-64 rounded shadow lg:pb-64">
-                   <img
+                   <Image
+                       width="200"
+                       height="200"
                      className="absolute object-cover  w-40 h-56 rounded"
                      src={post.photos[0]}
                      alt="book background image"
