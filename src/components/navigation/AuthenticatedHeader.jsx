@@ -15,6 +15,7 @@ import { FaExclamationCircle } from "react-icons/fa";
 import CustomIcon from '@/shared/CustomIcon/CustomIcon'
 import AvatarDropdown from "@/shared/Navigation/AvatarDropdown";
 
+
 const AuthenticatedHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { data: session, status } = useSession();
@@ -84,7 +85,9 @@ const AuthenticatedHeader = () => {
          
             <div onClick={toggleMenu} className="flex  items-center lg:hidden max-h-10">
             <p  className="relative ml-3 lg:ml-16 ">
-              <img
+              <Image
+                  width="200"
+                  height="200"
                 src={userDetails?.imageUrl}
                 onError={handleImageError}
                 alt="avatar"

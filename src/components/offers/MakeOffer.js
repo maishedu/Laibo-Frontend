@@ -12,6 +12,7 @@ import Popper from "../popper/Popper";
 import BorrowModal from './BorrowModal'
 import SnackBar from "../snackBar";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image'
 
 
 
@@ -262,7 +263,7 @@ const MakeOffer = () => {
                 <div className="flex flex-col w-full">
                 {book1?.url ? (
                     <div className="w-full relative mb-2">
-                     <img src={book1.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
+                     <Image width="100" height="100" src={book1.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
                      <span onClick={()=> setBook1("")} className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full cursor-pointer">X</span>
                     </div>
                    
@@ -289,7 +290,7 @@ const MakeOffer = () => {
                 <div className="flex flex-col w-full">
                 {book2?.url ? (
                     <div className="w-full relative mb-2">
-                     <img src={book2.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
+                     <Image width="200" height="200" src={book2.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
                      <span onClick={()=> setBook2("")} className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full cursor-pointer">X</span>
                     </div>
                    
@@ -316,7 +317,7 @@ const MakeOffer = () => {
                 <div className="flex flex-col w-full">
                 {book3?.url ? (
                     <div className="w-full relative mb-2">
-                     <img src={book3.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
+                     <Image width="100" height="100" src={book3.url} alt="book 1 image" className="relative object-fit w-20 h-20 rounded-lg" />
                      <span onClick={()=> setBook3("")} className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full cursor-pointer">X</span>
                     </div>
                    
@@ -439,7 +440,8 @@ const MakeOffer = () => {
                    <div key={index} className="" >
                     
                     <div onClick={()=>handleAddBook(post.post_id, post.title, post.photos[0])} className="relative pb-56 mb-4 rounded shadow lg:pb-64">
-                      <img
+                      <Image
+                          width="200" height="200"
                         className="absolute object-cover w-full h-full rounded"
                         src={post.photos[0]}
                         alt="book background image"

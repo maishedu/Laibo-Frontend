@@ -7,7 +7,9 @@ const nextConfig = {
     // typedRoutes: true,
   },
   images: {
-    domains: ['216.219.83.153','api.laibo.co.ke'],
+    loader: 'custom',
+    loaderFile: './utils/imageloader.js',
+    domains: ['216.219.83.153','api.laibo.co.ke','laibo.gumlet.io'],
     remotePatterns: [
       {
         protocol: 'https',

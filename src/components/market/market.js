@@ -7,6 +7,7 @@ import Filter from "../Filter";
 import locationIcon from "../../images/location icon.svg";
 import {searchUsername} from "@/lib/api-util";
 import {useRouter} from "next/navigation";
+import Image from 'next/image'
 
 
   
@@ -163,9 +164,11 @@ export default function  Market ({post}) {
                 <div key={index}>
                   <Link href={`/market/${post.post_id}`}>
                     <div className="relative pb-56 mb-4 rounded shadow lg:pb-64">
-                      <img
+                      <Image
                         className="absolute object-cover w-full h-full rounded"
                         src={post.photos[0]}
+                        width="200"
+                        height="100"
                         alt="book background image"
                       />
                     </div>

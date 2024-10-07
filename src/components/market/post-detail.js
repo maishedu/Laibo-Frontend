@@ -7,6 +7,7 @@ import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import { useParams } from 'next/navigation'
 import nullUser from '../../images/user.png';
 import { fetchPost } from '@/lib/api-util';
+import Image from 'next/image'
 
 
 function  Post ({details}) {
@@ -24,10 +25,12 @@ function  Post ({details}) {
        <div className="flex items-center mb-2">
            <Link href={`/profile/${details?.seller_username}`}>
             <p className="mr-3">
-              <img
+              <Image
                 src={details.seller_image_url}
                 onError={handleImageError}
                 alt="avatar"
+                width="200"
+                height="100"
                 className="object-cover w-10 h-10 rounded-2xl shadow-sm"
               />
             </p>
