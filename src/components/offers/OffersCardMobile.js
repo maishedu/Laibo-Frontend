@@ -4,6 +4,7 @@ import { acceptOrDenyDeal } from "@/lib/api-util";
 import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import Image from 'next/image';
 
 const OffersCardMobile = ({ offers,fetchOffers }) => {
   const { data: session, status } = useSession();
@@ -77,7 +78,9 @@ const OffersCardMobile = ({ offers,fetchOffers }) => {
               data-nc-id="CardCategory5"
             >
               <div className={`flex-shrink-0 relative w-full rounded-2xl`}>
-                <img
+                <Image
+                    width="100"
+                    height="100"
                   alt=""
                   src={offer.photos[0] || ""}
                   className="object-cover w-full h-96 rounded-2xl"

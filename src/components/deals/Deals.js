@@ -7,7 +7,6 @@ import { fetchDeals } from '@/lib/api-util';
 import Loader from '../Loader';
 import {BsEmojiFrown} from 'react-icons/bs';
 
-
 const Deals = () => {
   const { data: session, status } = useSession();
   const userId = session?.user?.id

@@ -3,6 +3,7 @@ import { dealResponses } from "@/lib/api-util";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
+import Image from 'next/image'
 
 const DealsCardMobile = ({ deals, fetchDeals }) => {
   
@@ -95,7 +96,9 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
           
                 <Link href={`/profile/${deal.seller_username}`}>
                   <p className="mr-3">
-                    <img
+                    <Image
+                        width="100"
+                        height="100"
                       src={deal.seller_seller_image_url}
                       // onError={handleImageError}
                       alt="avatar"
@@ -116,8 +119,10 @@ const DealsCardMobile = ({ deals, fetchDeals }) => {
               
 
               <div className={`flex-shrink-0 relative w-full rounded-2xl`}>
-                <img
-                  alt=""
+                <Image
+                    height="100"
+                    width="100"
+                    alt=""
                   src={deal.photos?.[0] || ""}
                   className="object-cover w-full h-96 rounded-2xl"
                   sizes="(max-width: 400px) 100vw, 400px"
