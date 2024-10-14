@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import Image from 'next/image'
 
 function StockDetail({ details }) {
-  console.log(details)
   const router = useRouter();
   const { data: session, status } = useSession();
   

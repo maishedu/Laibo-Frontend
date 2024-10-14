@@ -21,6 +21,7 @@ const Stock = () => {
       try{
         const nextPage = page + 1;
         const newData = await fetchUserPosts(nextPage, userId);
+        setPosts((prevPosts) => [...prevPosts, ...newData]);
         setPage(nextPage);
       } catch (error) {
         console.error('Error loading more posts:', error);
