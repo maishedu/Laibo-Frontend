@@ -554,7 +554,7 @@ export async function makeBorrowOffer(bearerToken, details) {
     post_id: parseFloat(details.postId),
     deal_type: 5,
     deal_from: parseFloat(details.customer_id),
-    amount:parseFloat(details.amount)
+    amount:parseFloat(details.lastPrice)
   });
 
   const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/laibo/api/deals/makeoffer`;
