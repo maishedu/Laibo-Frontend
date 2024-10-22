@@ -73,7 +73,7 @@ const MakeOffer = () => {
     }
 
     const handleMakeBorrowOffer = () => {
-        const details  = {quantity, postId, customer_id, returnDate}
+        const details  = {quantity, postId, customer_id, returnDate,amount}
         if (details.quantity <=0){
             setSeverity('warning')
             setShowAlert('Quantity should be greater than 0');
