@@ -4,6 +4,7 @@ import HeaderDefault from '@/components/navigation/HeaderDefault';
 import Provider from "@/components/providers/Provider";
 import { Metadata } from 'next';
 import favicon from '../images/logo4 copy.png';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: 'Laibo',
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" >
     <body suppressHydrationWarning={true}>
+    <GoogleAnalytics gaId="G-SQRSZ4051G" />
     <Provider>
       <HeaderDefault/>
       {children}
