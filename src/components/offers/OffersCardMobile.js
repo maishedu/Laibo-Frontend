@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import SnackBar from "../snackBar";
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import Image from 'next/image';
+import { BeatLoader } from "react-spinners";
 
 const OffersCardMobile = ({ offers,fetchOffers }) => {
   const { data: session, status } = useSession();
@@ -12,23 +13,38 @@ const OffersCardMobile = ({ offers,fetchOffers }) => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertSeverity, setSeverity] = useState("success");
   const [page,setPage] = useState(1);
+  const [loading, setLoading] = useState(null);
 
   const handleSubmitAccept = (deal_id) => () => {
+    setLoading(deal_id);
     const deal_status = 1;
-    acceptOrDenyDeal(deal_id, deal_status, bearerToken).then((data) => {
+    acceptOrDenyDeal(deal_id, deal_status, bearerToken)
+    .then((data) => {
       setSeverity("success");
       setShowAlert(data.message);
       fetchOffers(page,bearerToken);
-    });
+    })
+    .catch((error) => {
+      console.error("Error:", error)
+    }).finally(()=>{
+      setLoading(null);
+    })
   };
 
   const handleSubmitDeny = (deal_id) => () => {
+    setLoading(deal_id)
     const deal_status = 0;
-    acceptOrDenyDeal(deal_id, deal_status, bearerToken).then((data) => {
+    acceptOrDenyDeal(deal_id, deal_status, bearerToken)
+    .then((data) => {
       setSeverity("warning");
       setShowAlert(data.message);
       fetchOffers(page,bearerToken);
-    });
+    })
+    .catch((error) => {
+      console.error("Error:", error)
+    }).finally(()=>{
+      setLoading(null);
+    })
   };
 
   const handleLoadMore = async () => {
@@ -140,14 +156,18 @@ const OffersCardMobile = ({ offers,fetchOffers }) => {
               <button
                 onClick={handleSubmitAccept(offer.id)}
                 className="default-green-bg text-white p-2 w-full rounded-lg "
+                disabled={loading === offer.id}
               >
-                DEAL
+               
+                {loading === offer.id ? <BeatLoader size={8} color="#fff" /> : "DEAL"}
               </button>
               <button
                 onClick={handleSubmitDeny(offer.id)}
                 className="bg-red-600 text-white p-2 w-full rounded-lg  "
+                disabled={loading === offer.id}
               >
-                NO DEAL
+                
+                {loading === offer.id ? <BeatLoader size={8} color="#fff" /> : "NO DEAL"}
               </button>
             </div>
 
