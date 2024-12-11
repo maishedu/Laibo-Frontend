@@ -565,3 +565,35 @@ export async function makeBorrowOffer(bearerToken, details) {
 
   return customFetch(apiUrl, { method: 'POST', headers, body: params });
 }
+
+export async function fetchDynamicRoutes() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/laibo/api/posts/fetch?limit=100`);
+    const responseData = await response.json();
+
+    const data = responseData?.data || [];
+
+    // Validate if `data` is an array
+    if (!Array.isArray(data)) {
+      console.error('Invalid "data" type; expected an array but got:', typeof data, data);
+      return [];
+    }
+
+    // Generate routes
+    const routes = data
+      .map((post) => {
+        if (!post.post_id) {
+          console.error('Post ID is missing for post:', post);
+          return null;
+        }
+        return `/market/${post.post_id}`;
+      })
+      .filter(Boolean); // Filter out null or undefined values
+
+    return routes;
+  } catch (error) {
+    console.error('Error fetching dynamic routes:', error);
+    return [];
+  }
+}
+
