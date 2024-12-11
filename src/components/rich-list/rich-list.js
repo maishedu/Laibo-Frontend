@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { fetchRichList } from "@/lib/api-util";
 import RichListImg from "@/images/the rich list.png";
-import { fetchUserData } from "@/lib/api-util";
+import { fetchUserData} from "@/lib/api-util";
 
 const RichList = () => {
   const [posts, setPosts] = useState([]);
@@ -15,6 +15,8 @@ const RichList = () => {
   const bearerToken = session?.accessToken;
 
   const [userDetails, setUserDetails] = useState([]);
+
+  
 
   const handleLoadMore = async () => {
     try {
