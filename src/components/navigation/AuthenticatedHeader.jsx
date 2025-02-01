@@ -34,13 +34,17 @@ const AuthenticatedHeader = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleImageError = (e) => {
-    e.target.onerror = null; 
-    e.target.src = nullUser.src; 
-  };
+    const handleImageError = (e) => {
+        if (!e.target.dataset.errorHandled) {
+            e.target.dataset.errorHandled = "true"; // Mark as handled
+            e.target.src = nullUser.src;
+            e.target.srcset = nullUser.src// Assign fallback image
+        }
+    };
 
 
-  useEffect(() => {
+
+    useEffect(() => {
     fetchUserData(userId, bearerToken)
       .then((data)=> {
         setUserDetails(data)
@@ -85,15 +89,18 @@ const AuthenticatedHeader = () => {
          
             <div onClick={toggleMenu} className="flex  items-center lg:hidden max-h-10">
             <p  className="relative ml-3 lg:ml-16 ">
-              <Image
-                  width="200"
-                  height="200"
-                src={userDetails?.imageUrl}
-                onError={handleImageError}
-                alt="avatar"
-                className="relative object-cover w-10 h-10 rounded-2xl shadow-sm"
-              />
-              {userDetails?.offers + userDetails?.deals > 0 ? (
+                {userDetails?.imageUrl?.length > 1 ? (
+                    <Image
+                        width="200"
+                        height="200"
+                        src={userDetails.imageUrl}
+                        onError={handleImageError}
+                        alt=" desktop avatar"
+                        className="relative object-cover w-10 h-10 rounded-2xl shadow-sm"
+                    />
+                ) : null}
+
+                {userDetails?.offers + userDetails?.deals > 0 ? (
                 <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{userDetails?.offers + userDetails?.deals}</span>
               ):null}
               {/* <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{userDetails?.offers + userDetails?.deals}</span> */}

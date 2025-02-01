@@ -9,10 +9,13 @@ import { FaExclamationCircle } from "react-icons/fa";
 const AvatarDropdown =  ({data }) => {
   const isFieldMissing = !data?.first_name || !data?.last_name || !data?.location || !data?.imageUrl;
 
-  const handleImageError = (e) => {
-    e.target.onerror = null; 
-    e.target.src = nullUser.src; 
-  };
+    const handleImageError = (e) => {
+        if (!e.target.dataset.errorHandled) {
+            e.target.dataset.errorHandled = "true"; // Mark as handled
+            e.target.src = nullUser.src;
+            e.target.srcset = nullUser.src// Assign fallback image
+        }
+    };
 
 
   
